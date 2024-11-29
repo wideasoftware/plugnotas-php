@@ -250,7 +250,7 @@ class Prestador extends BuilderAbstract
 
         if (array_key_exists('nfse', $data)) {
             $data['nfse'] = Nfse::fromArray($data['nfse']);
-        }    
+        }
 
         return Hydrate::toObject(self::class, $data);
     }

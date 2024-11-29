@@ -50,7 +50,7 @@ class CidadePrestacao extends BuilderAbstract
     {
         return $this->tipoLogradouro;
     }
-    
+
     public function setLogradouro($logradouro)
     {
         $this->logradouro = $logradouro;
@@ -162,7 +162,7 @@ class CidadePrestacao extends BuilderAbstract
         ];
         if (!in_array(strtoupper($estado), $allowedStates)) {
             throw new ValidationError(
-                'Estado inválido.'
+                'EstadoEnum inválido.'
             );
         }
 

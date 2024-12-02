@@ -4,7 +4,7 @@ namespace TecnoSpeed\Plugnotas\Builders;
 
 use TecnoSpeed\Plugnotas\Common\Icms;
 use TecnoSpeed\Plugnotas\Common\SubstituicaoTributaria;
-use TecnoSpeed\Plugnotas\Enums\CstEnum;
+use TecnoSpeed\Plugnotas\Enums\CstIcmsEnum;
 use TecnoSpeed\Plugnotas\Enums\OrigemEnum;
 use TecnoSpeed\Plugnotas\Interfaces\IIcmsBuilder;
 
@@ -16,9 +16,9 @@ class IcmsBuilder implements IIcmsBuilder
     private OrigemEnum $origem;
 
     /**
-     * @var CstEnum
+     * @var CstIcmsEnum
      */
-    private CstEnum $cst;
+    private CstIcmsEnum $cst;
 
     /**
      * @var array
@@ -52,10 +52,10 @@ class IcmsBuilder implements IIcmsBuilder
     }
 
     /**
-     * @param CstEnum $cst
+     * @param CstIcmsEnum $cst
      * @return IIcmsBuilder
      */
-    public function setCst(CstEnum $cst): IIcmsBuilder
+    public function setCst(CstIcmsEnum $cst): IIcmsBuilder
     {
         $this->cst = $cst;
 

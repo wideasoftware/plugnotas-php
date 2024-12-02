@@ -7,7 +7,10 @@ use TecnoSpeed\Plugnotas\Error\ConfigurationRequiredError;
 
 trait Communication
 {
-    protected function getCallApiInstance($configuration)
+    /**
+     * @throws ConfigurationRequiredError
+     */
+    protected function getCallApiInstance($configuration): CallApi
     {
         if (!$configuration) {
             throw new ConfigurationRequiredError('É necessário setar a configuração utilizando o método setConfiguration.');

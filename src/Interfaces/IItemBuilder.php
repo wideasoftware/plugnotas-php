@@ -2,6 +2,9 @@
 
 namespace TecnoSpeed\Plugnotas\Interfaces;
 
+use TecnoSpeed\Plugnotas\Common\Item;
+use TecnoSpeed\Plugnotas\Common\Tributos;
+
 interface IItemBuilder
 {
     /**
@@ -53,10 +56,10 @@ interface IItemBuilder
     public function setValor(float $valor): self;
 
     /**
-     * @param $tributos
+     * @param Tributos $tributos
      * @return self
      */
-    public function setTributos($tributos): self;
+    public function setTributos(Tributos $tributos): self;
 
     /**
      * @param bool $compoeTotal
@@ -114,5 +117,7 @@ interface IItemBuilder
      * @return self
      */
     public function setValorUnitario(float $comercial, float $tributavel): self;
+
+    public function build(): Item;
 
 }

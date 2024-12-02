@@ -2,7 +2,7 @@
 
 namespace TecnoSpeed\Plugnotas\Enums;
 
-enum CstEnum: int
+enum CstIcmsEnum: int
 {
     case SIMPLES_COM_CREDITO = 101;
     case SIMPLES_SEM_CREDITO = 102;

@@ -12,8 +12,6 @@ class Ibpt extends BuilderAbstract
     private $simplificado;
     private $detalhado;
 
-   
-
     public function setSimplificado(array $simplificado)
     {
         $this->simplificado = $simplificado;
@@ -27,7 +25,7 @@ class Ibpt extends BuilderAbstract
 
     public function setDetalhado(array $detalhado)
     {
-  
+
         $this->detalhado = $detalhado;
     }
 

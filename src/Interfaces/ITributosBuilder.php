@@ -9,6 +9,9 @@ use TecnoSpeed\Plugnotas\Common\Issqn;
 use TecnoSpeed\Plugnotas\Common\Partilha;
 use TecnoSpeed\Plugnotas\Common\Pis;
 use TecnoSpeed\Plugnotas\Common\Tributos;
+use TecnoSpeed\Plugnotas\Enums\CstCofinsEnum;
+use TecnoSpeed\Plugnotas\Enums\CstIpiEnum;
+use TecnoSpeed\Plugnotas\Enums\CstPisEnum;
 
 interface ITributosBuilder
 {
@@ -28,28 +31,40 @@ interface ITributosBuilder
     public function setIcms(Icms $icms): self;
 
     /**
-     * @param Ipi $ipi
+     * @param string $codigoEnquadramentoLegal
+     * @param CstIpiEnum $cst
+     * @param float $baseCalculo
+     * @param float $aliquota
      * @return self
      */
-    public function setIpi(Ipi $ipi): self;
+    public function setIpi(string $codigoEnquadramentoLegal, CstIpiEnum $cst, float $baseCalculo, float $aliquota): self;
 
     /**
-     * @param Pis $pis
+     * @param CstPisEnum $cst
+     * @param float $valorBaseCalculo
+     * @param float $aliquota
      * @return self
      */
-    public function setPis(Pis $pis): self;
+    public function setPis(CstPisEnum $cst, float $valorBaseCalculo, float $aliquota): self;
 
     /**
-     * @param Cofins $cofins
+     * @param CstCofinsEnum $cst
+     * @param float $valorBaseCalculo
+     * @param float $aliquota
      * @return self
      */
-    public function setCofins(Cofins $cofins): self;
+    public function setCofins(CstCofinsEnum $cst, float $valorBaseCalculo, float $aliquota): self;
 
     /**
-     * @param Issqn $issqn
+     * @param float $valor
+     * @param float $aliquota
+     * @param float $baseCalculo
+     * @param string $codigoServico
+     * @param string $codigoMunicipioFatoGerador
+     * @param string $codigoExigibilidade
      * @return self
      */
-    public function setIssqn(Issqn $issqn): self;
+    public function setIssqn(float $valor, float $aliquota, float $baseCalculo, string $codigoServico, string $codigoMunicipioFatoGerador, string $codigoExigibilidade): self;
 
     /**
      * @param float $valorAproximadoTributos

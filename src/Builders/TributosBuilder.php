@@ -9,6 +9,9 @@ use TecnoSpeed\Plugnotas\Common\Issqn;
 use TecnoSpeed\Plugnotas\Common\Partilha;
 use TecnoSpeed\Plugnotas\Common\Pis;
 use TecnoSpeed\Plugnotas\Common\Tributos;
+use TecnoSpeed\Plugnotas\Enums\CstCofinsEnum;
+use TecnoSpeed\Plugnotas\Enums\CstIpiEnum;
+use TecnoSpeed\Plugnotas\Enums\CstPisEnum;
 use TecnoSpeed\Plugnotas\Interfaces\ITributosBuilder;
 
 class TributosBuilder implements ITributosBuilder
@@ -78,45 +81,73 @@ class TributosBuilder implements ITributosBuilder
     }
 
     /**
-     * @param Ipi $ipi
+     * @param string $codigoEnquadramentoLegal
+     * @param CstIpiEnum $cst
+     * @param float $baseCalculo
+     * @param float $aliquota
      * @return ITributosBuilder
      */
-    public function setIpi(Ipi $ipi): ITributosBuilder
+    public function setIpi(string $codigoEnquadramentoLegal, CstIpiEnum $cst, float $baseCalculo, float $aliquota): ITributosBuilder
     {
-        $this->ipi = $ipi;
+        $this->ipi = new Ipi($codigoEnquadramentoLegal, $cst, $baseCalculo, $aliquota);
 
         return $this;
     }
 
     /**
-     * @param Pis $pis
+     * @param CstPisEnum $cst
+     * @param float $valorBaseCalculo
+     * @param float $aliquota
      * @return ITributosBuilder
      */
-    public function setPis(Pis $pis): ITributosBuilder
+    public function setPis(CstPisEnum $cst, float $valorBaseCalculo, float $aliquota): ITributosBuilder
     {
-        $this->pis = $pis;
+        $baseCalculo = [
+            'valor' => $valorBaseCalculo,
+        ];
+
+        $this->pis = new Pis($cst, $baseCalculo, $aliquota);
 
         return $this;
     }
 
     /**
-     * @param Cofins $cofins
+     * @param CstCofinsEnum $cst
+     * @param float $valorBaseCalculo
+     * @param float $aliquota
      * @return ITributosBuilder
      */
-    public function setCofins(Cofins $cofins): ITributosBuilder
+    public function setCofins(CstCofinsEnum $cst, float $valorBaseCalculo, float $aliquota): ITributosBuilder
     {
-        $this->cofins = $cofins;
+        $baseCalculo = [
+            'valor' => $valorBaseCalculo,
+        ];
+
+        $this->cofins = new Cofins($cst, $baseCalculo, $aliquota);
 
         return $this;
     }
 
     /**
-     * @param Issqn $issqn
+     * @param float $valor
+     * @param float $aliquota
+     * @param float $baseCalculo
+     * @param string $codigoServico
+     * @param string $codigoMunicipioFatoGerador
+     * @param string $codigoExigibilidade
      * @return ITributosBuilder
      */
-    public function setIssqn(Issqn $issqn): ITributosBuilder
+    public function setIssqn(float $valor, float $aliquota, float $baseCalculo, string $codigoServico, string $codigoMunicipioFatoGerador, string $codigoExigibilidade): ITributosBuilder
     {
-        $this->issqn = $issqn;
+        $this->issqn = new Issqn
+        (
+            valor: $valor,
+            aliquota: $aliquota,
+            baseCalculo: $baseCalculo,
+            codigoServico: $codigoServico,
+            codigoMunicipioFatoGerador: $codigoMunicipioFatoGerador,
+            codigoExigibilidade: $codigoExigibilidade
+        );
 
         return $this;
     }

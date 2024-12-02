@@ -2,7 +2,7 @@
 
 namespace TecnoSpeed\Plugnotas\Common;
 
-use TecnoSpeed\Plugnotas\Enums\CstEnum;
+use TecnoSpeed\Plugnotas\Enums\CstIcmsEnum;
 use TecnoSpeed\Plugnotas\Enums\OrigemEnum;
 
 class Icms
@@ -39,7 +39,7 @@ class Icms
 
     /**
      * @param OrigemEnum|null $origem
-     * @param CstEnum|null $cst
+     * @param CstIcmsEnum|null $cst
      * @param array|null $creditoSimplesNacional
      * @param SubstituicaoTributaria|null $substituicaoTributaria
      * @param float|null $valor
@@ -48,11 +48,11 @@ class Icms
     public function __construct
     (
         ?OrigemEnum             $origem,
-        ?CstEnum                 $cst,
+        ?CstIcmsEnum            $cst,
         ?array                  $creditoSimplesNacional,
         ?SubstituicaoTributaria $substituicaoTributaria,
         ?float                  $valor,
-        ?array                $efetivo
+        ?array                  $efetivo
     )
     {
         $this->origem = $origem;

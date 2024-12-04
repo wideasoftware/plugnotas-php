@@ -4,6 +4,7 @@ namespace TecnoSpeed\Plugnotas\Interfaces;
 
 use TecnoSpeed\Plugnotas\Common\Item;
 use TecnoSpeed\Plugnotas\Common\Impostos;
+use TecnoSpeed\Plugnotas\Common\Tributos;
 
 interface IItemBuilder
 {
@@ -77,25 +78,25 @@ interface IItemBuilder
      * @param float $valorFrete
      * @return self
      */
-    public function valorFrete(float $valorFrete): self;
+    public function setValorFrete(float $valorFrete): self;
 
     /**
      * @param float $valorSeguro
      * @return self
      */
-    public function valorSeguro(float $valorSeguro): self;
+    public function setValorSeguro(float $valorSeguro): self;
 
     /**
      * @param float $valorDesconto
      * @return self
      */
-    public function valorDesconto(float $valorDesconto): self;
+    public function setValorDesconto(float $valorDesconto): self;
 
     /**
      * @param float $valorOutros
      * @return self
      */
-    public function valorOutros(float $valorOutros): self;
+    public function setValorOutros(float $valorOutros): self;
 
     /**
      * @param float $comercial

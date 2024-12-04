@@ -3,7 +3,7 @@
 namespace TecnoSpeed\Plugnotas\Builders;
 
 use TecnoSpeed\Plugnotas\Common\Item;
-use TecnoSpeed\Plugnotas\Common\Impostos;
+use TecnoSpeed\Plugnotas\Common\Tributos;
 use TecnoSpeed\Plugnotas\Interfaces\IItemBuilder;
 
 class ItemBuilder implements IItemBuilder
@@ -195,7 +195,7 @@ class ItemBuilder implements IItemBuilder
      * @param float $valorFrete
      * @return IItemBuilder
      */
-    public function valorFrete(float $valorFrete): IItemBuilder
+    public function setValorFrete(float $valorFrete): IItemBuilder
     {
         $this->valorFrete = $valorFrete;
         return $this;
@@ -205,7 +205,7 @@ class ItemBuilder implements IItemBuilder
      * @param float $valorSeguro
      * @return IItemBuilder
      */
-    public function valorSeguro(float $valorSeguro): IItemBuilder
+    public function setValorSeguro(float $valorSeguro): IItemBuilder
     {
         $this->valorSeguro = $valorSeguro;
         return $this;
@@ -215,7 +215,7 @@ class ItemBuilder implements IItemBuilder
      * @param float $valorDesconto
      * @return IItemBuilder
      */
-    public function valorDesconto(float $valorDesconto): IItemBuilder
+    public function setValorDesconto(float $valorDesconto): IItemBuilder
     {
         $this->valorDesconto = $valorDesconto;
         return $this;
@@ -225,7 +225,7 @@ class ItemBuilder implements IItemBuilder
      * @param float $valorOutros
      * @return IItemBuilder
      */
-    public function valorOutros(float $valorOutros): IItemBuilder
+    public function setValorOutros(float $valorOutros): IItemBuilder
     {
         $this->valorOutros = $valorOutros;
         return $this;

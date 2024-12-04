@@ -61,7 +61,7 @@ class Endereco extends BuilderAbstract
 
     public function setLogradouro($logradouro)
     {
-        if (($logradouro === '') > 0) {
+        if (!strlen($logradouro) > 0) {
             throw new ValidationError(
                 'Logradouro é um campo requerido.'
             );

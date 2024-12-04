@@ -2,7 +2,7 @@
 
 namespace TecnoSpeed\Plugnotas\Builders;
 
-use TecnoSpeed\Plugnotas\Common\Endereco;
+use TecnoSpeed\Plugnotas\Common\EnderecoV2;
 use TecnoSpeed\Plugnotas\Enums\EstadoEnum;
 use TecnoSpeed\Plugnotas\Enums\TipoLogradouroEnum;
 use TecnoSpeed\Plugnotas\Error\ValidationError;
@@ -202,11 +202,11 @@ class EnderecoBuilder implements IEnderecoBuilder
     }
 
     /**
-     * @return Endereco
+     * @return EnderecoV2
      */
-    public function build(): Endereco
+    public function build(): EnderecoV2
     {
-        return new Endereco(
+        return new EnderecoV2(
             tipoLogradouro: $this->tipoLogradouro,
             logradouro: $this->logradouro,
             numero: $this->numero,

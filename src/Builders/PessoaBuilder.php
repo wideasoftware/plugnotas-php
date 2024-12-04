@@ -2,7 +2,7 @@
 
 namespace TecnoSpeed\Plugnotas\Builders;
 
-use TecnoSpeed\Plugnotas\Common\Endereco;
+use TecnoSpeed\Plugnotas\Common\EnderecoV2;
 use TecnoSpeed\Plugnotas\Common\Pessoa;
 use TecnoSpeed\Plugnotas\Common\Telefone;
 use TecnoSpeed\Plugnotas\Error\ValidationError;
@@ -15,7 +15,7 @@ class PessoaBuilder implements IPessoaBuilder
 
     private string $cpfCnpj;
     private string $razaoSocial;
-    private Endereco $endereco;
+    private EnderecoV2 $endereco;
     private string $email;
     private string $inscricaoEstadual;
     private string $inscricaoMunicipal;
@@ -26,6 +26,7 @@ class PessoaBuilder implements IPessoaBuilder
     private Telefone $telefone;
     private string $codigoEstrangeiro;
     private string $naoNif;
+    private string $nome;
 
     /**
      * @param string $cpfCnpj
@@ -44,6 +45,17 @@ class PessoaBuilder implements IPessoaBuilder
     }
 
     /**
+     * @param string $nome
+     * @return $this
+     */
+    public function setNome(string $nome): self
+    {
+        $this->nome = $nome;
+
+        return $this;
+    }
+
+    /**
      * @param string $razaoSocial
      * @return self
      */
@@ -55,10 +67,10 @@ class PessoaBuilder implements IPessoaBuilder
     }
 
     /**
-     * @param Endereco $endereco
+     * @param EnderecoV2 $endereco
      * @return self
      */
-    public function setEndereco(Endereco $endereco): self
+    public function setEndereco(EnderecoV2 $endereco): self
     {
         $this->endereco = $endereco;
 
@@ -202,6 +214,7 @@ class PessoaBuilder implements IPessoaBuilder
     {
         return new Pessoa(
             cpfCnpj: $this->cpfCnpj,
+            nome: $this->nome,
             razaoSocial: $this->razaoSocial,
             endereco: $this->endereco,
             email: $this->email,

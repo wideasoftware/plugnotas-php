@@ -3,7 +3,7 @@
 namespace TecnoSpeed\Plugnotas\Builders;
 
 use TecnoSpeed\Plugnotas\Common\Item;
-use TecnoSpeed\Plugnotas\Common\Tributos;
+use TecnoSpeed\Plugnotas\Common\Impostos;
 use TecnoSpeed\Plugnotas\Interfaces\IItemBuilder;
 
 class ItemBuilder implements IItemBuilder

@@ -1,15 +1,15 @@
 <?php
 
-namespace TecnoSpeed\Plugnotas\Common;
+namespace TecnoSpeed\Plugnotas\Common\Impostos;
 
-use TecnoSpeed\Plugnotas\Enums\CstCofinsEnum;
+use TecnoSpeed\Plugnotas\Enums\CstPisEnum;
 
-class Cofins
+class Pis
 {
     /**
-     * @var CstCofinsEnum
+     * @var CstPisEnum
      */
-    private CstCofinsEnum $cst;
+    private CstPisEnum $cst;
     /**
      * @var array
      */
@@ -20,21 +20,26 @@ class Cofins
     private float $aliquota;
 
     /**
-     * @param CstCofinsEnum $cst
+     * @param CstPisEnum $cst
      * @param array $baseCalculo
      * @param float $aliquota
      */
-    public function __construct(CstCofinsEnum $cst, array $baseCalculo, float $aliquota)
+    public function __construct
+    (
+        CstPisEnum $cst,
+        array $baseCalculo,
+        float $aliquota
+    )
     {
-       $this->cst = $cst;
-       $this->baseCalculo = $baseCalculo;
-       $this->aliquota = $aliquota;
+        $this->cst = $cst;
+        $this->baseCalculo = $baseCalculo;
+        $this->aliquota = $aliquota;
     }
 
     /**
-     * @return CstCofinsEnum
+     * @return CstPisEnum
      */
-    public function getCst(): CstCofinsEnum
+    public function getCst(): CstPisEnum
     {
         return $this->cst;
     }

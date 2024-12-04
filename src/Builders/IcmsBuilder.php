@@ -2,8 +2,8 @@
 
 namespace TecnoSpeed\Plugnotas\Builders;
 
-use TecnoSpeed\Plugnotas\Common\Icms;
 use TecnoSpeed\Plugnotas\Common\SubstituicaoTributaria;
+use TecnoSpeed\Plugnotas\Common\Impostos\Icms;
 use TecnoSpeed\Plugnotas\Enums\CstIcmsEnum;
 use TecnoSpeed\Plugnotas\Enums\OrigemEnum;
 use TecnoSpeed\Plugnotas\Interfaces\IIcmsBuilder;

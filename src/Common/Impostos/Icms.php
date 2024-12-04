@@ -1,7 +1,8 @@
 <?php
 
-namespace TecnoSpeed\Plugnotas\Common;
+namespace TecnoSpeed\Plugnotas\Common\Impostos;
 
+use TecnoSpeed\Plugnotas\Common\SubstituicaoTributaria;
 use TecnoSpeed\Plugnotas\Enums\CstIcmsEnum;
 use TecnoSpeed\Plugnotas\Enums\OrigemEnum;
 

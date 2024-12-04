@@ -3,198 +3,256 @@
 namespace TecnoSpeed\Plugnotas\Common;
 
 use TecnoSpeed\Plugnotas\Abstracts\BuilderAbstract;
-use TecnoSpeed\Plugnotas\Enums\EstadoEnum;
-use TecnoSpeed\Plugnotas\Enums\TipoLogradouroEnum;
+use TecnoSpeed\Plugnotas\Error\ValidationError;
 
 class Endereco extends BuilderAbstract
 {
-    /**
-     * @var TipoLogradouroEnum|null
-     */
-    private ?TipoLogradouroEnum $tipoLogradouro;
-    /**
-     * @var string|null
-     */
-    private ?string $logradouro;
-    /**
-     * @var string|null
-     */
-    private ?string $numero;
-    /**
-     * @var string|null
-     */
-    private ?string $complemento;
-    /**
-     * @var string|null
-     */
-    private ?string $tipoBairro;
-    /**
-     * @var string|null
-     */
-    private ?string $bairro;
-    /**
-     * @var string|null
-     */
-    private ?string $codigoPais;
-    /**
-     * @var string|null
-     */
-    private ?string $descricaoPais;
-    /**
-     * @var string|null
-     */
-    private ?string $codigoCidade;
-    /**
-     * @var string|null
-     */
-    private ?string $descricaoCidade;
-    /**
-     * @var EstadoEnum|null
-     */
-    private ?EstadoEnum $estado;
-    /**
-     * @var string|null
-     */
-    private ?string $cep;
+    private $tipoLogradouro;
+    private $logradouro;
+    private $numero;
+    private $complemento;
+    private $tipoBairro;
+    private $bairro;
+    private $codigoPais;
+    private $descricaoPais;
+    private $codigoCidade;
+    private $descricaoCidade;
+    private $estado;
+    private $cep;
 
-    /**
-     * @param TipoLogradouroEnum|null $tipoLogradouro
-     * @param string|null $logradouro
-     * @param string|null $numero
-     * @param string|null $complemento
-     * @param string|null $tipoBairro
-     * @param string|null $bairro
-     * @param string|null $codigoPais
-     * @param string|null $descricaoPais
-     * @param string|null $codigoCidade
-     * @param string|null $descricaoCidade
-     * @param EstadoEnum|null $estado
-     * @param string|null $cep
-     */
-    public function __construct
-    (
-        ?TipoLogradouroEnum $tipoLogradouro,
-        ?string             $logradouro,
-        ?string             $numero,
-        ?string             $complemento,
-        ?string             $tipoBairro,
-        ?string             $bairro,
-        ?string             $codigoPais,
-        ?string             $descricaoPais,
-        ?string             $codigoCidade,
-        ?string             $descricaoCidade,
-        ?EstadoEnum         $estado,
-        ?string         $cep,
-    )
-    {
-        $this->tipoLogradouro = $tipoLogradouro;
-        $this->logradouro = $logradouro;
-        $this->numero = $numero;
-        $this->complemento = $complemento;
-        $this->tipoBairro = $tipoBairro;
-        $this->bairro = $bairro;
-        $this->codigoPais = $codigoPais;
-        $this->descricaoPais = $descricaoPais;
-        $this->codigoCidade = $codigoCidade;
-        $this->descricaoCidade = $descricaoCidade;
-        $this->estado = $estado;
-        $this->cep = $cep;
-    }
-
-    /**
-     * @return TipoLogradouroEnum|null
-     */
-    public function getTipoLogradouro(): ?TipoLogradouroEnum
+    public function getTipoLogradouro()
     {
         return $this->tipoLogradouro;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getLogradouro(): ?string
+    public function setTipoLogradouro($tipoLogradouro)
+    {
+        $allowedTypes = [
+            'Alameda',
+            'Avenida',
+            'Chácara',
+            'Colônia',
+            'Condomínio',
+            'Estância',
+            'Estrada',
+            'Fazenda',
+            'Praça',
+            'Prolongamento',
+            'Rodovia',
+            'Rua',
+            'Sítio',
+            'Travessa',
+            'Vicinal'
+        ];
+
+        if (!in_array($tipoLogradouro, $allowedTypes)) {
+            throw new ValidationError(
+                'Tipo de logradouro não suportado.'
+            );
+        }
+
+        $this->tipoLogradouro = $tipoLogradouro;
+    }
+
+    public function getLogradouro()
     {
         return $this->logradouro;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getNumero(): ?string
+    public function setLogradouro($logradouro)
+    {
+        if (($logradouro === '') > 0) {
+            throw new ValidationError(
+                'Logradouro é um campo requerido.'
+            );
+        }
+
+        $this->logradouro = $logradouro;
+    }
+
+    public function getNumero()
     {
         return $this->numero;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getComplemento(): ?string
+    public function setNumero($numero)
+    {
+        if (!strlen($numero) > 0) {
+            throw new ValidationError(
+                'Número é um campo requerido.'
+            );
+        }
+
+        $this->numero = $numero;
+    }
+
+    public function getComplemento()
     {
         return $this->complemento;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getTipoBairro(): ?string
+    public function setComplemento($complemento)
+    {
+        $this->complemento = $complemento;
+    }
+
+    public function getTipoBairro()
     {
         return $this->tipoBairro;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getBairro(): ?string
+    public function setTipoBairro($tipoBairro)
+    {
+        $allowedTypes = [
+            'Bairro',
+            'Bosque',
+            'Chácara',
+            'Conjunto',
+            'Desmembramento',
+            'Distrito',
+            'Favela',
+            'Fazenda',
+            'Gleba',
+            'Horto',
+            'Jardim',
+            'Loteamento',
+            'Núcleo',
+            'Parque',
+            'Residencial',
+            'Sítio',
+            'Tropical',
+            'Vila',
+            'Zona',
+            'Centro',
+            'Setor'
+        ];
+
+        if (!in_array($tipoBairro, $allowedTypes)) {
+            throw new ValidationError(
+                'Tipo de bairro não suportado.'
+            );
+        }
+
+        $this->tipoBairro = $tipoBairro;
+    }
+
+    public function getBairro()
     {
         return $this->bairro;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getCodigoPais(): ?string
+    public function setBairro($bairro)
+    {
+        $this->bairro = $bairro;
+    }
+
+    public function getCodigoPais()
     {
         return $this->codigoPais;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getDescricaoPais(): ?string
+    public function setCodigoPais($codigoPais)
+    {
+        $this->codigoPais = $codigoPais;
+    }
+
+    public function getDescricaoPais()
     {
         return $this->descricaoPais;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getCodigoCidade(): ?string
+    public function setDescricaoPais($descricaoPais)
+    {
+        $this->descricaoPais = $descricaoPais;
+    }
+
+    public function getCodigoCidade()
     {
         return $this->codigoCidade;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getDescricaoCidade(): ?string
+    public function setCodigoCidade($codigoCidade)
+    {
+        $codigoCidadeNumbers = preg_replace('/[^0-9]/', '', $codigoCidade);
+        if (strlen($codigoCidadeNumbers) !== 7) {
+            throw new ValidationError(
+                'Código da cidade inválido, por favor verifique se foram informados 7 números.'
+            );
+        }
+
+        $this->codigoCidade = $codigoCidadeNumbers;
+
+    }
+
+    public function getDescricaoCidade()
     {
         return $this->descricaoCidade;
     }
 
-    /**
-     * @return EstadoEnum|null
-     */
-    public function getEstado(): ?EstadoEnum
+    public function setDescricaoCidade($descricaoCidade)
+    {
+        $this->descricaoCidade = $descricaoCidade;
+    }
+
+    public function getEstado()
     {
         return $this->estado;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getCep(): ?string
+    public function setEstado($estado)
+    {
+        $allowedStates = [
+            'AC',
+            'AL',
+            'AM',
+            'AP',
+            'BA',
+            'CE',
+            'DF',
+            'ES',
+            'GO',
+            'MA',
+            'MG',
+            'MS',
+            'MT',
+            'PA',
+            'PB',
+            'PE',
+            'PI',
+            'PR',
+            'RJ',
+            'RN',
+            'RO',
+            'RR',
+            'RS',
+            'SC',
+            'SE',
+            'SP',
+            'TO'
+        ];
+        if (!in_array(strtoupper($estado), $allowedStates)) {
+            throw new ValidationError(
+                'Estado inválido.'
+            );
+        }
+
+        $this->estado = strtoupper($estado);
+    }
+
+    public function getCep()
     {
         return $this->cep;
     }
 
+    public function setCep($cep)
+    {
+        $cepNumbers = preg_replace('/[^0-9]/', '', $cep);
+        if (strlen($cepNumbers) !== 8) {
+            throw new ValidationError(
+                'CEP inválido, por favor verifique se foram informados 8 números.'
+            );
+        }
+
+        $this->cep = $cepNumbers;
+    }
 }

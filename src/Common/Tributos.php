@@ -2,6 +2,13 @@
 
 namespace TecnoSpeed\Plugnotas\Common;
 
+use TecnoSpeed\Plugnotas\Common\Impostos\Cofins;
+use TecnoSpeed\Plugnotas\Common\Impostos\Icms;
+use TecnoSpeed\Plugnotas\Common\Impostos\Ipi;
+use TecnoSpeed\Plugnotas\Common\Impostos\Issqn;
+use TecnoSpeed\Plugnotas\Common\Impostos\Partilha;
+use TecnoSpeed\Plugnotas\Common\Impostos\Pis;
+
 class Tributos
 {
     /**

@@ -13,9 +13,9 @@ class Pessoa
      */
     private ?string $razaoSocial;
     /**
-     * @var Endereco|null
+     * @var EnderecoV2|null
      */
-    private ?Endereco $endereco;
+    private ?EnderecoV2 $endereco;
     /**
      * @var string|null
      */
@@ -52,11 +52,13 @@ class Pessoa
      * @var string|null
      */
     private ?string $naoNif;
+    private ?string $nome;
 
     /**
      * @param string|null $cpfCnpj
+     * @param string|null $nome
      * @param string|null $razaoSocial
-     * @param Endereco|null $endereco
+     * @param EnderecoV2|null $endereco
      * @param string|null $email
      * @param string|null $inscricaoEstadual
      * @param string|null $inscricaoMunicipal
@@ -70,8 +72,9 @@ class Pessoa
     public function __construct
     (
         ?string   $cpfCnpj,
+        ?string   $nome,
         ?string   $razaoSocial,
-        ?Endereco $endereco,
+        ?EnderecoV2 $endereco,
         ?string   $email,
         ?string   $inscricaoEstadual,
         ?string   $inscricaoMunicipal,
@@ -84,6 +87,7 @@ class Pessoa
     )
     {
         $this->cpfCnpj = $cpfCnpj;
+        $this->nome = $nome;
         $this->razaoSocial = $razaoSocial;
         $this->endereco = $endereco;
         $this->email = $email;
@@ -108,6 +112,14 @@ class Pessoa
     /**
      * @return string|null
      */
+    public function getNome(): ?string
+    {
+        return $this->nome;
+    }
+
+    /**
+     * @return string|null
+     */
     public function getRazaoSocial(): ?string
     {
         return $this->razaoSocial;
@@ -116,7 +128,7 @@ class Pessoa
     /**
      * @return Endereco|null
      */
-    public function getEndereco(): ?Endereco
+    public function getEndereco(): ?EnderecoV2
     {
         return $this->endereco;
     }

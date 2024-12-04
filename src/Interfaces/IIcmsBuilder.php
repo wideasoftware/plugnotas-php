@@ -3,8 +3,8 @@
 namespace TecnoSpeed\Plugnotas\Interfaces;
 
 use TecnoSpeed\Plugnotas\Common\Efetivo;
-use TecnoSpeed\Plugnotas\Common\Icms;
 use TecnoSpeed\Plugnotas\Common\SubstituicaoTributaria;
+use TecnoSpeed\Plugnotas\Common\Impostos\Icms;
 use TecnoSpeed\Plugnotas\Enums\CstIcmsEnum;
 use TecnoSpeed\Plugnotas\Enums\OrigemEnum;
 

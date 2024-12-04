@@ -2,13 +2,12 @@
 
 namespace TecnoSpeed\Plugnotas\Builders;
 
-use TecnoSpeed\Plugnotas\Common\Cofins;
-use TecnoSpeed\Plugnotas\Common\Icms;
-use TecnoSpeed\Plugnotas\Common\Ipi;
-use TecnoSpeed\Plugnotas\Common\Issqn;
-use TecnoSpeed\Plugnotas\Common\Partilha;
-use TecnoSpeed\Plugnotas\Common\Pis;
-use TecnoSpeed\Plugnotas\Common\Tributos;
+use TecnoSpeed\Plugnotas\Common\Impostos\Cofins;
+use TecnoSpeed\Plugnotas\Common\Impostos\Icms;
+use TecnoSpeed\Plugnotas\Common\Impostos\Ipi;
+use TecnoSpeed\Plugnotas\Common\Impostos\Issqn;
+use TecnoSpeed\Plugnotas\Common\Impostos\Partilha;
+use TecnoSpeed\Plugnotas\Common\Impostos\Pis;
 use TecnoSpeed\Plugnotas\Enums\CstCofinsEnum;
 use TecnoSpeed\Plugnotas\Enums\CstIpiEnum;
 use TecnoSpeed\Plugnotas\Enums\CstPisEnum;

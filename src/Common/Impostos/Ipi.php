@@ -1,6 +1,6 @@
 <?php
 
-namespace TecnoSpeed\Plugnotas\Common;
+namespace TecnoSpeed\Plugnotas\Common\Impostos;
 
 use TecnoSpeed\Plugnotas\Enums\CstIpiEnum;
 

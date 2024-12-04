@@ -3,6 +3,7 @@
 namespace TecnoSpeed\Plugnotas\Interfaces;
 
 use TecnoSpeed\Plugnotas\Common\Endereco;
+use TecnoSpeed\Plugnotas\Common\EnderecoV2;
 use TecnoSpeed\Plugnotas\Common\Pessoa;
 use TecnoSpeed\Plugnotas\Common\Telefone;
 
@@ -17,6 +18,12 @@ interface IPessoaBuilder
     public function setCpfCnpj(string $cpfCnpj): self;
 
     /**
+     * @param string $nome
+     * @return self
+     */
+    public function setNome(string $nome): self;
+
+    /**
      * Define a razão social.
      *
      * @param string $razaoSocial Nome da empresa.
@@ -27,10 +34,10 @@ interface IPessoaBuilder
     /**
      * Define o endereço.
      *
-     * @param Endereco $endereco Objeto com os dados do endereço.
+     * @param EnderecoV2 $endereco Objeto com os dados do endereço.
      * @return IPessoaBuilder
      */
-    public function setEndereco(Endereco $endereco): self;
+    public function setEndereco(EnderecoV2 $endereco): self;
 
     /**
      * Define o email.

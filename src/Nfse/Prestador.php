@@ -7,7 +7,6 @@ use Respect\Validation\Validator as v;
 use TecnoSpeed\Plugnotas\Abstracts\BuilderAbstract;
 use TecnoSpeed\Plugnotas\Common\Endereco;
 use TecnoSpeed\Plugnotas\Common\Telefone;
-use TecnoSpeed\Plugnotas\Communication\CallApi;
 use TecnoSpeed\Plugnotas\Configuration;
 use TecnoSpeed\Plugnotas\Error\InvalidTypeError;
 use TecnoSpeed\Plugnotas\Error\RequiredError;

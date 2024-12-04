@@ -229,7 +229,7 @@ class Nfse extends BuilderAbstract implements IDfe
 
     public function setParcelas(Parcelas $parcelas)
     {
-        $this->parcelas = $parcelas;
+        $this->parcelas[] = $parcelas;
     }
 
     public function getParcelas()

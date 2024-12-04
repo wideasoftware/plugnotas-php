@@ -155,7 +155,7 @@ class Endereco extends BuilderAbstract
     {
         $this->codigoPais = $codigoPais;
     }
-    
+
     public function getDescricaoPais()
     {
         return $this->descricaoPais;

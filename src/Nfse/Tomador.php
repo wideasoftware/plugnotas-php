@@ -5,7 +5,6 @@ namespace TecnoSpeed\Plugnotas\Nfse;
 use FerFabricio\Hydrator\Hydrate;
 use Respect\Validation\Validator as v;
 use TecnoSpeed\Plugnotas\Configuration;
-use TecnoSpeed\Plugnotas\Communication\CallApi;
 use TecnoSpeed\Plugnotas\Common\Endereco;
 use TecnoSpeed\Plugnotas\Common\Telefone;
 use TecnoSpeed\Plugnotas\Error\InvalidTypeError;
@@ -118,7 +117,7 @@ class Tomador extends BuilderAbstract
     {
         return $this->inscricaoSuframa;
     }
-    
+
     public function setIndicadorInscricaoEstadual($indicadorInscricaoEstadual)
     {
         if (!v::in([1,2,9])->validate($indicadorInscricaoEstadual)) {

@@ -28,10 +28,10 @@ class SubstituicaoTributariaBuilder implements ISubstituicaoTributariaBuilder
     private array $fundoCombatePobreza;
 
     /**
-     * @param float $valor
+     * @param float|null $valor
      * @return ISubstituicaoTributariaBuilder
      */
-    public function setBaseCalculo(float $valor): ISubstituicaoTributariaBuilder
+    public function setBaseCalculo(?float $valor): ISubstituicaoTributariaBuilder
     {
         $this->baseCalculo = [
             'valor' => $valor,
@@ -41,10 +41,10 @@ class SubstituicaoTributariaBuilder implements ISubstituicaoTributariaBuilder
     }
 
     /**
-     * @param float $valor
+     * @param float|null $valor
      * @return ISubstituicaoTributariaBuilder
      */
-    public function setAliquota(float $valor): ISubstituicaoTributariaBuilder
+    public function setAliquota(?float $valor): ISubstituicaoTributariaBuilder
     {
         $this->aliquota = $valor;
 
@@ -52,10 +52,10 @@ class SubstituicaoTributariaBuilder implements ISubstituicaoTributariaBuilder
     }
 
     /**
-     * @param float $valor
+     * @param float|null $valor
      * @return ISubstituicaoTributariaBuilder
      */
-    public function setValor(float $valor): ISubstituicaoTributariaBuilder
+    public function setValor(?float $valor): ISubstituicaoTributariaBuilder
     {
         $this->valor = $valor;
 
@@ -63,12 +63,12 @@ class SubstituicaoTributariaBuilder implements ISubstituicaoTributariaBuilder
     }
 
     /**
-     * @param float $bc_valor
-     * @param float $aliquota
+     * @param float|null $bc_valor
+     * @param float|null $aliquota
      * @param float|null $valor
      * @return ISubstituicaoTributariaBuilder
      */
-    public function setFundoCombatePobreza(float $bc_valor, float $aliquota, ?float $valor): ISubstituicaoTributariaBuilder
+    public function setFundoCombatePobreza(?float $bc_valor, ?float $aliquota, ?float $valor): ISubstituicaoTributariaBuilder
     {
         $this->fundoCombatePobreza = [
             'baseCalculo' => [

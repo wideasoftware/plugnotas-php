@@ -9,6 +9,7 @@ use TecnoSpeed\Plugnotas\Traits\DataTransform;
 class EnderecoV2
 {
     use DataTransform;
+
     /**
      * @var TipoLogradouroEnum|null
      */
@@ -85,7 +86,7 @@ class EnderecoV2
         ?string             $codigoCidade,
         ?string             $descricaoCidade,
         ?EstadoEnum         $estado,
-        ?string         $cep,
+        ?string             $cep,
     )
     {
         $this->tipoLogradouro = $tipoLogradouro;

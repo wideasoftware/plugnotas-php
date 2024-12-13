@@ -2,8 +2,8 @@
 
 namespace TecnoSpeed\Plugnotas\Builders;
 
+use TecnoSpeed\Plugnotas\Common\Icms;
 use TecnoSpeed\Plugnotas\Common\SubstituicaoTributaria;
-use TecnoSpeed\Plugnotas\Common\Impostos\Icms;
 use TecnoSpeed\Plugnotas\Enums\CstIcmsEnum;
 use TecnoSpeed\Plugnotas\Enums\OrigemEnum;
 use TecnoSpeed\Plugnotas\Interfaces\IIcmsBuilder;
@@ -41,10 +41,10 @@ class IcmsBuilder implements IIcmsBuilder
     private array $efetivo;
 
     /**
-     * @param OrigemEnum $origem
+     * @param OrigemEnum|null $origem
      * @return IIcmsBuilder
      */
-    public function setOrigem(OrigemEnum $origem): IIcmsBuilder
+    public function setOrigem(?OrigemEnum $origem): IIcmsBuilder
     {
         $this->origem = $origem;
 
@@ -52,10 +52,10 @@ class IcmsBuilder implements IIcmsBuilder
     }
 
     /**
-     * @param CstIcmsEnum $cst
+     * @param CstIcmsEnum|null $cst
      * @return IIcmsBuilder
      */
-    public function setCst(CstIcmsEnum $cst): IIcmsBuilder
+    public function setCst(?CstIcmsEnum $cst): IIcmsBuilder
     {
         $this->cst = $cst;
 
@@ -63,11 +63,11 @@ class IcmsBuilder implements IIcmsBuilder
     }
 
     /**
-     * @param float $percentual
-     * @param float $valor
+     * @param float|null $percentual
+     * @param float|null $valor
      * @return IIcmsBuilder
      */
-    public function setCreditoSimplesNacional(float $percentual, float $valor): IIcmsBuilder
+    public function setCreditoSimplesNacional(?float $percentual, ?float $valor): IIcmsBuilder
     {
         $percentualConvertido = $percentual / 100;
 
@@ -80,10 +80,10 @@ class IcmsBuilder implements IIcmsBuilder
     }
 
     /**
-     * @param SubstituicaoTributaria $substituicaoTributaria
+     * @param SubstituicaoTributaria|null $substituicaoTributaria
      * @return IIcmsBuilder
      */
-    public function setSubstituicaoTributaria(SubstituicaoTributaria $substituicaoTributaria): IIcmsBuilder
+    public function setSubstituicaoTributaria(?SubstituicaoTributaria $substituicaoTributaria): IIcmsBuilder
     {
         $this->substituicaoTributaria = $substituicaoTributaria;
 
@@ -91,10 +91,10 @@ class IcmsBuilder implements IIcmsBuilder
     }
 
     /**
-     * @param float $valor
+     * @param float|null $valor
      * @return IIcmsBuilder
      */
-    public function setValor(float $valor): IIcmsBuilder
+    public function setValor(?float $valor): IIcmsBuilder
     {
         $this->valor = $valor;
 
@@ -102,12 +102,12 @@ class IcmsBuilder implements IIcmsBuilder
     }
 
     /**
-     * @param float $bc_percentual_reducao
-     * @param float $bc_valor
-     * @param float $aliquota
+     * @param float|null $bc_percentual_reducao
+     * @param float|null $bc_valor
+     * @param float|null $aliquota
      * @return IIcmsBuilder
      */
-    public function setEfetivo(float $bc_percentual_reducao, float $bc_valor, float $aliquota): IIcmsBuilder
+    public function setEfetivo(?float $bc_percentual_reducao, ?float $bc_valor, ?float $aliquota): IIcmsBuilder
     {
         $this->efetivo = [
             'baseCalculo' => [

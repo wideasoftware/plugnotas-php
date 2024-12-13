@@ -3,13 +3,14 @@
 namespace TecnoSpeed\Plugnotas\Interfaces;
 
 use TecnoSpeed\Plugnotas\Common\Item;
-use TecnoSpeed\Plugnotas\Common\Nfe;
+use TecnoSpeed\Plugnotas\Common\Pagamento;
 use TecnoSpeed\Plugnotas\Common\Pessoa;
+use TecnoSpeed\Plugnotas\Common\Total;
+use TecnoSpeed\Plugnotas\Common\Transporte;
 use TecnoSpeed\Plugnotas\Configuration;
-use TecnoSpeed\Plugnotas\Enums\FinalidadeNfeEnum;
-use TecnoSpeed\Plugnotas\Enums\FormasDePagamentoEnum;
-use TecnoSpeed\Plugnotas\Enums\ModalidadeFreteEnum;
-use TecnoSpeed\Plugnotas\Enums\PresencialEnum;
+use TecnoSpeed\Plugnotas\Dto\CupomFiscalReferenciadoDto;
+use TecnoSpeed\Plugnotas\Dto\NfeReferenciadaDto;
+use TecnoSpeed\Plugnotas\Nfe;
 
 interface INfeBuilder
 {
@@ -20,10 +21,10 @@ interface INfeBuilder
     public function setIdIntegracao(string $idIntegracao): self;
 
     /**
-     * @param FinalidadeNfeEnum $finalidade
+     * @param string $finalidade
      * @return self
      */
-    public function setFinalidade(FinalidadeNfeEnum $finalidade): self;
+    public function setFinalidade(string $finalidade): self;
 
     /**
      * @param string $natureza
@@ -38,16 +39,23 @@ interface INfeBuilder
     public function setDataEmissao(string $dataEmissao): self;
 
     /**
-     * @param PresencialEnum $presencial
+     * @param string $presencial
      * @return self
      */
-    public function setPresencial(PresencialEnum $presencial): self;
+    public function setPresencial(string $presencial): self;
 
     /**
      * @param bool $consumidorFinal
      * @return self
      */
     public function setConsumidorFinal(bool $consumidorFinal): self;
+
+    /**
+     * @param NfeReferenciadaDto[]|null $nfe
+     * @param CupomFiscalReferenciadoDto[]|null $cupomFiscal
+     * @return self
+     */
+    public function setNotaReferenciada(?array $nfe, ?array $cupomFiscal): self;
 
     /**
      * @param Pessoa $emitente
@@ -62,82 +70,52 @@ interface INfeBuilder
     public function setDestinatario(Pessoa $destinatario): self;
 
     /**
-     * @param Item $itens
+     * @param Item[] $itens
      * @return self
      */
-    public function setItens(Item $itens): self;
+    public function setItens(array $itens): self;
 
     /**
-     * @param float|null $pisRetido
-     * @param float|null $cofinsRetido
-     * @param float|null $irrfRetido
-     * @param float|null $csllRetido
-     * @param float|null $prevSocialRetido
+     * @param Total|null $total
      * @return self
      */
-    public function setRetencoes(?float $pisRetido, ?float $cofinsRetido, ?float $irrfRetido, ?float $csllRetido, ?float $prevSocialRetido): self;
+    public function setTotal(?Total $total): self;
 
     /**
-     * @param ModalidadeFreteEnum $modalidadeFrete
-     * @param Pessoa|null $transportador
-     * @param string|null $placaVeiculo
-     * @param string|null $ufPlaca
-     * @param string|null $rntc
-     * @param float|null $quantidadeVolTransp
-     * @param string|null $EspTransp
-     * @param string|null $marcaVolTransp
-     * @param string|null $NumVolTransp
-     * @param float|null $pesoLiquido
-     * @param float|null $pesoBruto
+     * @param Transporte|null $transporte
      * @return self
      */
-    public function setTransporte
-    (
-        ModalidadeFreteEnum $modalidadeFrete,
-        ?Pessoa             $transportador,
-        ?string             $placaVeiculo,
-        ?string             $ufPlaca,
-        ?string             $rntc,
-        ?float              $quantidadeVolTransp,
-        ?string             $EspTransp,
-        ?string             $marcaVolTransp,
-        ?string             $NumVolTransp,
-        ?float              $pesoLiquido,
-        ?float              $pesoBruto,
-    ): self;
+    public function setTransporte(?Transporte $transporte): self;
 
     /**
-     * @param FormasDePagamentoEnum $meio
-     * @param string|null $descricaoMeio
-     * @param float $valor
-     * @param string|null $data
+     * @param Pagamento[] $pagamentos
      * @return self
      */
-    public function setPagamentos(FormasDePagamentoEnum $meio, ?string $descricaoMeio, float $valor, ?string $data): self;
+    public function setPagamentos(array $pagamentos): self;
 
     /**
-     * @param string $informacoesComplementares
+     * @param string|null $informacoesComplementares
      * @return self
      */
-    public function setInformacoesComplementares(string $informacoesComplementares): self;
+    public function setInformacoesComplementares(?string $informacoesComplementares): self;
 
     /**
-     * @param Pessoa $intermediadorTransacao
+     * @param Pessoa|null $intermediadorTransacao
      * @return self
      */
-    public function setIntermediadorTransacao(Pessoa $intermediadorTransacao): self;
+    public function setIntermediadorTransacao(?Pessoa $intermediadorTransacao): self;
 
     /**
-     * @param int $intermediador
+     * @param int|null $intermediador
      * @return self
      */
-    public function setIntermediador(int $intermediador): self;
+    public function setIntermediador(?int $intermediador): self;
 
     /**
-     * @param Configuration $configuration
+     * @param Configuration $configuracao
      * @return self
      */
-    public function setConfiguration(Configuration $configuration): self;
+    public function setConfiguracao(Configuration $configuracao): self;
 
     public function build(): Nfe;
 }

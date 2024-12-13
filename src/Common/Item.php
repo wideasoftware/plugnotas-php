@@ -2,301 +2,159 @@
 
 namespace TecnoSpeed\Plugnotas\Common;
 
-class Item
+use TecnoSpeed\Plugnotas\Dto\ComercialETributavelDto;
+use TecnoSpeed\Plugnotas\Dto\ItemDto;
+
+readonly class Item
 {
     /**
-     * @var string|null
+     * @param ItemDto $itemDto
      */
-    private ?string $codigo;
-
-    /**
-     * @var string|null
-     */
-    private ?string $codigoBarras;
-
-    /**
-     * @var string|null
-     */
-    private ?string $codigoBarrasTributavel;
-
-    /**
-     * @var string
-     */
-    private string $descricao;
-
-    /**
-     * @var string
-     */
-    private string $ncm;
-
-    /**
-     * @var string|null
-     */
-    private ?string $cest;
-
-    /**
-     * @var string
-     */
-    private string $cfop;
-
-    /**
-     * @var float|null
-     */
-    private ?float $valor;
-
-    /**
-     * @var Tributos
-     */
-    private Tributos $tributos;
-
-    /**
-     * @var bool|null
-     */
-    private ?bool $compoeTotal;
-
-    /**
-     * @var string|null
-     */
-    private ?string $codigoBeneficioFiscal;
-
-    /**
-     * @var float|null
-     */
-    private ?float $valorFrete;
-
-    /**
-     * @var float|null
-     */
-    private ?float $valorSeguro;
-
-    /**
-     * @var float|null
-     */
-    private ?float $valorDesconto;
-
-    /**
-     * @var float|null
-     */
-    private ?float $valorOutros;
-
-    /**
-     * @var array|null
-     */
-    private ?array $unidade;
-
-    /**
-     * @var array|null
-     */
-    private ?array $quantidade;
-
-    /**
-     * @var array
-     */
-    private array $valorUnitario;
-
-    /**
-     * @param string|null $codigo
-     * @param string|null $codigoBarras
-     * @param string|null $codigoBarrasTributavel
-     * @param string $descricao
-     * @param string $ncm
-     * @param string|null $cest
-     * @param string $cfop
-     * @param float|null $valor
-     * @param Tributos $tributos
-     * @param bool|null $compoeTotal
-     * @param string|null $codigoBeneficioFiscal
-     * @param float|null $valorFrete
-     * @param float|null $valorSeguro
-     * @param float|null $valorDesconto
-     * @param float|null $valorOutros
-     * @param array|null $unidade
-     * @param array|null $quantidade
-     * @param array $valorUnitario
-     */
-    public function __construct
-    (
-        ?string  $codigo,
-        ?string  $codigoBarras,
-        ?string  $codigoBarrasTributavel,
-        string   $descricao,
-        string   $ncm,
-        ?string  $cest,
-        string   $cfop,
-        ?float   $valor,
-        Tributos $tributos,
-        ?bool    $compoeTotal,
-        ?string  $codigoBeneficioFiscal,
-        ?float   $valorFrete,
-        ?float   $valorSeguro,
-        ?float   $valorDesconto,
-        ?float   $valorOutros,
-        ?array   $unidade,
-        ?array   $quantidade,
-        array    $valorUnitario,
-    )
+    public function __construct(private ItemDto $itemDto)
     {
-        $this->codigo = $codigo;
-        $this->codigoBarras = $codigoBarras;
-        $this->codigoBarrasTributavel = $codigoBarrasTributavel;
-        $this->descricao = $descricao;
-        $this->ncm = $ncm;
-        $this->cest = $cest;
-        $this->cfop = $cfop;
-        $this->valor = $valor;
-        $this->tributos = $tributos;
-        $this->compoeTotal = $compoeTotal;
-        $this->codigoBeneficioFiscal = $codigoBeneficioFiscal;
-        $this->valorFrete = $valorFrete;
-        $this->valorSeguro = $valorSeguro;
-        $this->valorDesconto = $valorDesconto;
-        $this->valorOutros = $valorOutros;
-        $this->unidade = $unidade;
-        $this->quantidade = $quantidade;
-        $this->valorUnitario = $valorUnitario;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCodigo(): string
+    public function getCodigo(): ?string
     {
-        return $this->codigo;
+        return $this->itemDto->codigo;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCodigoBarras(): string
+    public function getCodigoBarras(): ?string
     {
-        return $this->codigoBarras;
+        return $this->itemDto->codigoBarras;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCodigoBarrasTributavel(): string
+    public function getCodigoBarrasTributavel(): ?string
     {
-        return $this->codigoBarrasTributavel;
+        return $this->itemDto->codigoBarrasTributavel;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescricao(): string
+    public function getDescricao(): ?string
     {
-        return $this->descricao;
+        return $this->itemDto->descricao;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getNcm(): string
+    public function getNcm(): ?string
     {
-        return $this->ncm;
+        return $this->itemDto->ncm;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCest(): string
+    public function getCest(): ?string
     {
-        return $this->cest;
+        return $this->itemDto->cest;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCfop(): string
+    public function getCfop(): ?string
     {
-        return $this->cfop;
+        return $this->itemDto->cfop;
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getValor(): float
+    public function getValor(): ?float
     {
-        return $this->valor;
+        return $this->itemDto->valor;
     }
 
     /**
-     * @return Tributos
+     * @return Tributos|null
      */
-    public function getTributos(): Tributos
+    public function getTributos(): ?Tributos
     {
-        return $this->tributos;
+        return $this->itemDto->tributos;
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
-    public function isCompoeTotal(): bool
+    public function isCompoeTotal(): ?bool
     {
-        return $this->compoeTotal;
+        return $this->itemDto->compoeTotal;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCodigoBeneficioFiscal(): string
+    public function getCodigoBeneficioFiscal(): ?string
     {
-        return $this->codigoBeneficioFiscal;
+        return $this->itemDto->codigoBeneficioFiscal;
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getValorFrete(): float
+    public function getValorFrete(): ?float
     {
-        return $this->valorFrete;
+        return $this->itemDto->valorFrete;
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getValorSeguro(): float
+    public function getValorSeguro(): ?float
     {
-        return $this->valorSeguro;
+        return $this->itemDto->valorSeguro;
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getValorDesconto(): float
+    public function getValorDesconto(): ?float
     {
-        return $this->valorDesconto;
+        return $this->itemDto->valorDesconto;
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getValorOutros(): float
+    public function getValorOutros(): ?float
     {
-        return $this->valorOutros;
+        return $this->itemDto->valorOutros;
     }
 
     /**
-     * @return array
+     * @return ComercialETributavelDto|null
      */
-    public function getUnidade(): array
+    public function getUnidade(): ?ComercialETributavelDto
     {
-        return $this->unidade;
+        return $this->itemDto->unidade;
     }
 
     /**
-     * @return array
+     * @return ComercialETributavelDto|null
      */
-    public function getQuantidade(): array
+    public function getQuantidade(): ?ComercialETributavelDto
     {
-        return $this->quantidade;
+        return $this->itemDto->quantidade;
     }
 
     /**
-     * @return array
+     * @return ComercialETributavelDto|null
      */
-    public function getValorUnitario(): array
+    public function getValorUnitario(): ?ComercialETributavelDto
     {
-        return $this->valorUnitario;
+        return $this->itemDto->valorUnitario;
     }
 }

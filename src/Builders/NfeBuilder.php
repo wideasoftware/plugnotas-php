@@ -3,183 +3,278 @@
 namespace TecnoSpeed\Plugnotas\Builders;
 
 use TecnoSpeed\Plugnotas\Common\Item;
-use TecnoSpeed\Plugnotas\Common\Nfe;
+use TecnoSpeed\Plugnotas\Common\Pagamento;
 use TecnoSpeed\Plugnotas\Common\Pessoa;
+use TecnoSpeed\Plugnotas\Common\Total;
+use TecnoSpeed\Plugnotas\Common\Transporte;
 use TecnoSpeed\Plugnotas\Configuration;
+use TecnoSpeed\Plugnotas\Dto\CupomFiscalReferenciadoDto;
+use TecnoSpeed\Plugnotas\Dto\NfeDto;
+use TecnoSpeed\Plugnotas\Dto\NfeReferenciadaDto;
+use TecnoSpeed\Plugnotas\Dto\NotaReferenciadaDto;
 use TecnoSpeed\Plugnotas\Enums\FinalidadeNfeEnum;
-use TecnoSpeed\Plugnotas\Enums\FormasDePagamentoEnum;
-use TecnoSpeed\Plugnotas\Enums\ModalidadeFreteEnum;
+use TecnoSpeed\Plugnotas\Enums\IntermediadorEnum;
 use TecnoSpeed\Plugnotas\Enums\PresencialEnum;
+use TecnoSpeed\Plugnotas\Error\ValidationError;
 use TecnoSpeed\Plugnotas\Interfaces\INfeBuilder;
+use TecnoSpeed\Plugnotas\Nfe;
+use TecnoSpeed\Plugnotas\Validators\ValidaNfe;
 
 class NfeBuilder implements INfeBuilder
 {
-    private string $idIntegracao;
-    private FinalidadeNfeEnum $finalidade;
-    private string $natureza;
-    private string $dataEmissao;
-    private PresencialEnum $presencial;
-    private bool $consumidorFinal;
-    private Pessoa $emitente;
-    private Pessoa $destinatario;
-    private Item $itens;
     /**
-     * @var array|float[]|null[]
+     * @var string
      */
-    private array $retencoes;
-    private array $transporte;
+    private string $idIntegracao;
+    /**
+     * @var FinalidadeNfeEnum
+     */
+    private FinalidadeNfeEnum $finalidade;
+    /**
+     * @var string
+     */
+    private string $natureza;
+    /**
+     * @var string
+     */
+    private string $dataEmissao;
+    /**
+     * @var PresencialEnum
+     */
+    private PresencialEnum $presencial;
+    /**
+     * @var bool
+     */
+    private bool $consumidorFinal;
+    /**
+     * @var NotaReferenciadaDto|null
+     */
+    private ?NotaReferenciadaDto $notaReferenciada;
+    /**
+     * @var Pessoa
+     */
+    private Pessoa $emitente;
+    /**
+     * @var Pessoa
+     */
+    private Pessoa $destinatario;
+    /**
+     * @var Item[]
+     */
+    private array $itens;
+    /**
+     * @var Total
+     */
+    private Total $total;
+    /**
+     * @var Transporte
+     */
+    private Transporte $transporte;
+    /**
+     * @var Pagamento[]
+     */
     private array $pagamentos;
+    /**
+     * @var string
+     */
     private string $informacoesComplementares;
-    private array $intermediadorTransacao;
-    private int $intermediador;
-    private Configuration $configuration;
+    /**
+     * @var Pessoa
+     */
+    private Pessoa $intermediadorTransacao;
+    /**
+     * @var IntermediadorEnum
+     */
+    private IntermediadorEnum $intermediador;
+    /**
+     * @var Configuration
+     */
+    private Configuration $configuracao;
 
+    /**
+     * @param string $idIntegracao
+     * @return INfeBuilder
+     */
     public function setIdIntegracao(string $idIntegracao): INfeBuilder
     {
         $this->idIntegracao = $idIntegracao;
         return $this;
     }
 
-    public function setFinalidade(FinalidadeNfeEnum $finalidade): INfeBuilder
+    /**
+     * @param string $finalidade
+     * @return INfeBuilder
+     */
+    public function setFinalidade(string $finalidade): INfeBuilder
     {
-        $this->finalidade = $finalidade;
+        $this->finalidade = FinalidadeNfeEnum::from($finalidade);
         return $this;
     }
 
+    /**
+     * @param string $natureza
+     * @return INfeBuilder
+     */
     public function setNatureza(string $natureza): INfeBuilder
     {
         $this->natureza = $natureza;
         return $this;
     }
 
+    /**
+     * @param string $dataEmissao
+     * @return INfeBuilder
+     */
     public function setDataEmissao(string $dataEmissao): INfeBuilder
     {
         $this->dataEmissao = $dataEmissao;
         return $this;
     }
 
-    public function setPresencial(PresencialEnum $presencial): INfeBuilder
+    /**
+     * @param string $presencial
+     * @return INfeBuilder
+     */
+    public function setPresencial(string $presencial): INfeBuilder
     {
-        $this->presencial = $presencial;
+        $this->presencial = PresencialEnum::from($presencial);
         return $this;
     }
 
+    /**
+     * @param bool $consumidorFinal
+     * @return INfeBuilder
+     */
     public function setConsumidorFinal(bool $consumidorFinal): INfeBuilder
     {
         $this->consumidorFinal = $consumidorFinal;
         return $this;
     }
 
+    /**
+     * @param NfeReferenciadaDto[]|null $nfe
+     * @param CupomFiscalReferenciadoDto[]|null $cupomFiscal
+     * @return INfeBuilder
+     */
+    public function setNotaReferenciada(?array $nfe, ?array $cupomFiscal): INfeBuilder
+    {
+        $this->notaReferenciada = new NotaReferenciadaDto($nfe, $cupomFiscal);
+        return $this;
+    }
+
+    /**
+     * @throws ValidationError
+     */
     public function setEmitente(Pessoa $emitente): INfeBuilder
     {
+        ValidaNfe::validaEmitente($emitente);
+
         $this->emitente = $emitente;
         return $this;
     }
 
+    /**
+     * @throws ValidationError
+     */
     public function setDestinatario(Pessoa $destinatario): INfeBuilder
     {
+        ValidaNfe::validaDestinatario($destinatario);
+
         $this->destinatario = $destinatario;
         return $this;
     }
 
-    public function setItens(Item $itens): INfeBuilder
+    /**
+     * @param Item[] $itens
+     * @return INfeBuilder
+     */
+    public function setItens(array $itens): INfeBuilder
     {
         $this->itens = $itens;
         return $this;
     }
 
-    public function setRetencoes(?float $pisRetido, ?float $cofinsRetido, ?float $irrfRetido, ?float $csllRetido, ?float $prevSocialRetido): INfeBuilder
+    /**
+     * @param Total|null $total
+     * @return INfeBuilder
+     */
+    public function setTotal(?Total $total): INfeBuilder
     {
-        $this->retencoes = [
-            'valorPisRetido' => $pisRetido,
-            'valorCofinsRetido' => $cofinsRetido,
-            'valorIrrfRetido' => $irrfRetido,
-            'valorCsllRetido' => $csllRetido,
-            'valorPrevidenciaRetido' => $prevSocialRetido,
-        ];
+        $this->total = $total;
 
         return $this;
     }
 
-    public function setTransporte
-    (
-        ModalidadeFreteEnum $modalidadeFrete,
-        ?Pessoa             $transportador,
-        ?string             $placaVeiculo,
-        ?string             $ufPlaca,
-        ?string             $rntc,
-        ?float              $quantidadeVolTransp,
-        ?string             $EspTransp,
-        ?string             $marcaVolTransp,
-        ?string             $NumVolTransp,
-        ?float              $pesoLiquido,
-        ?float              $pesoBruto,
-    ): INfeBuilder
+    /**
+     * @param Transporte|null $transporte
+     * @return INfeBuilder
+     */
+    public function setTransporte(?Transporte $transporte): INfeBuilder
     {
-        $this->transporte = [
-            'modalidadeFrete' => $modalidadeFrete,
-            'transportador' => $transportador,
-            'veiculo' => [
-                'placa' => $placaVeiculo,
-                'uf' => $ufPlaca,
-                'rntc' => $rntc,
-            ],
-            'volumes' => [
-                'quantidade' => $quantidadeVolTransp,
-                'especie' => $EspTransp,
-                'marca' => $marcaVolTransp,
-                'numeracao' => $NumVolTransp,
-                'pesoLiquido' => $pesoLiquido,
-                'pesoBruto' => $pesoBruto,
-            ]
-        ];
+        $this->transporte = $transporte;
 
         return $this;
     }
 
-    public function setPagamentos(FormasDePagamentoEnum $meio, ?string $descricaoMeio, float $valor, ?string $data): INfeBuilder
+    /**
+     * @param Pagamento[] $pagamentos
+     * @return INfeBuilder
+     * @throws ValidationError
+     */
+    public function setPagamentos(array $pagamentos): INfeBuilder
     {
-        $this->pagamentos = [
-            'meio' => $meio,
-            'descricaoMeio' => $descricaoMeio,
-            'valor' => $valor,
-            'data' => $data,
-        ];
+        ValidaNfe::validaPagamentos($pagamentos);
 
+        $this->pagamentos = $pagamentos;
         return $this;
     }
 
-    public function setInformacoesComplementares(string $informacoesComplementares): INfeBuilder
+    /**
+     * @param string|null $informacoesComplementares
+     * @return INfeBuilder
+     */
+    public function setInformacoesComplementares(?string $informacoesComplementares): INfeBuilder
     {
         $this->informacoesComplementares = $informacoesComplementares;
         return $this;
     }
 
-    public function setIntermediadorTransacao(Pessoa $intermediadorTransacao): INfeBuilder
+    /**
+     * @param Pessoa|null $intermediadorTransacao
+     * @return INfeBuilder
+     */
+    public function setIntermediadorTransacao(?Pessoa $intermediadorTransacao): INfeBuilder
     {
-        $this->intermediadorTransacao = [
-            'cpfCnpj' => $intermediadorTransacao->getCpfCnpj(),
-            'identificadorCadastro' => $intermediadorTransacao->getNome(),
-        ];
-
+        $this->intermediadorTransacao = $intermediadorTransacao;
         return $this;
     }
 
-    public function setIntermediador(int $intermediador): INfeBuilder
+    /**
+     * @param int|null $intermediador
+     * @return INfeBuilder
+     */
+    public function setIntermediador(?int $intermediador): INfeBuilder
     {
-        $this->intermediador = $intermediador;
+        $this->intermediador = IntermediadorEnum::from($intermediador);
         return $this;
     }
 
-    public function setConfiguration(Configuration $configuration): INfeBuilder
+    /**
+     * @param Configuration $configuracao
+     * @return INfeBuilder
+     */
+    public function setConfiguracao(Configuration $configuracao): INfeBuilder
     {
-        $this->configuration = $configuration;
+        $this->configuracao = $configuracao;
         return $this;
     }
 
+    /**
+     * @return Nfe
+     */
     public function build(): Nfe
     {
-        return new Nfe
+        $nfeDto = new NfeDto
         (
             idIntegracao: $this->idIntegracao,
             finalidade: $this->finalidade,
@@ -187,16 +282,18 @@ class NfeBuilder implements INfeBuilder
             dataEmissao: $this->dataEmissao,
             presencial: $this->presencial,
             consumidorFinal: $this->consumidorFinal,
+            notaReferenciada: $this->notaReferenciada,
             emitente: $this->emitente,
             destinatario: $this->destinatario,
             itens: $this->itens,
-            retencoes: $this->retencoes,
+            total: $this->total,
             transporte: $this->transporte,
             pagamentos: $this->pagamentos,
             informacoesComplementares: $this->informacoesComplementares,
             intermediadorTransacao: $this->intermediadorTransacao,
             intermediador: $this->intermediador,
-            configuration: $this->configuration,
         );
+
+        return new Nfe($nfeDto, $this->configuracao);
     }
 }

@@ -2,24 +2,8 @@
 
 namespace TecnoSpeed\Plugnotas\Common;
 
-class SubstituicaoTributaria
+readonly class SubstituicaoTributaria
 {
-    /**
-     * @var array|null
-     */
-    private ?array $baseCalculo;
-    /**
-     * @var float|null
-     */
-    private ?float $aliquota;
-    /**
-     * @var float|null
-     */
-    private ?float $valor;
-    /**
-     * @var array|null
-     */
-    private ?array $fundoCombatePobreza;
 
     /**
      * @param array|null $baseCalculo
@@ -27,12 +11,14 @@ class SubstituicaoTributaria
      * @param float|null $valor
      * @param array|null $fundoCombatePobreza
      */
-    public function __construct(?array $baseCalculo, ?float $aliquota, ?float $valor, ?array $fundoCombatePobreza)
+    public function __construct
+    (
+        private ?array $baseCalculo,
+        private ?float $aliquota,
+        private ?float $valor,
+        private ?array $fundoCombatePobreza
+    )
     {
-        $this->baseCalculo = $baseCalculo;
-        $this->aliquota = $aliquota;
-        $this->valor = $valor;
-        $this->fundoCombatePobreza = $fundoCombatePobreza;
     }
 
     /**

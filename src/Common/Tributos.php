@@ -2,87 +2,29 @@
 
 namespace TecnoSpeed\Plugnotas\Common;
 
-use TecnoSpeed\Plugnotas\Common\Impostos\Cofins;
-use TecnoSpeed\Plugnotas\Common\Impostos\Icms;
-use TecnoSpeed\Plugnotas\Common\Impostos\Ipi;
-use TecnoSpeed\Plugnotas\Common\Impostos\Issqn;
-use TecnoSpeed\Plugnotas\Common\Impostos\Partilha;
-use TecnoSpeed\Plugnotas\Common\Impostos\Pis;
+use TecnoSpeed\Plugnotas\Dto\CofinsDto;
+use TecnoSpeed\Plugnotas\Dto\IpiDto;
+use TecnoSpeed\Plugnotas\Dto\IssqnDto;
+use TecnoSpeed\Plugnotas\Dto\PartilhaDto;
+use TecnoSpeed\Plugnotas\Dto\PisDto;
+use TecnoSpeed\Plugnotas\Dto\TributosDto;
 
-class Tributos
+readonly class Tributos
 {
     /**
-     * @var Partilha|null
+     * @param TributosDto $tributosDto
      */
-    private ?Partilha $partilha;
-
-    /**
-     * @var Icms|null
-     */
-    private ?Icms $icms;
-
-    /**
-     * @var Ipi|null
-     */
-    private ?Ipi $ipi;
-
-    /**
-     * @var Pis|null
-     */
-    private ?Pis $pis;
-
-    /**
-     * @var Cofins|null
-     */
-    private ?Cofins $cofins;
-
-    /**
-     * @var Issqn|null
-     */
-    private ?Issqn $issqn;
-
-    /**
-     * @var float|null
-     */
-    private ?float $valorAproximadoTributos;
-
-    /**
-     * @param Partilha|null $partilha
-     * @param Icms|null $icms
-     * @param Ipi|null $ipi
-     * @param Pis|null $pis
-     * @param Cofins|null $cofins
-     * @param Issqn|null $issqn
-     * @param float|null $valorAproximadoTributos
-     */
-    public function __construct
-    (
-        ?Partilha $partilha,
-        ?Icms     $icms,
-        ?Ipi      $ipi,
-        ?Pis      $pis,
-        ?Cofins   $cofins,
-        ?Issqn    $issqn,
-        ?float    $valorAproximadoTributos
-    )
+    public function __construct(private TributosDto $tributosDto)
     {
-        $this->partilha = $partilha;
-        $this->icms = $icms;
-        $this->ipi = $ipi;
-        $this->pis = $pis;
-        $this->cofins = $cofins;
-        $this->issqn = $issqn;
-        $this->valorAproximadoTributos = $valorAproximadoTributos;
     }
 
-
     /**
-     * @return Partilha|null
+     * @return PartilhaDto|null
      */
 
-    public function getPartilha(): ?Partilha
+    public function getPartilha(): ?PartilhaDto
     {
-        return $this->partilha;
+        return $this->tributosDto->partilha;
     }
 
     /**
@@ -90,39 +32,39 @@ class Tributos
      */
     public function getIcms(): ?Icms
     {
-        return $this->icms;
+        return $this->tributosDto->icms;
     }
 
     /**
-     * @return Ipi|null
+     * @return IpiDto|null
      */
-    public function getIpi(): ?Ipi
+    public function getIpi(): ?IpiDto
     {
-        return $this->ipi;
+        return $this->tributosDto->ipi;
     }
 
     /**
-     * @return Pis|null
+     * @return PisDto|null
      */
-    public function getPis(): ?Pis
+    public function getPis(): ?PisDto
     {
-        return $this->pis;
+        return $this->tributosDto->pis;
     }
 
     /**
-     * @return Cofins|null
+     * @return CofinsDto|null
      */
-    public function getCofins(): ?Cofins
+    public function getCofins(): ?CofinsDto
     {
-        return $this->cofins;
+        return $this->tributosDto->cofins;
     }
 
     /**
-     * @return Issqn|null
+     * @return IssqnDto|null
      */
-    public function getIssqn(): ?Issqn
+    public function getIssqn(): ?IssqnDto
     {
-        return $this->issqn;
+        return $this->tributosDto->issqn;
     }
 
     /**
@@ -130,6 +72,6 @@ class Tributos
      */
     public function getValorAproximadoTributos(): ?float
     {
-        return $this->valorAproximadoTributos;
+        return $this->tributosDto->valorAproximadoTributos;
     }
 }

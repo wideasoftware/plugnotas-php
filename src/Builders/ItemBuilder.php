@@ -4,6 +4,8 @@ namespace TecnoSpeed\Plugnotas\Builders;
 
 use TecnoSpeed\Plugnotas\Common\Item;
 use TecnoSpeed\Plugnotas\Common\Tributos;
+use TecnoSpeed\Plugnotas\Dto\ComercialETributavelDto;
+use TecnoSpeed\Plugnotas\Dto\ItemDto;
 use TecnoSpeed\Plugnotas\Interfaces\IItemBuilder;
 
 class ItemBuilder implements IItemBuilder
@@ -69,103 +71,103 @@ class ItemBuilder implements IItemBuilder
      */
     private float $valorOutros;
     /**
-     * @var array|float[]
+     * @var ComercialETributavelDto
      */
-    private array $unidade;
+    private ComercialETributavelDto $unidade;
     /**
-     * @var array|float[]
+     * @var ComercialETributavelDto
      */
-    private array $quantidade;
+    private ComercialETributavelDto $quantidade;
     /**
-     * @var array|float[]
+     * @var ComercialETributavelDto
      */
-    private array $valorUnitario;
+    private ComercialETributavelDto $valorUnitario;
 
     /**
-     * @param string $codigo
+     * @param string|null $codigo
      * @return IItemBuilder
      */
-    public function setCodigo(string $codigo): IItemBuilder
+    public function setCodigo(?string $codigo): IItemBuilder
     {
         $this->codigo = $codigo;
         return $this;
     }
 
     /**
-     * @param string $codigoBarras
+     * @param string|null $codigoBarras
      * @return IItemBuilder
      */
-    public function setCodigoBarras(string $codigoBarras): IItemBuilder
+    public function setCodigoBarras(?string $codigoBarras): IItemBuilder
     {
         $this->codigoBarras = $codigoBarras;
         return $this;
     }
 
     /**
-     * @param string $codigoBarrasTributavel
+     * @param string|null $codigoBarrasTributavel
      * @return IItemBuilder
      */
-    public function setCodigoBarrasTributavel(string $codigoBarrasTributavel): IItemBuilder
+    public function setCodigoBarrasTributavel(?string $codigoBarrasTributavel): IItemBuilder
     {
         $this->codigoBarrasTributavel = $codigoBarrasTributavel;
         return $this;
     }
 
     /**
-     * @param string $descricao
+     * @param string|null $descricao
      * @return IItemBuilder
      */
-    public function setDescricao(string $descricao): IItemBuilder
+    public function setDescricao(?string $descricao): IItemBuilder
     {
         $this->descricao = $descricao;
         return $this;
     }
 
     /**
-     * @param string $ncm
+     * @param string|null $ncm
      * @return IItemBuilder
      */
-    public function setNcm(string $ncm): IItemBuilder
+    public function setNcm(?string $ncm): IItemBuilder
     {
         $this->ncm = $ncm;
         return $this;
     }
 
     /**
-     * @param string $cest
+     * @param string|null $cest
      * @return IItemBuilder
      */
-    public function setCest(string $cest): IItemBuilder
+    public function setCest(?string $cest): IItemBuilder
     {
         $this->cest = $cest;
         return $this;
     }
 
     /**
-     * @param string $cfop
+     * @param string|null $cfop
      * @return IItemBuilder
      */
-    public function setCfop(string $cfop): IItemBuilder
+    public function setCfop(?string $cfop): IItemBuilder
     {
         $this->cfop = $cfop;
         return $this;
     }
 
     /**
-     * @param float $valor
+     * @param float|null $valor
      * @return IItemBuilder
      */
-    public function setValor(float $valor): IItemBuilder
+    public function setValor(?float $valor): IItemBuilder
     {
         $this->valor = $valor;
         return $this;
     }
 
     /**
-     * @param Tributos $tributos
+     * @param Tributos|null $tributos
      * @return IItemBuilder
      */
-    public function setTributos(Tributos $tributos): IItemBuilder
+    public function setTributos(?Tributos $tributos): IItemBuilder
     {
         $this->tributos = $tributos;
         return $this;
@@ -175,102 +177,94 @@ class ItemBuilder implements IItemBuilder
      * @param bool $compoeTotal
      * @return IItemBuilder
      */
-    public function setCompoeTotal(bool $compoeTotal): IItemBuilder
+    public function setCompoeTotal(?bool $compoeTotal): IItemBuilder
     {
         $this->compoeTotal = $compoeTotal;
         return $this;
     }
 
     /**
-     * @param string $codigoBeneficioFiscal
+     * @param string|null $codigoBeneficioFiscal
      * @return IItemBuilder
      */
-    public function setCodigoBeneficioFiscal(string $codigoBeneficioFiscal): IItemBuilder
+    public function setCodigoBeneficioFiscal(?string $codigoBeneficioFiscal): IItemBuilder
     {
         $this->codigoBeneficioFiscal = $codigoBeneficioFiscal;
         return $this;
     }
 
     /**
-     * @param float $valorFrete
+     * @param float|null $valorFrete
      * @return IItemBuilder
      */
-    public function setValorFrete(float $valorFrete): IItemBuilder
+    public function setValorFrete(?float $valorFrete): IItemBuilder
     {
         $this->valorFrete = $valorFrete;
         return $this;
     }
 
     /**
-     * @param float $valorSeguro
+     * @param float|null $valorSeguro
      * @return IItemBuilder
      */
-    public function setValorSeguro(float $valorSeguro): IItemBuilder
+    public function setValorSeguro(?float $valorSeguro): IItemBuilder
     {
         $this->valorSeguro = $valorSeguro;
         return $this;
     }
 
     /**
-     * @param float $valorDesconto
+     * @param float|null $valorDesconto
      * @return IItemBuilder
      */
-    public function setValorDesconto(float $valorDesconto): IItemBuilder
+    public function setValorDesconto(?float $valorDesconto): IItemBuilder
     {
         $this->valorDesconto = $valorDesconto;
         return $this;
     }
 
     /**
-     * @param float $valorOutros
+     * @param float|null $valorOutros
      * @return IItemBuilder
      */
-    public function setValorOutros(float $valorOutros): IItemBuilder
+    public function setValorOutros(?float $valorOutros): IItemBuilder
     {
         $this->valorOutros = $valorOutros;
         return $this;
     }
 
     /**
-     * @param float $comercial
-     * @param float $tributavel
+     * @param float|null $comercial
+     * @param float|null $tributavel
      * @return IItemBuilder
      */
-    public function setUnidade(float $comercial, float $tributavel): IItemBuilder
+    public function setUnidade(?float $comercial, ?float $tributavel): IItemBuilder
     {
-        $this->unidade = [
-            'comercial' => $comercial,
-            'tributavel' => $tributavel
-        ];
+        $this->unidade = new ComercialETributavelDto($comercial, $tributavel);
 
         return $this;
     }
 
     /**
-     * @param float $comercial
-     * @param float $tributavel
+     * @param float|null $comercial
+     * @param float|null $tributavel
      * @return IItemBuilder
      */
-    public function setQuantidade(float $comercial, float $tributavel): IItemBuilder
+    public function setQuantidade(?float $comercial, ?float $tributavel): IItemBuilder
     {
-        $this->quantidade = [
-            'comercial' => $comercial,
-            'tributavel' => $tributavel
-        ];
+        $this->quantidade = new ComercialETributavelDto($comercial, $tributavel);
         return $this;
     }
 
     /**
-     * @param float $comercial
-     * @param float $tributavel
+     * @param float|null $comercial
+     * @param float|null $tributavel
      * @return IItemBuilder
      */
-    public function setValorUnitario(float $comercial, float $tributavel): IItemBuilder
+    public function setValorUnitario(?float $comercial, ?float $tributavel): IItemBuilder
     {
-        $this->valorUnitario = [
-            'comercial' => $comercial,
-            'tributavel' => $tributavel
-        ];
+        $this->valorUnitario = new ComercialETributavelDto($comercial, $tributavel);
+
         return $this;
     }
 
@@ -279,7 +273,7 @@ class ItemBuilder implements IItemBuilder
      */
     public function build(): Item
     {
-        return new Item
+        $itemDto = new ItemDto
         (
             codigo: $this->codigo,
             codigoBarras: $this->codigoBarras,
@@ -300,5 +294,7 @@ class ItemBuilder implements IItemBuilder
             quantidade: $this->quantidade,
             valorUnitario: $this->valorUnitario,
         );
+
+        return new Item($itemDto);
     }
 }

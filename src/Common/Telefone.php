@@ -3,7 +3,6 @@
 namespace TecnoSpeed\Plugnotas\Common;
 
 use TecnoSpeed\Plugnotas\Abstracts\BuilderAbstract;
-use TecnoSpeed\Plugnotas\Enums\EstadoEnum;
 use TecnoSpeed\Plugnotas\Error\ValidationError;
 
 class Telefone extends BuilderAbstract

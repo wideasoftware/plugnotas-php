@@ -15,109 +15,108 @@ interface IPessoaBuilder
      * @param string $cpfCnpj CPF ou CNPJ no formato válido.
      * @return IPessoaBuilder
      */
-    public function setCpfCnpj(string $cpfCnpj): self;
+    public function setCpfCnpj(string $cpfCnpj): IPessoaBuilder;
 
     /**
      * @param string $nome
-     * @return self
+     * @return IPessoaBuilder
      */
-    public function setNome(string $nome): self;
+    public function setNome(string $nome): IPessoaBuilder;
 
     /**
      * Define a razão social.
      *
-     * @param string $razaoSocial Nome da empresa.
+     * @param string|null $razaoSocial Nome da empresa.
      * @return IPessoaBuilder
      */
-    public function setRazaoSocial(string $razaoSocial): self;
+    public function setRazaoSocial(?string $razaoSocial): IPessoaBuilder;
 
     /**
      * Define o endereço.
      *
-     * @param EnderecoV2 $endereco Objeto com os dados do endereço.
+     * @param EnderecoV2|null $endereco Objeto com os dados do endereço.
      * @return IPessoaBuilder
      */
-    public function setEndereco(EnderecoV2 $endereco): self;
+    public function setEndereco(?EnderecoV2 $endereco): IPessoaBuilder;
 
     /**
      * Define o email.
      *
-     * @param string $email Email da pessoa ou empresa.
+     * @param string|null $email Email da pessoa ou empresa.
      * @return IPessoaBuilder
      */
-    public function setEmail(string $email): self;
+    public function setEmail(?string $email): IPessoaBuilder;
 
     /**
      * Define a inscrição estadual.
      *
-     * @param string $inscricaoEstadual Número da inscrição estadual.
+     * @param string|null $inscricaoEstadual Número da inscrição estadual.
      * @return IPessoaBuilder
      */
-    public function setInscricaoEstadual(string $inscricaoEstadual): self;
+    public function setInscricaoEstadual(?string $inscricaoEstadual): IPessoaBuilder;
 
     /**
      * Define a inscrição municipal.
      *
-     * @param string $inscricaoMunicipal Número da inscrição municipal.
+     * @param string|null $inscricaoMunicipal Número da inscrição municipal.
      * @return IPessoaBuilder
      */
-    public function setInscricaoMunicipal(string $inscricaoMunicipal): self;
+    public function setInscricaoMunicipal(?string $inscricaoMunicipal): IPessoaBuilder;
 
     /**
      * Define a inscrição Suframa.
      *
-     * @param string $inscricaoSuframa Número da inscrição Suframa.
+     * @param string|null $inscricaoSuframa Número da inscrição Suframa.
      * @return IPessoaBuilder
      */
-    public function setInscricaoSuframa(string $inscricaoSuframa): self;
+    public function setInscricaoSuframa(?string $inscricaoSuframa): IPessoaBuilder;
 
     /**
      * Define o nome fantasia.
      *
-     * @param string $nomeFantasia Nome fantasia da empresa.
+     * @param string|null $nomeFantasia Nome fantasia da empresa.
      * @return IPessoaBuilder
      */
-    public function setNomeFantasia(string $nomeFantasia): self;
+    public function setNomeFantasia(?string $nomeFantasia): IPessoaBuilder;
 
     /**
-     * Define o orgão publico
-     * @param bool $orgaoPublico
+     * @param bool|null $orgaoPublico
      * @return IPessoaBuilder
      */
-    public function setOrgaoPublico(bool $orgaoPublico): self;
+    public function setOrgaoPublico(?bool $orgaoPublico): IPessoaBuilder;
 
     /**
      * Define o telefone.
      *
-     * @param string $dd
-     * @param string $numero
+     * @param string|null $dd
+     * @param string|null $numero
      * @return IPessoaBuilder
      */
-    public function setTelefone(string $dd, string $numero): self;
+    public function setTelefone(?string $dd, ?string $numero): IPessoaBuilder;
 
     /**
      * Define o indicador da inscrição estadual.
      *
-     * @param int $indicadorInscricaoEstadual Indicador numérico.
+     * @param int|null $indicadorInscricaoEstadual Indicador numérico.
      * @return IPessoaBuilder
      */
-    public function setIndicadorInscricaoEstadual(int $indicadorInscricaoEstadual): self;
+    public function setIndicadorInscricaoEstadual(?int $indicadorInscricaoEstadual): IPessoaBuilder;
 
     /**
      * Define o código estrangeiro.
      *
-     * @param string $codigoEstrangeiro Código de pessoa estrangeira.
+     * @param string|null $codigoEstrangeiro Código de pessoa estrangeira.
      * @return IPessoaBuilder
      */
-    public function setCodigoEstrangeiro(string $codigoEstrangeiro): self;
+    public function setCodigoEstrangeiro(?string $codigoEstrangeiro): IPessoaBuilder;
 
     /**
      * Define o identificador não NIF.
      *
-     * @param string $naoNif Identificador não NIF.
+     * @param string|null $naoNif Identificador não NIF.
      * @return IPessoaBuilder
      */
-    public function setNaoNif(string $naoNif): self;
+    public function setNaoNif(?string $naoNif): IPessoaBuilder;
 
     /**
      * Constrói e retorna a entidade final.

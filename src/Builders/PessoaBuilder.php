@@ -5,6 +5,10 @@ namespace TecnoSpeed\Plugnotas\Builders;
 use TecnoSpeed\Plugnotas\Common\EnderecoV2;
 use TecnoSpeed\Plugnotas\Common\Pessoa;
 use TecnoSpeed\Plugnotas\Common\Telefone;
+use TecnoSpeed\Plugnotas\Dto\PessoaDto;
+use TecnoSpeed\Plugnotas\Dto\TelefoneDto;
+use TecnoSpeed\Plugnotas\Enums\IndicadorInscricaoEstadualEnum;
+use TecnoSpeed\Plugnotas\Enums\NaoNifEnum;
 use TecnoSpeed\Plugnotas\Error\ValidationError;
 use TecnoSpeed\Plugnotas\Interfaces\IPessoaBuilder;
 use TecnoSpeed\Plugnotas\Traits\Validation;
@@ -22,24 +26,25 @@ class PessoaBuilder implements IPessoaBuilder
     private string $inscricaoSuframa;
     private string $nomeFantasia;
     private bool $orgaoPublico;
-    private int $indicadorInscricaoEstadual;
-    private Telefone $telefone;
+    private IndicadorInscricaoEstadualEnum $indicadorInscricaoEstadual;
+    private TelefoneDto $telefone;
     private string $codigoEstrangeiro;
-    private string $naoNif;
+    private NaoNifEnum $naoNif;
     private string $nome;
+    private string $identificadorCadastro;
 
     /**
      * @param string $cpfCnpj
      * @return $this
      * @throws ValidationError
      */
-    public function setCpfCnpj(string $cpfCnpj): self
+    public function setCpfCnpj(string $cpfCnpj): IPessoaBuilder
     {
-        if (!$this->isValidCpfCnpj($cpfCnpj)) {
+        if (!$this::isValidCpfCnpj($cpfCnpj)) {
             throw new ValidationError('CPF/CNPJ Invalido');
         }
 
-        $this->cpfCnpj = $this->removeSpecialCharacters($cpfCnpj);
+        $this->cpfCnpj = $this::removeSpecialCharacters($cpfCnpj);
 
         return $this;
     }
@@ -48,7 +53,7 @@ class PessoaBuilder implements IPessoaBuilder
      * @param string $nome
      * @return $this
      */
-    public function setNome(string $nome): self
+    public function setNome(string $nome): IPessoaBuilder
     {
         $this->nome = $nome;
 
@@ -56,10 +61,10 @@ class PessoaBuilder implements IPessoaBuilder
     }
 
     /**
-     * @param string $razaoSocial
-     * @return self
+     * @param string|null $razaoSocial
+     * @return IPessoaBuilder
      */
-    public function setRazaoSocial(string $razaoSocial): self
+    public function setRazaoSocial(?string $razaoSocial): IPessoaBuilder
     {
         $this->razaoSocial = $razaoSocial;
 
@@ -67,10 +72,10 @@ class PessoaBuilder implements IPessoaBuilder
     }
 
     /**
-     * @param EnderecoV2 $endereco
-     * @return self
+     * @param EnderecoV2|null $endereco
+     * @return IPessoaBuilder
      */
-    public function setEndereco(EnderecoV2 $endereco): self
+    public function setEndereco(?EnderecoV2 $endereco): IPessoaBuilder
     {
         $this->endereco = $endereco;
 
@@ -78,11 +83,11 @@ class PessoaBuilder implements IPessoaBuilder
     }
 
     /**
-     * @param string $email
-     * @return self
+     * @param string|null $email
+     * @return IPessoaBuilder
      * @throws ValidationError
      */
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): IPessoaBuilder
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new ValidationError('Email Invalido');
@@ -94,10 +99,10 @@ class PessoaBuilder implements IPessoaBuilder
     }
 
     /**
-     * @param string $inscricaoEstadual
-     * @return self
+     * @param string|null $inscricaoEstadual
+     * @return IPessoaBuilder
      */
-    public function setInscricaoEstadual(string $inscricaoEstadual): self
+    public function setInscricaoEstadual(?string $inscricaoEstadual): IPessoaBuilder
     {
         $this->inscricaoEstadual = $inscricaoEstadual;
 
@@ -105,10 +110,10 @@ class PessoaBuilder implements IPessoaBuilder
     }
 
     /**
-     * @param string $inscricaoMunicipal
-     * @return self
+     * @param string|null $inscricaoMunicipal
+     * @return IPessoaBuilder
      */
-    public function setInscricaoMunicipal(string $inscricaoMunicipal): self
+    public function setInscricaoMunicipal(?string $inscricaoMunicipal): IPessoaBuilder
     {
         $this->inscricaoMunicipal = $inscricaoMunicipal;
 
@@ -116,10 +121,10 @@ class PessoaBuilder implements IPessoaBuilder
     }
 
     /**
-     * @param string $inscricaoSuframa
-     * @return self
+     * @param string|null $inscricaoSuframa
+     * @return IPessoaBuilder
      */
-    public function setInscricaoSuframa(string $inscricaoSuframa): self
+    public function setInscricaoSuframa(?string $inscricaoSuframa): IPessoaBuilder
     {
         $this->inscricaoSuframa = $inscricaoSuframa;
 
@@ -127,10 +132,10 @@ class PessoaBuilder implements IPessoaBuilder
     }
 
     /**
-     * @param string $nomeFantasia
-     * @return self
+     * @param string|null $nomeFantasia
+     * @return IPessoaBuilder
      */
-    public function setNomeFantasia(string $nomeFantasia): self
+    public function setNomeFantasia(?string $nomeFantasia): IPessoaBuilder
     {
         $this->nomeFantasia = $nomeFantasia;
 
@@ -138,10 +143,10 @@ class PessoaBuilder implements IPessoaBuilder
     }
 
     /**
-     * @param bool $orgaoPublico
-     * @return self
+     * @param bool|null $orgaoPublico
+     * @return IPessoaBuilder
      */
-    public function setOrgaoPublico(bool $orgaoPublico): self
+    public function setOrgaoPublico(?bool $orgaoPublico): IPessoaBuilder
     {
         $this->orgaoPublico = $orgaoPublico;
 
@@ -149,34 +154,34 @@ class PessoaBuilder implements IPessoaBuilder
     }
 
     /**
-     * @param string $dd
-     * @param string $numero
+     * @param string|null $dd
+     * @param string|null $numero
      * @return $this
      */
-    public function setTelefone(string $dd, string $numero): self
+    public function setTelefone(?string $dd, ?string $numero): IPessoaBuilder
     {
-        $this->telefone = new Telefone($dd, $numero);
+        $this->telefone = new TelefoneDto($numero, $dd);
 
         return $this;
     }
 
     /**
-     * @param int $indicadorInscricaoEstadual
-     * @return self
+     * @param int|null $indicadorInscricaoEstadual
+     * @return IPessoaBuilder
      */
-    public function setIndicadorInscricaoEstadual(int $indicadorInscricaoEstadual): self
+    public function setIndicadorInscricaoEstadual(?int $indicadorInscricaoEstadual): IPessoaBuilder
     {
-        $this->indicadorInscricaoEstadual = $indicadorInscricaoEstadual;
+        $this->indicadorInscricaoEstadual = IndicadorInscricaoEstadualEnum::from($indicadorInscricaoEstadual);
 
         return $this;
     }
 
     /**
-     * @param string $codigoEstrangeiro
-     * @return self
+     * @param string|null $codigoEstrangeiro
+     * @return IPessoaBuilder
      * @throws ValidationError
      */
-    public function setCodigoEstrangeiro(string $codigoEstrangeiro): self
+    public function setCodigoEstrangeiro(?string $codigoEstrangeiro): IPessoaBuilder
     {
         $valoresPermitidos = ['1', '2', '9'];
 
@@ -190,20 +195,23 @@ class PessoaBuilder implements IPessoaBuilder
     }
 
     /**
-     * @param string $naoNif
-     * @return self
-     * @throws ValidationError
+     * @param string|null $naoNif
+     * @return IPessoaBuilder
      */
-    public function setNaoNif(string $naoNif): self
+    public function setNaoNif(?string $naoNif): IPessoaBuilder
     {
-        $valoresPermitidos = ['0', '1', '2'];
+        $this->naoNif = NaoNifEnum::from($naoNif);
 
-        if (!in_array($naoNif, $valoresPermitidos, true)) {
-            throw new ValidationError("O código deve ser 0, 1 ou 2. Valor recebido: {$naoNif}");
-        }
+        return $this;
+    }
 
-        $this->naoNif = $naoNif;
-
+    /**
+     * @param string|null $identificadorCadastro
+     * @return IPessoaBuilder
+     */
+    public function setIdentificadorCadastro(?string $identificadorCadastro): IPessoaBuilder
+    {
+        $this->identificadorCadastro = $identificadorCadastro;
         return $this;
     }
 
@@ -212,9 +220,9 @@ class PessoaBuilder implements IPessoaBuilder
      */
     public function build(): Pessoa
     {
-        return new Pessoa(
-            cpfCnpj: $this->cpfCnpj,
+        $pessoaDto = new PessoaDto(
             nome: $this->nome,
+            cpfCnpj: $this->cpfCnpj,
             razaoSocial: $this->razaoSocial,
             endereco: $this->endereco,
             email: $this->email,
@@ -226,6 +234,9 @@ class PessoaBuilder implements IPessoaBuilder
             indicadorInscricaoEstadual: $this->indicadorInscricaoEstadual,
             codigoEstrangeiro: $this->codigoEstrangeiro,
             naoNif: $this->naoNif,
+            identificadorCadastro: $this->identificadorCadastro
         );
+
+        return new Pessoa($pessoaDto);
     }
 }

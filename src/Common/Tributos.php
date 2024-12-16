@@ -11,6 +11,9 @@ use TecnoSpeed\Plugnotas\Dto\TributosDto;
 
 readonly class Tributos
 {
+    /**
+     * @param TributosDto $tributosDto
+     */
     public function __construct(private TributosDto $tributosDto)
     {
     }

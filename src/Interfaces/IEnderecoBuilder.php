@@ -10,76 +10,76 @@ use TecnoSpeed\Plugnotas\Enums\TipoLogradouroEnum;
 interface IEnderecoBuilder
 {
     /**
-     * @param string $bairro
+     * @param string|null $bairro
      * @return self
      */
-    public function setBairro(string $bairro): self;
+    public function setBairro(?string $bairro): self;
 
     /**
-     * @param string $cep
+     * @param string|null $cep
      * @return self
      */
-    public function setCep(string $cep): self;
+    public function setCep(?string $cep): self;
 
     /**
-     * @param string $codigoCidade
+     * @param string|null $codigoCidade
      * @return self
      */
-    public function setCodigoCidade(string $codigoCidade): self;
+    public function setCodigoCidade(?string $codigoCidade): self;
 
     /**
-     * @param EstadoEnum $estado
+     * @param string|null $estado
      * @return self
      */
-    public function setEstado(EstadoEnum $estado): self;
+    public function setEstado(?string $estado): self;
 
     /**
-     * @param string $logradouro
+     * @param string|null $logradouro
      * @return self
      */
-    public function setLogradouro(string $logradouro): self;
+    public function setLogradouro(?string $logradouro): self;
 
     /**
-     * @param string $numero
+     * @param string|null $numero
      * @return self
      */
-    public function setNumero(string $numero): self;
+    public function setNumero(?string $numero): self;
 
     /**
-     * @param TipoLogradouroEnum $tipoLogradouro
+     * @param string|null $tipoLogradouro
      * @return self
      */
-    public function setTipoLogradouro(TipoLogradouroEnum $tipoLogradouro): self;
+    public function setTipoLogradouro(?string $tipoLogradouro): self;
 
     /**
-     * @param string $codigoPais
+     * @param string|null $codigoPais
      * @return self
      */
-    public function setCodigoPais(string $codigoPais): self;
+    public function setCodigoPais(?string $codigoPais): self;
 
     /**
-     * @param string $complemento
+     * @param string|null $complemento
      * @return self
      */
-    public function setComplemento(string $complemento): self;
+    public function setComplemento(?string $complemento): self;
 
     /**
-     * @param string $descricaoCidade
+     * @param string|null $descricaoCidade
      * @return self
      */
-    public function setDescricaoCidade(string $descricaoCidade): self;
+    public function setDescricaoCidade(?string $descricaoCidade): self;
 
     /**
-     * @param string $descricaoPais
+     * @param string|null $descricaoPais
      * @return self
      */
-    public function setDescricaoPais(string $descricaoPais): self;
+    public function setDescricaoPais(?string $descricaoPais): self;
 
     /**
-     * @param string $tipoBairro
+     * @param string|null $tipoBairro
      * @return self
      */
-    public function setTipoBairro(string $tipoBairro): self;
+    public function setTipoBairro(?string $tipoBairro): self;
 
     /**
      * @return EnderecoV2

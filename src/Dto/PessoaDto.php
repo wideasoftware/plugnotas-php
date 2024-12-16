@@ -26,8 +26,8 @@ readonly class PessoaDto
      */
     public function __construct
     (
-        public ?string                         $nome,
-        public ?string                         $cpfCnpj,
+        public string                          $nome,
+        public string                          $cpfCnpj,
         public ?string                         $razaoSocial,
         public ?EnderecoV2                     $endereco,
         public ?string                         $email,

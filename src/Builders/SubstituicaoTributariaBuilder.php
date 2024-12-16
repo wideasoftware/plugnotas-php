@@ -3,9 +3,8 @@
 namespace TecnoSpeed\Plugnotas\Builders;
 
 use TecnoSpeed\Plugnotas\Common\SubstituicaoTributaria;
-use TecnoSpeed\Plugnotas\Interfaces\ISubstituicaoTributariaBuilder;
 
-class SubstituicaoTributariaBuilder implements ISubstituicaoTributariaBuilder
+class SubstituicaoTributariaBuilder
 {
     /**
      * @var array
@@ -29,9 +28,9 @@ class SubstituicaoTributariaBuilder implements ISubstituicaoTributariaBuilder
 
     /**
      * @param float|null $valor
-     * @return ISubstituicaoTributariaBuilder
+     * @return SubstituicaoTributariaBuilder
      */
-    public function setBaseCalculo(?float $valor): ISubstituicaoTributariaBuilder
+    public function setBaseCalculo(?float $valor): SubstituicaoTributariaBuilder
     {
         $this->baseCalculo = [
             'valor' => $valor,
@@ -42,9 +41,9 @@ class SubstituicaoTributariaBuilder implements ISubstituicaoTributariaBuilder
 
     /**
      * @param float|null $valor
-     * @return ISubstituicaoTributariaBuilder
+     * @return SubstituicaoTributariaBuilder
      */
-    public function setAliquota(?float $valor): ISubstituicaoTributariaBuilder
+    public function setAliquota(?float $valor): SubstituicaoTributariaBuilder
     {
         $this->aliquota = $valor;
 
@@ -53,9 +52,9 @@ class SubstituicaoTributariaBuilder implements ISubstituicaoTributariaBuilder
 
     /**
      * @param float|null $valor
-     * @return ISubstituicaoTributariaBuilder
+     * @return SubstituicaoTributariaBuilder
      */
-    public function setValor(?float $valor): ISubstituicaoTributariaBuilder
+    public function setValor(?float $valor): SubstituicaoTributariaBuilder
     {
         $this->valor = $valor;
 
@@ -66,9 +65,9 @@ class SubstituicaoTributariaBuilder implements ISubstituicaoTributariaBuilder
      * @param float|null $bc_valor
      * @param float|null $aliquota
      * @param float|null $valor
-     * @return ISubstituicaoTributariaBuilder
+     * @return SubstituicaoTributariaBuilder
      */
-    public function setFundoCombatePobreza(?float $bc_valor, ?float $aliquota, ?float $valor): ISubstituicaoTributariaBuilder
+    public function setFundoCombatePobreza(?float $bc_valor, ?float $aliquota, ?float $valor): SubstituicaoTributariaBuilder
     {
         $this->fundoCombatePobreza = [
             'baseCalculo' => [

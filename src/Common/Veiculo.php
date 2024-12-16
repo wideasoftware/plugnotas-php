@@ -29,9 +29,9 @@ readonly class Veiculo
     }
 
     /**
-     * @return string|null
+     * @return EstadoEnum|null
      */
-    public function getUf(): ?string
+    public function getUf(): ?EstadoEnum
     {
         return $this->uf;
     }

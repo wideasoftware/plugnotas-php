@@ -16,11 +16,10 @@ use TecnoSpeed\Plugnotas\Enums\FinalidadeNfeEnum;
 use TecnoSpeed\Plugnotas\Enums\IntermediadorEnum;
 use TecnoSpeed\Plugnotas\Enums\PresencialEnum;
 use TecnoSpeed\Plugnotas\Error\ValidationError;
-use TecnoSpeed\Plugnotas\Interfaces\INfeBuilder;
 use TecnoSpeed\Plugnotas\Nfe;
 use TecnoSpeed\Plugnotas\Validators\ValidaNfe;
 
-class NfeBuilder implements INfeBuilder
+class NfeBuilder
 {
     /**
      * @var string
@@ -93,9 +92,9 @@ class NfeBuilder implements INfeBuilder
 
     /**
      * @param string $idIntegracao
-     * @return INfeBuilder
+     * @return NfeBuilder
      */
-    public function setIdIntegracao(string $idIntegracao): INfeBuilder
+    public function setIdIntegracao(string $idIntegracao): NfeBuilder
     {
         $this->idIntegracao = $idIntegracao;
         return $this;
@@ -103,9 +102,9 @@ class NfeBuilder implements INfeBuilder
 
     /**
      * @param string $finalidade
-     * @return INfeBuilder
+     * @return NfeBuilder
      */
-    public function setFinalidade(string $finalidade): INfeBuilder
+    public function setFinalidade(string $finalidade): NfeBuilder
     {
         $this->finalidade = FinalidadeNfeEnum::from($finalidade);
         return $this;
@@ -113,9 +112,9 @@ class NfeBuilder implements INfeBuilder
 
     /**
      * @param string $natureza
-     * @return INfeBuilder
+     * @return NfeBuilder
      */
-    public function setNatureza(string $natureza): INfeBuilder
+    public function setNatureza(string $natureza): NfeBuilder
     {
         $this->natureza = $natureza;
         return $this;
@@ -123,9 +122,9 @@ class NfeBuilder implements INfeBuilder
 
     /**
      * @param string $dataEmissao
-     * @return INfeBuilder
+     * @return NfeBuilder
      */
-    public function setDataEmissao(string $dataEmissao): INfeBuilder
+    public function setDataEmissao(string $dataEmissao): NfeBuilder
     {
         $this->dataEmissao = $dataEmissao;
         return $this;
@@ -133,9 +132,9 @@ class NfeBuilder implements INfeBuilder
 
     /**
      * @param string $presencial
-     * @return INfeBuilder
+     * @return NfeBuilder
      */
-    public function setPresencial(string $presencial): INfeBuilder
+    public function setPresencial(string $presencial): NfeBuilder
     {
         $this->presencial = PresencialEnum::from($presencial);
         return $this;
@@ -143,9 +142,9 @@ class NfeBuilder implements INfeBuilder
 
     /**
      * @param bool $consumidorFinal
-     * @return INfeBuilder
+     * @return NfeBuilder
      */
-    public function setConsumidorFinal(bool $consumidorFinal): INfeBuilder
+    public function setConsumidorFinal(bool $consumidorFinal): NfeBuilder
     {
         $this->consumidorFinal = $consumidorFinal;
         return $this;
@@ -154,9 +153,9 @@ class NfeBuilder implements INfeBuilder
     /**
      * @param NfeReferenciadaDto[]|null $nfe
      * @param CupomFiscalReferenciadoDto[]|null $cupomFiscal
-     * @return INfeBuilder
+     * @return NfeBuilder
      */
-    public function setNotaReferenciada(?array $nfe, ?array $cupomFiscal): INfeBuilder
+    public function setNotaReferenciada(?array $nfe, ?array $cupomFiscal): NfeBuilder
     {
         $this->notaReferenciada = new NotaReferenciadaDto($nfe, $cupomFiscal);
         return $this;
@@ -165,7 +164,7 @@ class NfeBuilder implements INfeBuilder
     /**
      * @throws ValidationError
      */
-    public function setEmitente(Pessoa $emitente): INfeBuilder
+    public function setEmitente(Pessoa $emitente): NfeBuilder
     {
         ValidaNfe::validaEmitente($emitente);
 
@@ -176,7 +175,7 @@ class NfeBuilder implements INfeBuilder
     /**
      * @throws ValidationError
      */
-    public function setDestinatario(Pessoa $destinatario): INfeBuilder
+    public function setDestinatario(Pessoa $destinatario): NfeBuilder
     {
         ValidaNfe::validaDestinatario($destinatario);
 
@@ -186,19 +185,22 @@ class NfeBuilder implements INfeBuilder
 
     /**
      * @param Item[] $itens
-     * @return INfeBuilder
+     * @return NfeBuilder
+     * @throws ValidationError
      */
-    public function setItens(array $itens): INfeBuilder
+    public function setItens(array $itens): NfeBuilder
     {
+        ValidaNfe::validaItens($itens);
+
         $this->itens = $itens;
         return $this;
     }
 
     /**
      * @param Total|null $total
-     * @return INfeBuilder
+     * @return NfeBuilder
      */
-    public function setTotal(?Total $total): INfeBuilder
+    public function setTotal(?Total $total): NfeBuilder
     {
         $this->total = $total;
 
@@ -207,9 +209,9 @@ class NfeBuilder implements INfeBuilder
 
     /**
      * @param Transporte|null $transporte
-     * @return INfeBuilder
+     * @return NfeBuilder
      */
-    public function setTransporte(?Transporte $transporte): INfeBuilder
+    public function setTransporte(?Transporte $transporte): NfeBuilder
     {
         $this->transporte = $transporte;
 
@@ -218,10 +220,10 @@ class NfeBuilder implements INfeBuilder
 
     /**
      * @param Pagamento[] $pagamentos
-     * @return INfeBuilder
+     * @return NfeBuilder
      * @throws ValidationError
      */
-    public function setPagamentos(array $pagamentos): INfeBuilder
+    public function setPagamentos(array $pagamentos): NfeBuilder
     {
         ValidaNfe::validaPagamentos($pagamentos);
 
@@ -231,9 +233,9 @@ class NfeBuilder implements INfeBuilder
 
     /**
      * @param string|null $informacoesComplementares
-     * @return INfeBuilder
+     * @return NfeBuilder
      */
-    public function setInformacoesComplementares(?string $informacoesComplementares): INfeBuilder
+    public function setInformacoesComplementares(?string $informacoesComplementares): NfeBuilder
     {
         $this->informacoesComplementares = $informacoesComplementares;
         return $this;
@@ -241,9 +243,9 @@ class NfeBuilder implements INfeBuilder
 
     /**
      * @param Pessoa|null $intermediadorTransacao
-     * @return INfeBuilder
+     * @return NfeBuilder
      */
-    public function setIntermediadorTransacao(?Pessoa $intermediadorTransacao): INfeBuilder
+    public function setIntermediadorTransacao(?Pessoa $intermediadorTransacao): NfeBuilder
     {
         $this->intermediadorTransacao = $intermediadorTransacao;
         return $this;
@@ -251,9 +253,9 @@ class NfeBuilder implements INfeBuilder
 
     /**
      * @param int|null $intermediador
-     * @return INfeBuilder
+     * @return NfeBuilder
      */
-    public function setIntermediador(?int $intermediador): INfeBuilder
+    public function setIntermediador(?int $intermediador): NfeBuilder
     {
         $this->intermediador = IntermediadorEnum::from($intermediador);
         return $this;
@@ -261,9 +263,9 @@ class NfeBuilder implements INfeBuilder
 
     /**
      * @param Configuration $configuracao
-     * @return INfeBuilder
+     * @return NfeBuilder
      */
-    public function setConfiguracao(Configuration $configuracao): INfeBuilder
+    public function setConfiguracao(Configuration $configuracao): NfeBuilder
     {
         $this->configuracao = $configuracao;
         return $this;

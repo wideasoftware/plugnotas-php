@@ -76,4 +76,39 @@ class ValidaNfe
             throw new ValidationError(implode(' ', $erros));
         }
     }
+
+    /**
+     * @throws ValidationError
+     */
+    public static function validaItens(array $itens): void
+    {
+        $erros = [];
+
+        foreach ($itens as $index => $item) {
+            if (empty($item['descricao'])) {
+                $erros[] = "O item na posição {$index} está sem o atributo 'descricao'.";
+            }
+
+            if (empty($item['ncm'])) {
+                $erros[] = "O item na posição {$index} está sem o atributo 'ncm'.";
+            }
+
+            if (empty($item['cfop'])) {
+                $erros[] = "O item na posição {$index} está sem o atributo 'cfop'.";
+            }
+
+            if (empty($item['valorUnitario'])) {
+                $erros[] = "O item na posição {$index} está sem o atributo 'valorUnitario'.";
+            }
+
+            if (empty($item['tributos'])) {
+                $erros[] = "O item na posição {$index} está sem o atributo 'tributos'.";
+            }
+
+        }
+
+        if (!empty($erros)) {
+            throw new ValidationError(implode(' ', $erros));
+        }
+    }
 }

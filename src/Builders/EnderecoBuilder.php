@@ -14,60 +14,24 @@ class EnderecoBuilder implements IEnderecoBuilder
 {
     use Validation;
 
-    /**
-     * @var TipoLogradouroEnum
-     */
-    private TipoLogradouroEnum $tipoLogradouro;
-    /**
-     * @var string
-     */
-    private string $logradouro;
-    /**
-     * @var string
-     */
-    private string $numero;
-    /**
-     * @var string
-     */
-    private string $complemento;
-    /**
-     * @var string
-     */
-    private string $tipoBairro;
-    /**
-     * @var string
-     */
-    private string $bairro;
-    /**
-     * @var string
-     */
-    private string $codigoPais;
-    /**
-     * @var string
-     */
-    private string $descricaoPais;
-    /**
-     * @var string
-     */
-    private string $codigoCidade;
-    /**
-     * @var string
-     */
-    private string $descricaoCidade;
-    /**
-     * @var EstadoEnum
-     */
-    private EstadoEnum $estado;
-    /**
-     * @var string
-     */
-    private string $cep;
+    private ?TipoLogradouroEnum $tipoLogradouro = TipoLogradouroEnum::RUA;
+    private ?string $logradouro = null;
+    private ?string $numero = null;
+    private ?string $complemento = null;
+    private ?string $tipoBairro = null;
+    private ?string $bairro = null;
+    private ?string $codigoPais = '55';
+    private ?string $descricaoPais = null;
+    private ?string $codigoCidade = null;
+    private ?string $descricaoCidade = null;
+    private ?EstadoEnum $estado = null;
+    private ?string $cep = null;
 
     /**
-     * @param string|null $bairro
+     * @param string $bairro
      * @return IEnderecoBuilder
      */
-    public function setBairro(?string $bairro): IEnderecoBuilder
+    public function setBairro(string $bairro): IEnderecoBuilder
     {
         $this->bairro = $bairro;
 
@@ -75,11 +39,11 @@ class EnderecoBuilder implements IEnderecoBuilder
     }
 
     /**
-     * @param string|null $cep
+     * @param string $cep
      * @return IEnderecoBuilder
      * @throws ValidationError
      */
-    public function setCep(?string $cep): IEnderecoBuilder
+    public function setCep(string $cep): IEnderecoBuilder
     {
         $cepNumbers = $this::removeSpecialCharacters($cep);
 
@@ -95,10 +59,10 @@ class EnderecoBuilder implements IEnderecoBuilder
     }
 
     /**
-     * @param string|null $codigoCidade
+     * @param string $codigoCidade
      * @return IEnderecoBuilder
      */
-    public function setCodigoCidade(?string $codigoCidade): IEnderecoBuilder
+    public function setCodigoCidade(string $codigoCidade): IEnderecoBuilder
     {
         $this->codigoCidade = $codigoCidade;
 
@@ -106,10 +70,10 @@ class EnderecoBuilder implements IEnderecoBuilder
     }
 
     /**
-     * @param string|null $estado
+     * @param string $estado
      * @return IEnderecoBuilder
      */
-    public function setEstado(?string $estado): IEnderecoBuilder
+    public function setEstado(string $estado): IEnderecoBuilder
     {
         $this->estado = EstadoEnum::from($estado);
 
@@ -117,10 +81,10 @@ class EnderecoBuilder implements IEnderecoBuilder
     }
 
     /**
-     * @param string|null $logradouro
+     * @param string $logradouro
      * @return IEnderecoBuilder
      */
-    public function setLogradouro(?string $logradouro): IEnderecoBuilder
+    public function setLogradouro(string $logradouro): IEnderecoBuilder
     {
         $this->logradouro = $logradouro;
 
@@ -128,10 +92,10 @@ class EnderecoBuilder implements IEnderecoBuilder
     }
 
     /**
-     * @param string|null $numero
+     * @param string $numero
      * @return IEnderecoBuilder
      */
-    public function setNumero(?string $numero): IEnderecoBuilder
+    public function setNumero(string $numero): IEnderecoBuilder
     {
         $this->numero = $numero;
 
@@ -139,10 +103,10 @@ class EnderecoBuilder implements IEnderecoBuilder
     }
 
     /**
-     * @param string|null $tipoLogradouro
+     * @param string $tipoLogradouro
      * @return IEnderecoBuilder
      */
-    public function setTipoLogradouro(?string $tipoLogradouro): IEnderecoBuilder
+    public function setTipoLogradouro(string $tipoLogradouro): IEnderecoBuilder
     {
         $this->tipoLogradouro = TipoLogradouroEnum::from($tipoLogradouro);
 
@@ -150,10 +114,10 @@ class EnderecoBuilder implements IEnderecoBuilder
     }
 
     /**
-     * @param string|null $codigoPais
+     * @param string $codigoPais
      * @return IEnderecoBuilder
      */
-    public function setCodigoPais(?string $codigoPais): IEnderecoBuilder
+    public function setCodigoPais(string $codigoPais): IEnderecoBuilder
     {
         $this->codigoPais = $codigoPais;
 
@@ -161,10 +125,10 @@ class EnderecoBuilder implements IEnderecoBuilder
     }
 
     /**
-     * @param string|null $complemento
+     * @param string $complemento
      * @return IEnderecoBuilder
      */
-    public function setComplemento(?string $complemento): IEnderecoBuilder
+    public function setComplemento(string $complemento): IEnderecoBuilder
     {
         $this->complemento = $complemento;
 
@@ -172,10 +136,10 @@ class EnderecoBuilder implements IEnderecoBuilder
     }
 
     /**
-     * @param string|null $descricaoCidade
+     * @param string $descricaoCidade
      * @return IEnderecoBuilder
      */
-    public function setDescricaoCidade(?string $descricaoCidade): IEnderecoBuilder
+    public function setDescricaoCidade(string $descricaoCidade): IEnderecoBuilder
     {
         $this->descricaoCidade = $descricaoCidade;
 
@@ -183,10 +147,10 @@ class EnderecoBuilder implements IEnderecoBuilder
     }
 
     /**
-     * @param string|null $descricaoPais
+     * @param string $descricaoPais
      * @return IEnderecoBuilder
      */
-    public function setDescricaoPais(?string $descricaoPais): IEnderecoBuilder
+    public function setDescricaoPais(string $descricaoPais): IEnderecoBuilder
     {
         $this->descricaoPais = $descricaoPais;
 
@@ -194,10 +158,10 @@ class EnderecoBuilder implements IEnderecoBuilder
     }
 
     /**
-     * @param string|null $tipoBairro
+     * @param string $tipoBairro
      * @return IEnderecoBuilder
      */
-    public function setTipoBairro(?string $tipoBairro): IEnderecoBuilder
+    public function setTipoBairro(string $tipoBairro): IEnderecoBuilder
     {
         $this->tipoBairro = $tipoBairro;
 

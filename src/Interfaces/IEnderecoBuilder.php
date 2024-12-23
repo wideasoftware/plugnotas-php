@@ -2,84 +2,81 @@
 
 namespace TecnoSpeed\Plugnotas\Interfaces;
 
-use TecnoSpeed\Plugnotas\Common\Endereco;
 use TecnoSpeed\Plugnotas\Common\EnderecoV2;
-use TecnoSpeed\Plugnotas\Enums\EstadoEnum;
-use TecnoSpeed\Plugnotas\Enums\TipoLogradouroEnum;
 
 interface IEnderecoBuilder
 {
     /**
-     * @param string|null $bairro
+     * @param string $bairro
      * @return self
      */
-    public function setBairro(?string $bairro): self;
+    public function setBairro(string $bairro): self;
 
     /**
-     * @param string|null $cep
+     * @param string $cep
      * @return self
      */
-    public function setCep(?string $cep): self;
+    public function setCep(string $cep): self;
 
     /**
-     * @param string|null $codigoCidade
+     * @param string $codigoCidade
      * @return self
      */
-    public function setCodigoCidade(?string $codigoCidade): self;
+    public function setCodigoCidade(string $codigoCidade): self;
 
     /**
-     * @param string|null $estado
+     * @param string $estado
      * @return self
      */
-    public function setEstado(?string $estado): self;
+    public function setEstado(string $estado): self;
 
     /**
-     * @param string|null $logradouro
+     * @param string $logradouro
      * @return self
      */
-    public function setLogradouro(?string $logradouro): self;
+    public function setLogradouro(string $logradouro): self;
 
     /**
-     * @param string|null $numero
+     * @param string $numero
      * @return self
      */
-    public function setNumero(?string $numero): self;
+    public function setNumero(string $numero): self;
 
     /**
-     * @param string|null $tipoLogradouro
+     * @param string $tipoLogradouro
      * @return self
      */
-    public function setTipoLogradouro(?string $tipoLogradouro): self;
+    public function setTipoLogradouro(string $tipoLogradouro): self;
 
     /**
-     * @param string|null $codigoPais
+     * @param string $codigoPais
      * @return self
      */
-    public function setCodigoPais(?string $codigoPais): self;
+    public function setCodigoPais(string $codigoPais): self;
 
     /**
-     * @param string|null $complemento
+     * @param string $complemento
      * @return self
      */
-    public function setComplemento(?string $complemento): self;
+    public function setComplemento(string $complemento): self;
 
     /**
-     * @param string|null $descricaoCidade
+     * @param string $descricaoCidade
      * @return self
      */
-    public function setDescricaoCidade(?string $descricaoCidade): self;
+    public function setDescricaoCidade(string $descricaoCidade): self;
 
     /**
-     * @param string|null $descricaoPais
+     * @param string $descricaoPais
      * @return self
      */
-    public function setDescricaoPais(?string $descricaoPais): self;
+    public function setDescricaoPais(string $descricaoPais): self;
 
     /**
-     * @param string|null $tipoBairro
+     * @param string $tipoBairro
      * @return self
      */
-    public function setTipoBairro(?string $tipoBairro): self;
+    public function setTipoBairro(string $tipoBairro): self;
 
     /**
      * @return EnderecoV2

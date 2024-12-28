@@ -8,8 +8,8 @@ use TecnoSpeed\Plugnotas\Enums\OrigemEnum;
 readonly class Icms
 {
     /**
-     * @param OrigemEnum|null $origem
-     * @param CstIcmsEnum|null $cst
+     * @param OrigemEnum $origem
+     * @param CstIcmsEnum $cst
      * @param array|null $creditoSimplesNacional
      * @param SubstituicaoTributaria|null $substituicaoTributaria
      * @param float|null $valor
@@ -17,8 +17,8 @@ readonly class Icms
      */
     public function __construct
     (
-        private ?OrigemEnum             $origem,
-        private ?CstIcmsEnum            $cst,
+        private OrigemEnum              $origem,
+        private CstIcmsEnum             $cst,
         private ?array                  $creditoSimplesNacional,
         private ?SubstituicaoTributaria $substituicaoTributaria,
         private ?float                  $valor,
@@ -28,17 +28,17 @@ readonly class Icms
     }
 
     /**
-     * @return OrigemEnum|null
+     * @return OrigemEnum
      */
-    public function getOrigem(): ?OrigemEnum
+    public function getOrigem(): OrigemEnum
     {
         return $this->origem;
     }
 
     /**
-     * @return CstIcmsEnum|null
+     * @return CstIcmsEnum
      */
-    public function getCst(): ?CstIcmsEnum
+    public function getCst(): CstIcmsEnum
     {
         return $this->cst;
     }

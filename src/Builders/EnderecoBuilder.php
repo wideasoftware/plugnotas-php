@@ -3,6 +3,7 @@
 namespace TecnoSpeed\Plugnotas\Builders;
 
 use TecnoSpeed\Plugnotas\Common\EnderecoV2;
+use TecnoSpeed\Plugnotas\Dto\EnderecoDto;
 use TecnoSpeed\Plugnotas\Enums\EstadoEnum;
 use TecnoSpeed\Plugnotas\Enums\TipoLogradouroEnum;
 use TecnoSpeed\Plugnotas\Error\ValidationError;
@@ -13,54 +14,18 @@ class EnderecoBuilder implements IEnderecoBuilder
 {
     use Validation;
 
-    /**
-     * @var TipoLogradouroEnum
-     */
-    private TipoLogradouroEnum $tipoLogradouro;
-    /**
-     * @var string
-     */
-    private string $logradouro;
-    /**
-     * @var string
-     */
-    private string $numero;
-    /**
-     * @var string
-     */
-    private string $complemento;
-    /**
-     * @var string
-     */
-    private string $tipoBairro;
-    /**
-     * @var string
-     */
-    private string $bairro;
-    /**
-     * @var string
-     */
-    private string $codigoPais;
-    /**
-     * @var string
-     */
-    private string $descricaoPais;
-    /**
-     * @var string
-     */
-    private string $codigoCidade;
-    /**
-     * @var string
-     */
-    private string $descricaoCidade;
-    /**
-     * @var EstadoEnum
-     */
-    private EstadoEnum $estado;
-    /**
-     * @var string
-     */
-    private string $cep;
+    private ?TipoLogradouroEnum $tipoLogradouro = TipoLogradouroEnum::RUA;
+    private ?string $logradouro = null;
+    private ?string $numero = null;
+    private ?string $complemento = null;
+    private ?string $tipoBairro = null;
+    private ?string $bairro = null;
+    private ?string $codigoPais = '55';
+    private ?string $descricaoPais = null;
+    private ?string $codigoCidade = null;
+    private ?string $descricaoCidade = null;
+    private ?EstadoEnum $estado = null;
+    private ?string $cep = null;
 
     /**
      * @param string $bairro
@@ -74,11 +39,13 @@ class EnderecoBuilder implements IEnderecoBuilder
     }
 
     /**
+     * @param string $cep
+     * @return IEnderecoBuilder
      * @throws ValidationError
      */
     public function setCep(string $cep): IEnderecoBuilder
     {
-        $cepNumbers = $this->removeSpecialCharacters($cep);
+        $cepNumbers = $this::removeSpecialCharacters($cep);
 
         if (strlen($cepNumbers) !== 8) {
             throw new ValidationError(
@@ -103,12 +70,12 @@ class EnderecoBuilder implements IEnderecoBuilder
     }
 
     /**
-     * @param EstadoEnum $estado
+     * @param string $estado
      * @return IEnderecoBuilder
      */
-    public function setEstado(EstadoEnum $estado): IEnderecoBuilder
+    public function setEstado(string $estado): IEnderecoBuilder
     {
-        $this->estado = $estado;
+        $this->estado = EstadoEnum::from($estado);
 
         return $this;
     }
@@ -136,12 +103,12 @@ class EnderecoBuilder implements IEnderecoBuilder
     }
 
     /**
-     * @param TipoLogradouroEnum $tipoLogradouro
+     * @param string $tipoLogradouro
      * @return IEnderecoBuilder
      */
-    public function setTipoLogradouro(TipoLogradouroEnum $tipoLogradouro): IEnderecoBuilder
+    public function setTipoLogradouro(string $tipoLogradouro): IEnderecoBuilder
     {
-        $this->tipoLogradouro = $tipoLogradouro;
+        $this->tipoLogradouro = TipoLogradouroEnum::from($tipoLogradouro);
 
         return $this;
     }
@@ -206,7 +173,7 @@ class EnderecoBuilder implements IEnderecoBuilder
      */
     public function build(): EnderecoV2
     {
-        return new EnderecoV2(
+        $enderecoDto = new EnderecoDto(
             tipoLogradouro: $this->tipoLogradouro,
             logradouro: $this->logradouro,
             numero: $this->numero,
@@ -220,5 +187,7 @@ class EnderecoBuilder implements IEnderecoBuilder
             estado: $this->estado,
             cep: $this->cep,
         );
+
+        return new EnderecoV2($enderecoDto);
     }
 }

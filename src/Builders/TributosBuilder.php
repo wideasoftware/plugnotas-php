@@ -2,12 +2,14 @@
 
 namespace TecnoSpeed\Plugnotas\Builders;
 
-use TecnoSpeed\Plugnotas\Common\Impostos\Cofins;
-use TecnoSpeed\Plugnotas\Common\Impostos\Icms;
-use TecnoSpeed\Plugnotas\Common\Impostos\Ipi;
-use TecnoSpeed\Plugnotas\Common\Impostos\Issqn;
-use TecnoSpeed\Plugnotas\Common\Impostos\Partilha;
-use TecnoSpeed\Plugnotas\Common\Impostos\Pis;
+use TecnoSpeed\Plugnotas\Common\Icms;
+use TecnoSpeed\Plugnotas\Common\Tributos;
+use TecnoSpeed\Plugnotas\Dto\CofinsDto;
+use TecnoSpeed\Plugnotas\Dto\IpiDto;
+use TecnoSpeed\Plugnotas\Dto\IssqnDto;
+use TecnoSpeed\Plugnotas\Dto\PartilhaDto;
+use TecnoSpeed\Plugnotas\Dto\PisDto;
+use TecnoSpeed\Plugnotas\Dto\TributosDto;
 use TecnoSpeed\Plugnotas\Enums\CstCofinsEnum;
 use TecnoSpeed\Plugnotas\Enums\CstIpiEnum;
 use TecnoSpeed\Plugnotas\Enums\CstPisEnum;
@@ -16,33 +18,33 @@ use TecnoSpeed\Plugnotas\Interfaces\ITributosBuilder;
 class TributosBuilder implements ITributosBuilder
 {
     /**
-     * @var Partilha
+     * @var PartilhaDto
      */
-    private Partilha $partilha;
+    private PartilhaDto $partilha;
     /**
      * @var Icms
      */
     private Icms $icms;
 
     /**
-     * @var Ipi
+     * @var IpiDto
      */
-    private Ipi $ipi;
+    private IpiDto $ipi;
 
     /**
-     * @var Pis
+     * @var PisDto
      */
-    private Pis $pis;
+    private PisDto $pis;
 
     /**
-     * @var Cofins
+     * @var CofinsDto
      */
-    private Cofins $cofins;
+    private CofinsDto $cofins;
 
     /**
-     * @var Issqn
+     * @var IssqnDto
      */
-    private Issqn $issqn;
+    private IssqnDto $issqn;
 
     /**
      * @var float
@@ -50,15 +52,15 @@ class TributosBuilder implements ITributosBuilder
     private float $valorAproximadoTributos;
 
     /**
-     * @param float $baseCalculoIcms
+     * @param float|null $baseCalculoIcms
      * @param float|null $percentualIcmsFcp
-     * @param float $aliquotaInterna
-     * @param float $aliquotaInterestadual
+     * @param float|null $aliquotaInterna
+     * @param float|null $aliquotaInterestadual
      * @return ITributosBuilder
      */
-    public function setPartilha(float $baseCalculoIcms, ?float $percentualIcmsFcp, float $aliquotaInterna, float $aliquotaInterestadual): ITributosBuilder
+    public function setPartilha(?float $baseCalculoIcms, ?float $percentualIcmsFcp, ?float $aliquotaInterna, ?float $aliquotaInterestadual): ITributosBuilder
     {
-        $this->partilha = new Partilha(
+        $this->partilha = new PartilhaDto(
             baseCalculoIcms: $baseCalculoIcms,
             percentualIcmsFcp: $percentualIcmsFcp,
             aliquotaInterna: $aliquotaInterna,
@@ -69,10 +71,10 @@ class TributosBuilder implements ITributosBuilder
     }
 
     /**
-     * @param Icms $icms
+     * @param Icms|null $icms
      * @return ITributosBuilder
      */
-    public function setIcms(Icms $icms): ITributosBuilder
+    public function setIcms(?Icms $icms): ITributosBuilder
     {
         $this->icms = $icms;
 
@@ -80,65 +82,65 @@ class TributosBuilder implements ITributosBuilder
     }
 
     /**
-     * @param string $codigoEnquadramentoLegal
-     * @param CstIpiEnum $cst
-     * @param float $baseCalculo
-     * @param float $aliquota
+     * @param string|null $codigoEnquadramentoLegal
+     * @param CstIpiEnum|null $cst
+     * @param float|null $baseCalculo
+     * @param float|null $aliquota
      * @return ITributosBuilder
      */
-    public function setIpi(string $codigoEnquadramentoLegal, CstIpiEnum $cst, float $baseCalculo, float $aliquota): ITributosBuilder
+    public function setIpi(?string $codigoEnquadramentoLegal, ?CstIpiEnum $cst, ?float $baseCalculo, ?float $aliquota): ITributosBuilder
     {
-        $this->ipi = new Ipi($codigoEnquadramentoLegal, $cst, $baseCalculo, $aliquota);
+        $this->ipi = new IpiDto($codigoEnquadramentoLegal, $cst, $baseCalculo, $aliquota);
 
         return $this;
     }
 
     /**
-     * @param CstPisEnum $cst
-     * @param float $valorBaseCalculo
-     * @param float $aliquota
+     * @param CstPisEnum|null $cst
+     * @param float|null $valorBaseCalculo
+     * @param float|null $aliquota
      * @return ITributosBuilder
      */
-    public function setPis(CstPisEnum $cst, float $valorBaseCalculo, float $aliquota): ITributosBuilder
+    public function setPis(?CstPisEnum $cst, ?float $valorBaseCalculo, ?float $aliquota): ITributosBuilder
     {
         $baseCalculo = [
             'valor' => $valorBaseCalculo,
         ];
 
-        $this->pis = new Pis($cst, $baseCalculo, $aliquota);
+        $this->pis = new PisDto($cst, $baseCalculo, $aliquota);
 
         return $this;
     }
 
     /**
-     * @param CstCofinsEnum $cst
-     * @param float $valorBaseCalculo
-     * @param float $aliquota
+     * @param CstCofinsEnum|null $cst
+     * @param float|null $valorBaseCalculo
+     * @param float|null $aliquota
      * @return ITributosBuilder
      */
-    public function setCofins(CstCofinsEnum $cst, float $valorBaseCalculo, float $aliquota): ITributosBuilder
+    public function setCofins(?CstCofinsEnum $cst, ?float $valorBaseCalculo, ?float $aliquota): ITributosBuilder
     {
         $baseCalculo = [
             'valor' => $valorBaseCalculo,
         ];
 
-        $this->cofins = new Cofins($cst, $baseCalculo, $aliquota);
+        $this->cofins = new CofinsDto($cst, $baseCalculo, $aliquota);
 
         return $this;
     }
 
     /**
-     * @param float $valor
-     * @param float $aliquota
-     * @param float $baseCalculo
-     * @param string $codigoServico
-     * @param string $codigoMunicipioFatoGerador
-     * @param string $codigoExigibilidade
+     * @param float|null $valor
+     * @param float|null $aliquota
+     * @param float|null $baseCalculo
+     * @param string|null $codigoServico
+     * @param string|null $codigoMunicipioFatoGerador
+     * @param string|null $codigoExigibilidade
      * @return ITributosBuilder
      */
-    public function setIssqn(float $valor, float $aliquota, float $baseCalculo, string $codigoServico, string $codigoMunicipioFatoGerador, string $codigoExigibilidade): ITributosBuilder
+    public function setIssqn(?float $valor, ?float $aliquota, ?float $baseCalculo, ?string $codigoServico, ?string $codigoMunicipioFatoGerador, ?string $codigoExigibilidade): ITributosBuilder
     {
-        $this->issqn = new Issqn
+        $this->issqn = new IssqnDto
         (
             valor: $valor,
             aliquota: $aliquota,
@@ -152,22 +154,20 @@ class TributosBuilder implements ITributosBuilder
     }
 
     /**
-     * @param float $valorAproximadoTributos
+     * @param float|null $valorAproximadoTributos
      * @return ITributosBuilder
      */
-    public function setValorAproximadoTributos(float $valorAproximadoTributos): ITributosBuilder
+    public function setValorAproximadoTributos(?float $valorAproximadoTributos): ITributosBuilder
     {
         $this->valorAproximadoTributos = $valorAproximadoTributos;
 
         return $this;
     }
 
-    /**
-     * @return Tributos
-     */
+
     public function build(): Tributos
     {
-        return new Tributos(
+        $tributosDto = new TributosDto(
             partilha: $this->partilha,
             icms: $this->icms,
             ipi: $this->ipi,
@@ -176,6 +176,8 @@ class TributosBuilder implements ITributosBuilder
             issqn: $this->issqn,
             valorAproximadoTributos: $this->valorAproximadoTributos,
         );
+
+        return new Tributos($tributosDto);
     }
 
 

@@ -2,10 +2,7 @@
 
 namespace TecnoSpeed\Plugnotas\Interfaces;
 
-use TecnoSpeed\Plugnotas\Common\Endereco;
 use TecnoSpeed\Plugnotas\Common\EnderecoV2;
-use TecnoSpeed\Plugnotas\Enums\EstadoEnum;
-use TecnoSpeed\Plugnotas\Enums\TipoLogradouroEnum;
 
 interface IEnderecoBuilder
 {
@@ -28,10 +25,10 @@ interface IEnderecoBuilder
     public function setCodigoCidade(string $codigoCidade): self;
 
     /**
-     * @param EstadoEnum $estado
+     * @param string $estado
      * @return self
      */
-    public function setEstado(EstadoEnum $estado): self;
+    public function setEstado(string $estado): self;
 
     /**
      * @param string $logradouro
@@ -46,10 +43,10 @@ interface IEnderecoBuilder
     public function setNumero(string $numero): self;
 
     /**
-     * @param TipoLogradouroEnum $tipoLogradouro
+     * @param string $tipoLogradouro
      * @return self
      */
-    public function setTipoLogradouro(TipoLogradouroEnum $tipoLogradouro): self;
+    public function setTipoLogradouro(string $tipoLogradouro): self;
 
     /**
      * @param string $codigoPais

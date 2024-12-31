@@ -40,6 +40,12 @@ readonly class PessoaDto
         public ?string                         $codigoEstrangeiro,
         public ?NaoNifEnum                     $naoNif,
         public ?string                         $identificadorCadastro,
+        public ?string                         $certificado,
+        public ?bool                           $simplesNacional,
+        public ?int                            $regimeTributario,
+        public ?bool                           $incentivoFiscal,
+        public ?bool                           $incentivadorCultural,
+        public ?int                            $regimeTributarioEspecial
     )
     {
     }

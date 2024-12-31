@@ -134,7 +134,7 @@ class Nfse extends BuilderAbstract implements IDfe
         return $this->rps;
     }
 
-    public function setServico(array $servicos)
+    public function setServico(Servico $servicos)
     {
         $this->servico = $servicos;
     }
@@ -227,15 +227,16 @@ class Nfse extends BuilderAbstract implements IDfe
         return $this->informacoesComplementares;
     }
 
-    public function setParcelas(Parcelas $parcelas)
-    {
-        $this->parcelas[] = $parcelas;
-    }
-
     public function getParcelas()
     {
         return $this->parcelas;
     }
+
+    public function setParcelas(array $parcelas)
+    {
+        $this->parcelas[] = $parcelas;
+    }
+
     public function setAtivo($ativo)
     {
         $this->ativo = $ativo;
@@ -268,25 +269,20 @@ class Nfse extends BuilderAbstract implements IDfe
 
     private function validateArrayServices($servico): bool
     {
-        $validateServices = v::arrayVal()->each(
-            v::oneOf(
-                v::allOf(
-                    v::keyNested('codigo'),
-                    v::keyNested('discriminacao'),
-                    v::keyNested('cnae'),
-                    v::keyNested('iss.aliquota'),
-                    v::keyNested('valor.servico')
-                ),
-                v::allOf(
-                    v::keyNested('id')
-                )
-            )
+        $validateServices = v::arrayVal()->allOf(
+            v::key('codigo', v::stringType()->notEmpty()),
+            v::key('discriminacao', v::stringType()),
+            v::keyNested('iss.aliquota', v::numericVal()->notEmpty()),
+            v::keyNested('valor.servico', v::numericVal()->notEmpty())
         )->validate($servico);
 
         return $validateServices;
     }
 
-  public function send($configuration = null)
+    /**
+     * @throws RequiredError
+     */
+    public function send($configuration = null)
     {
         $this->validate();
 

@@ -28,15 +28,34 @@ class ConfiguracoesNfseBuilder
         return $this;
     }
 
-    public function setRps(?ConfiguracaoRpsDto $rps): ConfiguracoesNfseBuilder
+    public function setRps(
+        ?int $lote,
+        ?array $numeracao,
+        ?bool $numeracaoAutomatica,
+        ?bool $agrupaLoteAutomatico,
+        ?bool $agrupaLoteComSerieAutomatico
+    ): ConfiguracoesNfseBuilder
     {
-        $this->rps = $rps;
+        $rpsDto = new ConfiguracaoRpsDto(
+            lote: $lote,
+            numeracao: $numeracao,
+            numeracaoAutomatica: $numeracaoAutomatica,
+            agrupaLoteAutomatico: $agrupaLoteAutomatico,
+            agrupaLoteComSerieAutomatico: $agrupaLoteComSerieAutomatico
+        );
+
+        $this->rps = $rpsDto;
         return $this;
     }
 
-    public function setPrefeitura(?PrefeituraDto $prefeitura): ConfiguracoesNfseBuilder
+    public function setPrefeitura(?string $login, ?string $senha): ConfiguracoesNfseBuilder
     {
-        $this->prefeitura = $prefeitura;
+        $prefeituraDto = new PrefeituraDto(
+            login: $login,
+            senha: $senha
+        );
+
+        $this->prefeitura = $prefeituraDto;
         return $this;
     }
 

@@ -9,8 +9,8 @@ use TecnoSpeed\Plugnotas\Enums\NaoNifEnum;
 readonly class PessoaDto
 {
     /**
-     * @param string|null $nome
-     * @param string|null $cpfCnpj
+     * @param string $nome
+     * @param string $cpfCnpj
      * @param string|null $razaoSocial
      * @param EnderecoV2|null $endereco
      * @param string|null $email
@@ -23,6 +23,12 @@ readonly class PessoaDto
      * @param string|null $codigoEstrangeiro
      * @param NaoNifEnum|null $naoNif
      * @param string|null $identificadorCadastro
+     * @param string|null $certificado
+     * @param bool|null $simplesNacional
+     * @param int|null $regimeTributario
+     * @param bool|null $incentivoFiscal
+     * @param bool|null $incentivadorCultural
+     * @param int|null $regimeTributarioEspecial
      */
     public function __construct
     (

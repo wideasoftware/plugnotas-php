@@ -234,7 +234,13 @@ class PessoaBuilder implements IPessoaBuilder
             indicadorInscricaoEstadual: $this->indicadorInscricaoEstadual,
             codigoEstrangeiro: $this->codigoEstrangeiro,
             naoNif: $this->naoNif,
-            identificadorCadastro: $this->identificadorCadastro
+            identificadorCadastro: $this->identificadorCadastro,
+            certificado: null,
+            simplesNacional: null,
+            regimeTributario: null,
+            incentivoFiscal: null,
+            incentivadorCultural: null,
+            regimeTributarioEspecial: null,
         );
 
         return new Pessoa($pessoaDto);

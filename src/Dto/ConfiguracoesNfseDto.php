@@ -11,7 +11,9 @@ class ConfiguracoesNfseDto
         public ?ConfiguracaoRpsDto $rps,
         public ?PrefeituraDto      $prefeitura,
         public ?array              $email,
-        public ?bool               $producao = false
+        public bool                $producao,
+        public bool                $ativo,
+        public string              $tipoContrato
     )
     {
     }

@@ -42,8 +42,18 @@ readonly class ConfiguracoesNfse
         return $this->dto->email;
     }
 
-    public function getProducao(): ?bool
+    public function getProducao(): bool
     {
         return $this->dto->producao;
+    }
+
+    public function getAtivo(): bool
+    {
+        return $this->dto->ativo;
+    }
+
+    public function getTipoContrato(): bool
+    {
+        return $this->dto->tipoContrato;
     }
 }

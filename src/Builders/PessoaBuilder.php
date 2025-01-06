@@ -4,7 +4,6 @@ namespace TecnoSpeed\Plugnotas\Builders;
 
 use TecnoSpeed\Plugnotas\Common\EnderecoV2;
 use TecnoSpeed\Plugnotas\Common\Pessoa;
-use TecnoSpeed\Plugnotas\Common\Telefone;
 use TecnoSpeed\Plugnotas\Dto\PessoaDto;
 use TecnoSpeed\Plugnotas\Dto\TelefoneDto;
 use TecnoSpeed\Plugnotas\Enums\IndicadorInscricaoEstadualEnum;
@@ -12,6 +11,8 @@ use TecnoSpeed\Plugnotas\Enums\NaoNifEnum;
 use TecnoSpeed\Plugnotas\Error\ValidationError;
 use TecnoSpeed\Plugnotas\Interfaces\IPessoaBuilder;
 use TecnoSpeed\Plugnotas\Traits\Validation;
+
+use Respect\Validation\Validator as v;
 
 class PessoaBuilder implements IPessoaBuilder
 {
@@ -32,6 +33,12 @@ class PessoaBuilder implements IPessoaBuilder
     private ?NaoNifEnum $naoNif = null;
     private ?string $nome = null;
     private ?string $identificadorCadastro = null;
+    private ?string $certificado = null;
+    private ?bool $simplesNacional = null;
+    private ?int $regimeTributario = null;
+    private ?bool $incentivoFiscal = null;
+    private ?bool $incentivadorCultural = null;
+    private ?int $regimeTributarioEspecial = null;
 
     /**
      * @param string $cpfCnpj
@@ -50,12 +57,14 @@ class PessoaBuilder implements IPessoaBuilder
     }
 
     /**
-     * @param string $nome
+     * @param string|null $nome
      * @return $this
      */
-    public function setNome(string $nome): IPessoaBuilder
+    public function setNome(?string $nome): IPessoaBuilder
     {
-        $this->nome = $nome;
+        if ($nome !== null) {
+            $this->nome = $nome;
+        }
 
         return $this;
     }
@@ -216,6 +225,66 @@ class PessoaBuilder implements IPessoaBuilder
     }
 
     /**
+     * @param string $certificado
+     * @return IPessoaBuilder
+     */
+    public function setCertificado(string $certificado): IPessoaBuilder
+    {
+        $this->certificado = $certificado;
+        return $this;
+    }
+
+    /**
+     * @param bool $simplesNacional
+     * @return IPessoaBuilder
+     */
+    public function setSimplesNacional(bool $simplesNacional): IPessoaBuilder
+    {
+        $this->simplesNacional = $simplesNacional;
+        return $this;
+    }
+
+    /**
+     * @param int $regimeTributario
+     * @return IPessoaBuilder
+     */
+    public function setRegimeTributario(int $regimeTributario): IPessoaBuilder
+    {
+        $this->regimeTributario = $regimeTributario;
+        return $this;
+    }
+
+    /**
+     * @param bool $incentivoFiscal
+     * @return IPessoaBuilder
+     */
+    public function setIncentivoFiscal(bool $incentivoFiscal): IPessoaBuilder
+    {
+        $this->incentivoFiscal = $incentivoFiscal;
+        return $this;
+    }
+
+    /**
+     * @param bool $incentivadorCultural
+     * @return IPessoaBuilder
+     */
+    public function setIncentivadorCultural(bool $incentivadorCultural): IPessoaBuilder
+    {
+        $this->incentivadorCultural = $incentivadorCultural;
+        return $this;
+    }
+
+    /**
+     * @param int $regimeTributarioEspecial
+     * @return IPessoaBuilder
+     */
+    public function setRegimeTributarioEspecial(int $regimeTributarioEspecial): IPessoaBuilder
+    {
+        $this->regimeTributarioEspecial = $regimeTributarioEspecial;
+        return $this;
+    }
+
+    /**
      * @return Pessoa
      */
     public function build(): Pessoa
@@ -234,7 +303,13 @@ class PessoaBuilder implements IPessoaBuilder
             indicadorInscricaoEstadual: $this->indicadorInscricaoEstadual,
             codigoEstrangeiro: $this->codigoEstrangeiro,
             naoNif: $this->naoNif,
-            identificadorCadastro: $this->identificadorCadastro
+            identificadorCadastro: $this->identificadorCadastro,
+            certificado: $this->certificado,
+            simplesNacional: $this->simplesNacional,
+            regimeTributario: $this->regimeTributario,
+            incentivoFiscal: $this->incentivoFiscal,
+            incentivadorCultural: $this->incentivadorCultural,
+            regimeTributarioEspecial: $this->regimeTributarioEspecial
         );
 
         return new Pessoa($pessoaDto);

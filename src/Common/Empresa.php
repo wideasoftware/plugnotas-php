@@ -17,7 +17,7 @@ readonly class Empresa
 
     public function __construct(
         private Configuration $configuration,
-        public Pessoa $pessoa,
+        public ?Pessoa $pessoa,
         public ?ConfiguracoesNfse $nfse
     )
     {

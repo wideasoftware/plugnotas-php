@@ -133,8 +133,52 @@ class Pessoa
     {
         return $this->pessoaDTO->naoNif;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getCertificado(): ?string
+    {
+        return $this->pessoaDTO->certificado;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getSimplesNacional(): ?bool
+    {
+        return $this->pessoaDTO->simplesNacional;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getRegimeTributario(): ?int
+    {
+        return $this->pessoaDTO->regimeTributario;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getIncentivoFiscal(): ?bool
+    {
+        return $this->pessoaDTO->incentivoFiscal;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getIncentivadorCultural(): ?bool
+    {
+        return $this->pessoaDTO->incentivadorCultural;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getRegimeTributarioEspecial(): ?int
+    {
+        return $this->pessoaDTO->regimeTributarioEspecial;
+    }
 }
-
-
-
-

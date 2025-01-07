@@ -168,13 +168,13 @@ class TributosBuilder implements ITributosBuilder
     public function build(): Tributos
     {
         $tributosDto = new TributosDto(
-            partilha: $this->partilha,
+            partilha: $this->partilha ?? null,
             icms: $this->icms,
             ipi: $this->ipi,
             pis: $this->pis,
             cofins: $this->cofins,
-            issqn: $this->issqn,
-            valorAproximadoTributos: $this->valorAproximadoTributos,
+            issqn: $this->issqn ?? null,
+            valorAproximadoTributos: $this->valorAproximadoTributos ?? null,
         );
 
         return new Tributos($tributosDto);

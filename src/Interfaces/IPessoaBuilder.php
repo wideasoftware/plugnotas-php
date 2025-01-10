@@ -88,11 +88,11 @@ interface IPessoaBuilder
     /**
      * Define o telefone.
      *
-     * @param string $dd
+     * @param string|null $dd
      * @param string $numero
      * @return IPessoaBuilder
      */
-    public function setTelefone(string $dd, string $numero): IPessoaBuilder;
+    public function setTelefone(?string $dd, string $numero): IPessoaBuilder;
 
     /**
      * Define o indicador da inscrição estadual.
@@ -117,6 +117,63 @@ interface IPessoaBuilder
      * @return IPessoaBuilder
      */
     public function setNaoNif(string $naoNif): IPessoaBuilder;
+
+    /**
+     * Define o Identificador de Cadastro
+     *
+     * @param string $identificadorCadastro
+     * @return IPessoaBuilder
+     */
+    public function setIdentificadorCadastro(string $identificadorCadastro): IPessoaBuilder;
+
+
+    /**
+     * Define o ID do certificado na Tecnospeed
+     *
+     * @param string $certificado
+     * @return IPessoaBuilder
+     */
+    public function setCertificado(string $certificado): IPessoaBuilder;
+
+    /**
+     * Define se e optante pelo Simples Nacional
+     *
+     * @param bool $simplesNacional
+     * @return IPessoaBuilder
+     */
+    public function setSimplesNacional(bool $simplesNacional): IPessoaBuilder;
+
+    /**
+     * Define o Regime Tributario
+     *
+     * @param int $regimeTributario
+     * @return IPessoaBuilder
+     */
+    public function setRegimeTributario(int $regimeTributario): IPessoaBuilder;
+
+    /**
+     * Define se ha incentivo fiscal
+     *
+     * @param bool|null $incentivoFiscal
+     * @return IPessoaBuilder
+     */
+    public function setIncentivoFiscal(?bool $incentivoFiscal): IPessoaBuilder;
+
+    /**
+     * Define se ha incentivador cultural
+     *
+     * @param bool|null $incentivadorCultural
+     * @return IPessoaBuilder
+     */
+    public function setIncentivadorCultural(?bool $incentivadorCultural): IPessoaBuilder;
+
+    /**
+     * Define o Regime Tributario Especial
+     *
+     * @param int $regimeTributarioEspecial
+     * @return IPessoaBuilder
+     */
+    public function setRegimeTributarioEspecial(int $regimeTributarioEspecial): IPessoaBuilder;
 
     /**
      * Constrói e retorna a entidade final.

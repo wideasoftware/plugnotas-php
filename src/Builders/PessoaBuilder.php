@@ -57,14 +57,12 @@ class PessoaBuilder implements IPessoaBuilder
     }
 
     /**
-     * @param string|null $nome
+     * @param string $nome
      * @return $this
      */
-    public function setNome(?string $nome): IPessoaBuilder
+    public function setNome(string $nome): IPessoaBuilder
     {
-        if ($nome !== null) {
-            $this->nome = $nome;
-        }
+        $this->nome = $nome;
 
         return $this;
     }
@@ -92,11 +90,11 @@ class PessoaBuilder implements IPessoaBuilder
     }
 
     /**
-     * @param string $email
+     * @param string|null $email
      * @return IPessoaBuilder
      * @throws ValidationError
      */
-    public function setEmail(string $email): IPessoaBuilder
+    public function setEmail(?string $email): IPessoaBuilder
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new ValidationError('Email Invalido');
@@ -108,10 +106,10 @@ class PessoaBuilder implements IPessoaBuilder
     }
 
     /**
-     * @param string $inscricaoEstadual
+     * @param string|null $inscricaoEstadual
      * @return IPessoaBuilder
      */
-    public function setInscricaoEstadual(string $inscricaoEstadual): IPessoaBuilder
+    public function setInscricaoEstadual(?string $inscricaoEstadual): IPessoaBuilder
     {
         $this->inscricaoEstadual = $inscricaoEstadual;
 
@@ -119,10 +117,10 @@ class PessoaBuilder implements IPessoaBuilder
     }
 
     /**
-     * @param string $inscricaoMunicipal
+     * @param string|null $inscricaoMunicipal
      * @return IPessoaBuilder
      */
-    public function setInscricaoMunicipal(string $inscricaoMunicipal): IPessoaBuilder
+    public function setInscricaoMunicipal(?string $inscricaoMunicipal): IPessoaBuilder
     {
         $this->inscricaoMunicipal = $inscricaoMunicipal;
 
@@ -163,13 +161,15 @@ class PessoaBuilder implements IPessoaBuilder
     }
 
     /**
-     * @param string $dd
+     * @param string|null $dd
      * @param string $numero
      * @return $this
      */
-    public function setTelefone(string $dd, string $numero): IPessoaBuilder
+    public function setTelefone(?string $dd, string $numero): IPessoaBuilder
     {
-        $this->telefone = new TelefoneDto($numero, $dd);
+        if($numero){
+            $this->telefone = new TelefoneDto($numero, $dd);
+        }
 
         return $this;
     }
@@ -255,20 +255,20 @@ class PessoaBuilder implements IPessoaBuilder
     }
 
     /**
-     * @param bool $incentivoFiscal
+     * @param bool|null $incentivoFiscal
      * @return IPessoaBuilder
      */
-    public function setIncentivoFiscal(bool $incentivoFiscal): IPessoaBuilder
+    public function setIncentivoFiscal(?bool $incentivoFiscal): IPessoaBuilder
     {
         $this->incentivoFiscal = $incentivoFiscal;
         return $this;
     }
 
     /**
-     * @param bool $incentivadorCultural
+     * @param bool|null $incentivadorCultural
      * @return IPessoaBuilder
      */
-    public function setIncentivadorCultural(bool $incentivadorCultural): IPessoaBuilder
+    public function setIncentivadorCultural(?bool $incentivadorCultural): IPessoaBuilder
     {
         $this->incentivadorCultural = $incentivadorCultural;
         return $this;

@@ -9,7 +9,7 @@ use TecnoSpeed\Plugnotas\Enums\NaoNifEnum;
 readonly class PessoaDto
 {
     /**
-     * @param string $nome
+     * @param string|null $nome
      * @param string $cpfCnpj
      * @param string|null $razaoSocial
      * @param EnderecoV2|null $endereco
@@ -32,7 +32,7 @@ readonly class PessoaDto
      */
     public function __construct
     (
-        public string                          $nome,
+        public ?string                          $nome,
         public string                          $cpfCnpj,
         public ?string                         $razaoSocial,
         public ?EnderecoV2                     $endereco,

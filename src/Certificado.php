@@ -30,13 +30,12 @@ class Certificado extends BuilderAbstract implements ICertificado
         return Bottomline::pick($array, ['password', 'file']);
     }
 
-    public function setFile($file, $fileNameWithExtension)
+    public function setFile($file, $fileNameWithExtension): void
     {
-        $splFileObject = new \SplFileInfo($file);
 
         $this->file = [
             'name' => 'arquivo',
-            'contents' => file_get_contents($splFileObject->getPathName()),
+            'contents' => $file,
             'filename' => $fileNameWithExtension
         ];
     }

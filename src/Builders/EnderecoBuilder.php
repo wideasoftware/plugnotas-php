@@ -3,17 +3,14 @@
 namespace TecnoSpeed\Plugnotas\Builders;
 
 use TecnoSpeed\Plugnotas\Common\EnderecoV2;
-use TecnoSpeed\Plugnotas\Dto\EnderecoDto;
 use TecnoSpeed\Plugnotas\Enums\EstadoEnum;
 use TecnoSpeed\Plugnotas\Enums\TipoLogradouroEnum;
 use TecnoSpeed\Plugnotas\Error\ValidationError;
-use TecnoSpeed\Plugnotas\Interfaces\IEnderecoBuilder;
 use TecnoSpeed\Plugnotas\Traits\Validation;
 
-class EnderecoBuilder implements IEnderecoBuilder
+class EnderecoBuilder
 {
     use Validation;
-
     private ?TipoLogradouroEnum $tipoLogradouro = TipoLogradouroEnum::RUA;
     private ?string $logradouro = null;
     private ?string $numero = null;
@@ -27,153 +24,109 @@ class EnderecoBuilder implements IEnderecoBuilder
     private ?EstadoEnum $estado = null;
     private ?string $cep = null;
 
-    /**
-     * @param string $bairro
-     * @return IEnderecoBuilder
-     */
-    public function setBairro(string $bairro): IEnderecoBuilder
+    public function setBairro(?string $bairro): EnderecoBuilder
     {
         $this->bairro = $bairro;
-
         return $this;
     }
 
     /**
-     * @param string $cep
-     * @return IEnderecoBuilder
      * @throws ValidationError
      */
-    public function setCep(string $cep): IEnderecoBuilder
+    public function setCep(?string $cep): EnderecoBuilder
     {
-        $cepNumbers = $this::removeSpecialCharacters($cep);
+        if ($cep) {
+            $cepNumbers = $this::removeSpecialCharacters($cep);
 
-        if (strlen($cepNumbers) !== 8) {
-            throw new ValidationError(
-                'CEP inválido, por favor verifique se foram informados 8 números.'
-            );
+            if (strlen($cepNumbers) !== 8) {
+                throw new ValidationError(
+                    'CEP inválido, por favor verifique se foram informados 8 números.'
+                );
+            }
+
+            $this->cep = $cepNumbers;
         }
-
-        $this->cep = $cepNumbers;
 
         return $this;
     }
 
-    /**
-     * @param string $codigoCidade
-     * @return IEnderecoBuilder
-     */
-    public function setCodigoCidade(string $codigoCidade): IEnderecoBuilder
+    public function setCodigoCidade(?string $codigoCidade): EnderecoBuilder
     {
         $this->codigoCidade = $codigoCidade;
 
         return $this;
     }
 
-    /**
-     * @param string $estado
-     * @return IEnderecoBuilder
-     */
-    public function setEstado(string $estado): IEnderecoBuilder
+    public function setEstado(?string $estado): EnderecoBuilder
     {
-        $this->estado = EstadoEnum::from($estado);
+        if ($estado) {
+            $this->estado = EstadoEnum::from($estado);
+        }
 
         return $this;
     }
 
-    /**
-     * @param string $logradouro
-     * @return IEnderecoBuilder
-     */
-    public function setLogradouro(string $logradouro): IEnderecoBuilder
+    public function setLogradouro(?string $logradouro): EnderecoBuilder
     {
         $this->logradouro = $logradouro;
 
         return $this;
     }
 
-    /**
-     * @param string $numero
-     * @return IEnderecoBuilder
-     */
-    public function setNumero(string $numero): IEnderecoBuilder
+    public function setNumero(?string $numero): EnderecoBuilder
     {
         $this->numero = $numero;
 
         return $this;
     }
 
-    /**
-     * @param string $tipoLogradouro
-     * @return IEnderecoBuilder
-     */
-    public function setTipoLogradouro(string $tipoLogradouro): IEnderecoBuilder
+    public function setTipoLogradouro(?string $tipoLogradouro): EnderecoBuilder
     {
-        $this->tipoLogradouro = TipoLogradouroEnum::from($tipoLogradouro);
+        if ($tipoLogradouro) {
+            $this->tipoLogradouro = TipoLogradouroEnum::from($tipoLogradouro);
+        }
 
         return $this;
     }
 
-    /**
-     * @param string $codigoPais
-     * @return IEnderecoBuilder
-     */
-    public function setCodigoPais(string $codigoPais): IEnderecoBuilder
+    public function setCodigoPais(?string $codigoPais): EnderecoBuilder
     {
         $this->codigoPais = $codigoPais;
 
         return $this;
     }
 
-    /**
-     * @param string $complemento
-     * @return IEnderecoBuilder
-     */
-    public function setComplemento(string $complemento): IEnderecoBuilder
+    public function setComplemento(?string $complemento): EnderecoBuilder
     {
         $this->complemento = $complemento;
 
         return $this;
     }
 
-    /**
-     * @param string $descricaoCidade
-     * @return IEnderecoBuilder
-     */
-    public function setDescricaoCidade(string $descricaoCidade): IEnderecoBuilder
+    public function setDescricaoCidade(?string $descricaoCidade): EnderecoBuilder
     {
         $this->descricaoCidade = $descricaoCidade;
 
         return $this;
     }
 
-    /**
-     * @param string $descricaoPais
-     * @return IEnderecoBuilder
-     */
-    public function setDescricaoPais(string $descricaoPais): IEnderecoBuilder
+    public function setDescricaoPais(?string $descricaoPais): EnderecoBuilder
     {
         $this->descricaoPais = $descricaoPais;
 
         return $this;
     }
 
-    /**
-     * @param string $tipoBairro
-     * @return IEnderecoBuilder
-     */
-    public function setTipoBairro(string $tipoBairro): IEnderecoBuilder
+    public function setTipoBairro(?string $tipoBairro): EnderecoBuilder
     {
         $this->tipoBairro = $tipoBairro;
 
         return $this;
     }
 
-    /**
-     * @return EnderecoV2
-     */
     public function build(): EnderecoV2
     {
-        $enderecoDto = new EnderecoDto(
+        return new EnderecoV2(
             tipoLogradouro: $this->tipoLogradouro,
             logradouro: $this->logradouro,
             numero: $this->numero,
@@ -187,7 +140,5 @@ class EnderecoBuilder implements IEnderecoBuilder
             estado: $this->estado,
             cep: $this->cep,
         );
-
-        return new EnderecoV2($enderecoDto);
     }
 }

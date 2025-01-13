@@ -2,76 +2,62 @@
 
 namespace TecnoSpeed\Plugnotas\Common;
 
-use TecnoSpeed\Plugnotas\Dto\CofinsDto;
-use TecnoSpeed\Plugnotas\Dto\IpiDto;
-use TecnoSpeed\Plugnotas\Dto\IssqnDto;
-use TecnoSpeed\Plugnotas\Dto\PartilhaDto;
-use TecnoSpeed\Plugnotas\Dto\PisDto;
-use TecnoSpeed\Plugnotas\Dto\TributosDto;
+use TecnoSpeed\Plugnotas\Common\Impostos\Cofins;
+use TecnoSpeed\Plugnotas\Common\Impostos\Icms;
+use TecnoSpeed\Plugnotas\Common\Impostos\Ipi;
+use TecnoSpeed\Plugnotas\Common\Impostos\Issqn;
+use TecnoSpeed\Plugnotas\Common\Impostos\Partilha;
+use TecnoSpeed\Plugnotas\Common\Impostos\Pis;
 
 readonly class Tributos
 {
-    /**
-     * @param TributosDto $tributosDto
-     */
-    public function __construct(private TributosDto $tributosDto)
+    public function __construct
+    (
+        private ?Partilha $partilha,
+        private ?Icms     $icms,
+        private ?Ipi      $ipi,
+        private ?Pis      $pis,
+        private ?Cofins   $cofins,
+        private ?Issqn    $issqn,
+        private ?float    $valorAproximadoTributos
+    )
     {
     }
 
-    /**
-     * @return PartilhaDto|null
-     */
-
-    public function getPartilha(): ?PartilhaDto
+    public function getPartilha(): ?Partilha
     {
-        return $this->tributosDto->partilha;
+        return $this->partilha;
     }
 
-    /**
-     * @return Icms|null
-     */
     public function getIcms(): ?Icms
     {
-        return $this->tributosDto->icms;
+        return $this->icms;
     }
 
-    /**
-     * @return IpiDto|null
-     */
-    public function getIpi(): ?IpiDto
+    public function getIpi(): ?Ipi
     {
-        return $this->tributosDto->ipi;
+        return $this->ipi;
     }
 
-    /**
-     * @return PisDto|null
-     */
-    public function getPis(): ?PisDto
+    public function getPis(): ?Pis
     {
-        return $this->tributosDto->pis;
+        return $this->pis;
     }
 
-    /**
-     * @return CofinsDto|null
-     */
-    public function getCofins(): ?CofinsDto
+    public function getCofins(): ?Cofins
     {
-        return $this->tributosDto->cofins;
+        return $this->cofins;
     }
 
-    /**
-     * @return IssqnDto|null
-     */
-    public function getIssqn(): ?IssqnDto
+    public function getIssqn(): ?Issqn
     {
-        return $this->tributosDto->issqn;
+        return $this->issqn;
     }
 
-    /**
-     * @return float|null
-     */
     public function getValorAproximadoTributos(): ?float
     {
-        return $this->tributosDto->valorAproximadoTributos;
+        return $this->valorAproximadoTributos;
     }
+
+
 }

@@ -2,8 +2,8 @@
 
 namespace TecnoSpeed\Plugnotas\Builders;
 
-use TecnoSpeed\Plugnotas\Common\Icms;
-use TecnoSpeed\Plugnotas\Common\SubstituicaoTributaria;
+use TecnoSpeed\Plugnotas\Common\Impostos\Icms;
+use TecnoSpeed\Plugnotas\Common\Impostos\SubstituicaoTributaria;
 use TecnoSpeed\Plugnotas\Enums\CstIcmsEnum;
 use TecnoSpeed\Plugnotas\Enums\OrigemEnum;
 
@@ -17,23 +17,23 @@ class IcmsBuilder
     private ?array $efetivo = null;
 
     /**
-     * @param OrigemEnum $origem
+     * @param string $origem
      * @return IcmsBuilder
      */
-    public function setOrigem(OrigemEnum $origem): IcmsBuilder
+    public function setOrigem(string $origem): IcmsBuilder
     {
-        $this->origem = $origem;
+        $this->origem = OrigemEnum::from($origem);
 
         return $this;
     }
 
     /**
-     * @param CstIcmsEnum $cst
+     * @param string $cst
      * @return IcmsBuilder
      */
-    public function setCst(CstIcmsEnum $cst): IcmsBuilder
+    public function setCst(string $cst): IcmsBuilder
     {
-        $this->cst = $cst;
+        $this->cst = CstIcmsEnum::from($cst);
 
         return $this;
     }
@@ -48,7 +48,7 @@ class IcmsBuilder
         $percentualConvertido = $percentual / 100;
 
         $this->creditoSimplesNacional = [
-            'percentual' => $percentualConvertido,
+            'percentual' => $percentual,
             'valor' => $percentualConvertido * $bc_valor
         ];
 

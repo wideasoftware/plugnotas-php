@@ -8,10 +8,6 @@ use TecnoSpeed\Plugnotas\Common\Pessoa;
 use TecnoSpeed\Plugnotas\Common\Total;
 use TecnoSpeed\Plugnotas\Common\Transporte;
 use TecnoSpeed\Plugnotas\Configuration;
-use TecnoSpeed\Plugnotas\Dto\CupomFiscalReferenciadoDto;
-use TecnoSpeed\Plugnotas\Dto\NfeDto;
-use TecnoSpeed\Plugnotas\Dto\NfeReferenciadaDto;
-use TecnoSpeed\Plugnotas\Dto\NotaReferenciadaDto;
 use TecnoSpeed\Plugnotas\Enums\FinalidadeNfeEnum;
 use TecnoSpeed\Plugnotas\Enums\IntermediadorEnum;
 use TecnoSpeed\Plugnotas\Enums\PresencialEnum;
@@ -21,73 +17,21 @@ use TecnoSpeed\Plugnotas\Validators\ValidaNfe;
 
 class NfeBuilder
 {
-    /**
-     * @var string
-     */
     private string $idIntegracao;
-    /**
-     * @var FinalidadeNfeEnum
-     */
-    private FinalidadeNfeEnum $finalidade;
-    /**
-     * @var string
-     */
+    private FinalidadeNfeEnum $finalidade = FinalidadeNfeEnum::NFE_NORMAL;
     private string $natureza;
-    /**
-     * @var string
-     */
     private string $dataEmissao;
-    /**
-     * @var PresencialEnum
-     */
-    private PresencialEnum $presencial;
-    /**
-     * @var bool
-     */
-    private bool $consumidorFinal;
-    /**
-     * @var NotaReferenciadaDto|null
-     */
-    private ?NotaReferenciadaDto $notaReferenciada;
-    /**
-     * @var Pessoa
-     */
+    private PresencialEnum $presencial = PresencialEnum::OPERACAO_NAO_PRESENCIAL_OUTROS;
+    private bool $consumidorFinal = true;
     private Pessoa $emitente;
-    /**
-     * @var Pessoa
-     */
     private Pessoa $destinatario;
-    /**
-     * @var Item[]
-     */
     private array $itens;
-    /**
-     * @var Total
-     */
-    private Total $total;
-    /**
-     * @var Transporte
-     */
-    private Transporte $transporte;
-    /**
-     * @var Pagamento[]
-     */
+    private ?Total $total = null;
+    private ?Transporte $transporte = null;
     private array $pagamentos;
-    /**
-     * @var string
-     */
-    private string $informacoesComplementares;
-    /**
-     * @var Pessoa
-     */
-    private Pessoa $intermediadorTransacao;
-    /**
-     * @var IntermediadorEnum
-     */
-    private IntermediadorEnum $intermediador;
-    /**
-     * @var Configuration
-     */
+    private ?string $informacoesComplementares = null;
+    private ?Pessoa $intermediadorTransacao = null;
+    private ?IntermediadorEnum $intermediador = null;
     private Configuration $configuracao;
 
     /**
@@ -101,10 +45,10 @@ class NfeBuilder
     }
 
     /**
-     * @param string $finalidade
+     * @param string|null $finalidade
      * @return NfeBuilder
      */
-    public function setFinalidade(string $finalidade): NfeBuilder
+    public function setFinalidade(?string $finalidade): NfeBuilder
     {
         $this->finalidade = FinalidadeNfeEnum::from($finalidade);
         return $this;
@@ -131,10 +75,10 @@ class NfeBuilder
     }
 
     /**
-     * @param string $presencial
+     * @param string|null $presencial
      * @return NfeBuilder
      */
-    public function setPresencial(string $presencial): NfeBuilder
+    public function setPresencial(?string $presencial): NfeBuilder
     {
         $this->presencial = PresencialEnum::from($presencial);
         return $this;
@@ -144,20 +88,9 @@ class NfeBuilder
      * @param bool $consumidorFinal
      * @return NfeBuilder
      */
-    public function setConsumidorFinal(bool $consumidorFinal): NfeBuilder
+    public function setConsumidorFinal(?bool $consumidorFinal): NfeBuilder
     {
         $this->consumidorFinal = $consumidorFinal;
-        return $this;
-    }
-
-    /**
-     * @param NfeReferenciadaDto[]|null $nfe
-     * @param CupomFiscalReferenciadoDto[]|null $cupomFiscal
-     * @return NfeBuilder
-     */
-    public function setNotaReferenciada(?array $nfe, ?array $cupomFiscal): NfeBuilder
-    {
-        $this->notaReferenciada = new NotaReferenciadaDto($nfe, $cupomFiscal);
         return $this;
     }
 
@@ -262,12 +195,13 @@ class NfeBuilder
     }
 
     /**
-     * @param Configuration $configuracao
+     * @param string $ambiente
+     * @param string $apiKey
      * @return NfeBuilder
      */
-    public function setConfiguracao(Configuration $configuracao): NfeBuilder
+    public function setConfiguracao(string $ambiente, string $apiKey): NfeBuilder
     {
-        $this->configuracao = $configuracao;
+        $this->configuracao = new Configuration($ambiente, $apiKey);
         return $this;
     }
 
@@ -276,7 +210,7 @@ class NfeBuilder
      */
     public function build(): Nfe
     {
-        $nfeDto = new NfeDto
+        return new Nfe
         (
             idIntegracao: $this->idIntegracao,
             finalidade: $this->finalidade,
@@ -284,7 +218,6 @@ class NfeBuilder
             dataEmissao: $this->dataEmissao,
             presencial: $this->presencial,
             consumidorFinal: $this->consumidorFinal,
-            notaReferenciada: $this->notaReferenciada,
             emitente: $this->emitente,
             destinatario: $this->destinatario,
             itens: $this->itens,
@@ -294,8 +227,7 @@ class NfeBuilder
             informacoesComplementares: $this->informacoesComplementares,
             intermediadorTransacao: $this->intermediadorTransacao,
             intermediador: $this->intermediador,
+            config: $this->configuracao
         );
-
-        return new Nfe($nfeDto, $this->configuracao);
     }
 }

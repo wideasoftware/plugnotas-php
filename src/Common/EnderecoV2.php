@@ -2,16 +2,26 @@
 
 namespace TecnoSpeed\Plugnotas\Common;
 
-use TecnoSpeed\Plugnotas\Dto\EnderecoDto;
 use TecnoSpeed\Plugnotas\Enums\EstadoEnum;
 use TecnoSpeed\Plugnotas\Enums\TipoLogradouroEnum;
 
 readonly class EnderecoV2
 {
-    /**
-     * @param EnderecoDto $enderecoDto
-     */
-    public function __construct(private EnderecoDto $enderecoDto)
+    public function __construct
+    (
+        private ?TipoLogradouroEnum $tipoLogradouro,
+        private ?string             $logradouro,
+        private ?string             $numero,
+        private ?string             $complemento,
+        private ?string             $tipoBairro,
+        private ?string             $bairro,
+        private ?string             $codigoPais,
+        private ?string             $descricaoPais,
+        private ?string             $codigoCidade,
+        private ?string             $descricaoCidade,
+        private ?EstadoEnum         $estado,
+        private ?string             $cep,
+    )
     {
     }
 
@@ -20,7 +30,7 @@ readonly class EnderecoV2
      */
     public function getTipoLogradouro(): ?TipoLogradouroEnum
     {
-        return $this->enderecoDto->tipoLogradouro;
+        return $this->tipoLogradouro;
     }
 
 
@@ -29,7 +39,7 @@ readonly class EnderecoV2
      */
     public function getLogradouro(): ?string
     {
-        return $this->enderecoDto->logradouro;
+        return $this->logradouro;
     }
 
 
@@ -38,7 +48,7 @@ readonly class EnderecoV2
      */
     public function getNumero(): ?string
     {
-        return $this->enderecoDto->numero;
+        return $this->numero;
     }
 
 
@@ -47,7 +57,7 @@ readonly class EnderecoV2
      */
     public function getComplemento(): ?string
     {
-        return $this->enderecoDto->complemento;
+        return $this->complemento;
     }
 
 
@@ -56,7 +66,7 @@ readonly class EnderecoV2
      */
     public function getTipoBairro(): ?string
     {
-        return $this->enderecoDto->tipoBairro;
+        return $this->tipoBairro;
     }
 
 
@@ -65,7 +75,7 @@ readonly class EnderecoV2
      */
     public function getBairro(): ?string
     {
-        return $this->enderecoDto->bairro;
+        return $this->bairro;
     }
 
 
@@ -74,7 +84,7 @@ readonly class EnderecoV2
      */
     public function getCodigoPais(): ?string
     {
-        return $this->enderecoDto->codigoPais;
+        return $this->codigoPais;
     }
 
 
@@ -83,7 +93,7 @@ readonly class EnderecoV2
      */
     public function getDescricaoPais(): ?string
     {
-        return $this->enderecoDto->descricaoPais;
+        return $this->descricaoPais;
     }
 
     /**
@@ -91,7 +101,7 @@ readonly class EnderecoV2
      */
     public function getCodigoCidade(): ?string
     {
-        return $this->enderecoDto->codigoCidade;
+        return $this->codigoCidade;
     }
 
 
@@ -100,7 +110,7 @@ readonly class EnderecoV2
      */
     public function getDescricaoCidade(): ?string
     {
-        return $this->enderecoDto->descricaoCidade;
+        return $this->descricaoCidade;
     }
 
     /**
@@ -108,7 +118,7 @@ readonly class EnderecoV2
      */
     public function getEstado(): ?EstadoEnum
     {
-        return $this->enderecoDto->estado;
+        return $this->estado;
     }
 
 
@@ -117,7 +127,7 @@ readonly class EnderecoV2
      */
     public function getCep(): ?string
     {
-        return $this->enderecoDto->cep;
+        return $this->cep;
     }
 
 }

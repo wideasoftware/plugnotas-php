@@ -2,7 +2,7 @@
 
 namespace TecnoSpeed\Plugnotas\Builders;
 
-use TecnoSpeed\Plugnotas\Common\SubstituicaoTributaria;
+use TecnoSpeed\Plugnotas\Common\Impostos\SubstituicaoTributaria;
 
 class SubstituicaoTributariaBuilder
 {

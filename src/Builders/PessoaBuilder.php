@@ -4,17 +4,12 @@ namespace TecnoSpeed\Plugnotas\Builders;
 
 use TecnoSpeed\Plugnotas\Common\EnderecoV2;
 use TecnoSpeed\Plugnotas\Common\Pessoa;
-use TecnoSpeed\Plugnotas\Dto\PessoaDto;
-use TecnoSpeed\Plugnotas\Dto\TelefoneDto;
 use TecnoSpeed\Plugnotas\Enums\IndicadorInscricaoEstadualEnum;
 use TecnoSpeed\Plugnotas\Enums\NaoNifEnum;
 use TecnoSpeed\Plugnotas\Error\ValidationError;
-use TecnoSpeed\Plugnotas\Interfaces\IPessoaBuilder;
 use TecnoSpeed\Plugnotas\Traits\Validation;
 
-use Respect\Validation\Validator as v;
-
-class PessoaBuilder implements IPessoaBuilder
+class PessoaBuilder
 {
     use Validation;
 
@@ -28,7 +23,7 @@ class PessoaBuilder implements IPessoaBuilder
     private ?string $nomeFantasia = null;
     private ?bool $orgaoPublico = null;
     private ?IndicadorInscricaoEstadualEnum $indicadorInscricaoEstadual = null;
-    private ?TelefoneDto $telefone = null;
+    private ?array $telefone = null;
     private ?string $codigoEstrangeiro = null;
     private ?NaoNifEnum $naoNif = null;
     private ?string $nome = null;
@@ -41,11 +36,9 @@ class PessoaBuilder implements IPessoaBuilder
     private ?int $regimeTributarioEspecial = null;
 
     /**
-     * @param string $cpfCnpj
-     * @return $this
      * @throws ValidationError
      */
-    public function setCpfCnpj(string $cpfCnpj): IPessoaBuilder
+    public function setCpfCnpj(string $cpfCnpj): PessoaBuilder
     {
         if (!$this::isValidCpfCnpj($cpfCnpj)) {
             throw new ValidationError('CPF/CNPJ Invalido');
@@ -56,33 +49,21 @@ class PessoaBuilder implements IPessoaBuilder
         return $this;
     }
 
-    /**
-     * @param string $nome
-     * @return $this
-     */
-    public function setNome(string $nome): IPessoaBuilder
+    public function setNome(?string $nome): PessoaBuilder
     {
         $this->nome = $nome;
 
         return $this;
     }
 
-    /**
-     * @param string $razaoSocial
-     * @return IPessoaBuilder
-     */
-    public function setRazaoSocial(string $razaoSocial): IPessoaBuilder
+    public function setRazaoSocial(?string $razaoSocial): PessoaBuilder
     {
         $this->razaoSocial = $razaoSocial;
 
         return $this;
     }
 
-    /**
-     * @param EnderecoV2 $endereco
-     * @return IPessoaBuilder
-     */
-    public function setEndereco(EnderecoV2 $endereco): IPessoaBuilder
+    public function setEndereco(?EnderecoV2 $endereco): PessoaBuilder
     {
         $this->endereco = $endereco;
 
@@ -90,195 +71,146 @@ class PessoaBuilder implements IPessoaBuilder
     }
 
     /**
-     * @param string|null $email
-     * @return IPessoaBuilder
      * @throws ValidationError
      */
-    public function setEmail(?string $email): IPessoaBuilder
+    public function setEmail(?string $email): PessoaBuilder
     {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new ValidationError('Email Invalido');
+        if ($email) {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                throw new ValidationError('Email Invalido');
+            }
+
+            $this->email = $email;
         }
 
-        $this->email = $email;
-
         return $this;
     }
 
-    /**
-     * @param string|null $inscricaoEstadual
-     * @return IPessoaBuilder
-     */
-    public function setInscricaoEstadual(?string $inscricaoEstadual): IPessoaBuilder
+    public function setInscricaoEstadual(?string $inscricaoEstadual): PessoaBuilder
     {
-        $this->inscricaoEstadual = $inscricaoEstadual;
+        if ($inscricaoEstadual) {
+            $this->inscricaoEstadual = $this::removeSpecialCharacters($inscricaoEstadual);
+        }
 
         return $this;
     }
 
-    /**
-     * @param string|null $inscricaoMunicipal
-     * @return IPessoaBuilder
-     */
-    public function setInscricaoMunicipal(?string $inscricaoMunicipal): IPessoaBuilder
+    public function setInscricaoMunicipal(?string $inscricaoMunicipal): PessoaBuilder
     {
-        $this->inscricaoMunicipal = $inscricaoMunicipal;
+        if ($inscricaoMunicipal) {
+            $this->inscricaoMunicipal = $this::removeSpecialCharacters($inscricaoMunicipal);
+        }
 
         return $this;
     }
 
-    /**
-     * @param string $inscricaoSuframa
-     * @return IPessoaBuilder
-     */
-    public function setInscricaoSuframa(string $inscricaoSuframa): IPessoaBuilder
+    public function setInscricaoSuframa(?string $inscricaoSuframa): PessoaBuilder
     {
-        $this->inscricaoSuframa = $inscricaoSuframa;
+        if ($inscricaoSuframa) {
+            $this->inscricaoSuframa = $this::removeSpecialCharacters($inscricaoSuframa);
+
+        }
 
         return $this;
     }
 
-    /**
-     * @param string $nomeFantasia
-     * @return IPessoaBuilder
-     */
-    public function setNomeFantasia(string $nomeFantasia): IPessoaBuilder
+    public function setNomeFantasia(?string $nomeFantasia): PessoaBuilder
     {
         $this->nomeFantasia = $nomeFantasia;
 
         return $this;
     }
 
-    /**
-     * @param bool $orgaoPublico
-     * @return IPessoaBuilder
-     */
-    public function setOrgaoPublico(bool $orgaoPublico): IPessoaBuilder
+    public function setOrgaoPublico(?bool $orgaoPublico): PessoaBuilder
     {
         $this->orgaoPublico = $orgaoPublico;
 
         return $this;
     }
 
-    /**
-     * @param string|null $dd
-     * @param string $numero
-     * @return $this
-     */
-    public function setTelefone(?string $dd, string $numero): IPessoaBuilder
+    public function setTelefone(?string $dd, ?string $numero): PessoaBuilder
     {
-        if($numero){
-            $this->telefone = new TelefoneDto($numero, $dd);
+        $this->telefone = [
+            'dd' => $dd,
+            'numero' => $numero,
+        ];
+
+        return $this;
+    }
+
+    public function setIndicadorInscricaoEstadual(?int $indicadorInscricaoEstadual): PessoaBuilder
+    {
+        if ($indicadorInscricaoEstadual) {
+            $this->indicadorInscricaoEstadual = IndicadorInscricaoEstadualEnum::from($indicadorInscricaoEstadual);
         }
 
         return $this;
     }
 
     /**
-     * @param int $indicadorInscricaoEstadual
-     * @return IPessoaBuilder
-     */
-    public function setIndicadorInscricaoEstadual(int $indicadorInscricaoEstadual): IPessoaBuilder
-    {
-        $this->indicadorInscricaoEstadual = IndicadorInscricaoEstadualEnum::from($indicadorInscricaoEstadual);
-
-        return $this;
-    }
-
-    /**
-     * @param string $codigoEstrangeiro
-     * @return IPessoaBuilder
      * @throws ValidationError
      */
-    public function setCodigoEstrangeiro(string $codigoEstrangeiro): IPessoaBuilder
+    public function setCodigoEstrangeiro(?string $codigoEstrangeiro): PessoaBuilder
     {
-        $valoresPermitidos = ['1', '2', '9'];
+        if ($codigoEstrangeiro) {
+            $valoresPermitidos = ['1', '2', '9'];
 
-        if (!in_array($codigoEstrangeiro, $valoresPermitidos, true)) {
-            throw new ValidationError("O código estrangeiro deve ser 1, 2 ou 9. Valor recebido: {$codigoEstrangeiro}");
+            if (!in_array($codigoEstrangeiro, $valoresPermitidos, true)) {
+                throw new ValidationError("O código estrangeiro deve ser 1, 2 ou 9. Valor recebido: {$codigoEstrangeiro}");
+            }
+
+            $this->codigoEstrangeiro = $codigoEstrangeiro;
         }
 
-        $this->codigoEstrangeiro = $codigoEstrangeiro;
-
         return $this;
     }
 
-    /**
-     * @param string $naoNif
-     * @return IPessoaBuilder
-     */
-    public function setNaoNif(string $naoNif): IPessoaBuilder
+    public function setNaoNif(?string $naoNif): PessoaBuilder
     {
-        $this->naoNif = NaoNifEnum::from($naoNif);
+        if ($naoNif) {
+            $this->naoNif = NaoNifEnum::from($naoNif);
+        }
 
         return $this;
     }
 
-    /**
-     * @param string $identificadorCadastro
-     * @return IPessoaBuilder
-     */
-    public function setIdentificadorCadastro(string $identificadorCadastro): IPessoaBuilder
+    public function setIdentificadorCadastro(?string $identificadorCadastro): PessoaBuilder
     {
         $this->identificadorCadastro = $identificadorCadastro;
         return $this;
     }
 
-    /**
-     * @param string $certificado
-     * @return IPessoaBuilder
-     */
-    public function setCertificado(string $certificado): IPessoaBuilder
+    public function setCertificado(?string $certificado): PessoaBuilder
     {
         $this->certificado = $certificado;
         return $this;
     }
 
-    /**
-     * @param bool $simplesNacional
-     * @return IPessoaBuilder
-     */
-    public function setSimplesNacional(bool $simplesNacional): IPessoaBuilder
+    public function setSimplesNacional(?bool $simplesNacional): PessoaBuilder
     {
         $this->simplesNacional = $simplesNacional;
         return $this;
     }
 
-    /**
-     * @param int $regimeTributario
-     * @return IPessoaBuilder
-     */
-    public function setRegimeTributario(int $regimeTributario): IPessoaBuilder
+    public function setRegimeTributario(?int $regimeTributario): PessoaBuilder
     {
         $this->regimeTributario = $regimeTributario;
         return $this;
     }
 
-    /**
-     * @param bool|null $incentivoFiscal
-     * @return IPessoaBuilder
-     */
-    public function setIncentivoFiscal(?bool $incentivoFiscal): IPessoaBuilder
+    public function setIncentivoFiscal(?bool $incentivoFiscal): PessoaBuilder
     {
         $this->incentivoFiscal = $incentivoFiscal;
         return $this;
     }
 
-    /**
-     * @param bool|null $incentivadorCultural
-     * @return IPessoaBuilder
-     */
-    public function setIncentivadorCultural(?bool $incentivadorCultural): IPessoaBuilder
+    public function setIncentivadorCultural(?bool $incentivadorCultural): PessoaBuilder
     {
         $this->incentivadorCultural = $incentivadorCultural;
         return $this;
     }
 
-    /**
-     * @param int $regimeTributarioEspecial
-     * @return IPessoaBuilder
-     */
-    public function setRegimeTributarioEspecial(int $regimeTributarioEspecial): IPessoaBuilder
+    public function setRegimeTributarioEspecial(?int $regimeTributarioEspecial): PessoaBuilder
     {
         $this->regimeTributarioEspecial = $regimeTributarioEspecial;
         return $this;
@@ -289,7 +221,7 @@ class PessoaBuilder implements IPessoaBuilder
      */
     public function build(): Pessoa
     {
-        $pessoaDto = new PessoaDto(
+        return new Pessoa(
             nome: $this->nome,
             cpfCnpj: $this->cpfCnpj,
             razaoSocial: $this->razaoSocial,
@@ -311,7 +243,5 @@ class PessoaBuilder implements IPessoaBuilder
             incentivadorCultural: $this->incentivadorCultural,
             regimeTributarioEspecial: $this->regimeTributarioEspecial
         );
-
-        return new Pessoa($pessoaDto);
     }
 }

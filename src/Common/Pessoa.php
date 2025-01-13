@@ -2,8 +2,6 @@
 
 namespace TecnoSpeed\Plugnotas\Common;
 
-use TecnoSpeed\Plugnotas\Dto\PessoaDto;
-use TecnoSpeed\Plugnotas\Dto\TelefoneDto;
 use TecnoSpeed\Plugnotas\Enums\IndicadorInscricaoEstadualEnum;
 use TecnoSpeed\Plugnotas\Enums\NaoNifEnum;
 use TecnoSpeed\Plugnotas\Traits\DataTransform;
@@ -12,173 +10,131 @@ class Pessoa
 {
     use DataTransform;
 
-    /**
-     * @param PessoaDto $pessoaDTO
-     */
-    public function __construct(private readonly PessoaDTO $pessoaDTO)
+    public function __construct
+    (
+        public ?string                         $nome,
+        public ?string                         $cpfCnpj,
+        public ?string                         $razaoSocial,
+        public ?EnderecoV2                     $endereco,
+        public ?string                         $email,
+        public ?string                         $inscricaoEstadual,
+        public ?string                         $inscricaoMunicipal,
+        public ?string                         $inscricaoSuframa,
+        public ?string                         $nomeFantasia,
+        public ?array                          $telefone,
+        public ?IndicadorInscricaoEstadualEnum $indicadorInscricaoEstadual,
+        public ?string                         $codigoEstrangeiro,
+        public ?NaoNifEnum                     $naoNif,
+        public ?string                         $identificadorCadastro,
+        public ?string                         $certificado,
+        public ?bool                           $simplesNacional,
+        public ?int                            $regimeTributario,
+        public ?bool                           $incentivoFiscal,
+        public ?bool                           $incentivadorCultural,
+        public ?int                            $regimeTributarioEspecial
+    )
     {
     }
 
-    /**
-     * @return string
-     */
-    public function getCpfCnpj(): string
+    public function getNome(): ?string
     {
-        return $this->pessoaDTO->cpfCnpj;
+        return $this->nome;
     }
 
-
-    /**
-     * @return string
-     */
-    public function getNome(): string
+    public function getCpfCnpj(): ?string
     {
-        return $this->pessoaDTO->nome;
+        return $this->cpfCnpj;
     }
 
-
-    /**
-     * @return string|null
-     */
     public function getRazaoSocial(): ?string
     {
-        return $this->pessoaDTO->razaoSocial;
+        return $this->razaoSocial;
     }
 
-
-    /**
-     * @return EnderecoV2|null
-     */
     public function getEndereco(): ?EnderecoV2
     {
-        return $this->pessoaDTO->endereco;
+        return $this->endereco;
     }
 
-
-    /**
-     * @return string|null
-     */
     public function getEmail(): ?string
     {
-        return $this->pessoaDTO->email;
+        return $this->email;
     }
 
-
-    /**
-     * @return string|null
-     */
     public function getInscricaoEstadual(): ?string
     {
-        return $this->pessoaDTO->inscricaoEstadual;
+        return $this->inscricaoEstadual;
     }
 
-
-    /**
-     * @return string|null
-     */
     public function getInscricaoMunicipal(): ?string
     {
-        return $this->pessoaDTO->inscricaoMunicipal;
+        return $this->inscricaoMunicipal;
     }
 
-
-    /**
-     * @return string|null
-     */
     public function getInscricaoSuframa(): ?string
     {
-        return $this->pessoaDTO->inscricaoSuframa;
+        return $this->inscricaoSuframa;
     }
 
-
-    /**
-     * @return string|null
-     */
     public function getNomeFantasia(): ?string
     {
-        return $this->pessoaDTO->nomeFantasia;
+        return $this->nomeFantasia;
     }
 
-
-    /**
-     * @return TelefoneDto
-     */
-    public function getTelefone(): TelefoneDto
+    public function getTelefone(): ?array
     {
-        return $this->pessoaDTO->telefone;
+        return $this->telefone;
     }
 
-
-    /**
-     * @return IndicadorInscricaoEstadualEnum
-     */
-    public function getIndicadorInscricaoEstadual(): IndicadorInscricaoEstadualEnum
+    public function getIndicadorInscricaoEstadual(): ?IndicadorInscricaoEstadualEnum
     {
-        return $this->pessoaDTO->indicadorInscricaoEstadual;
+        return $this->indicadorInscricaoEstadual;
     }
 
-
-    /**
-     * @return string|null
-     */
     public function getCodigoEstrangeiro(): ?string
     {
-        return $this->pessoaDTO->codigoEstrangeiro;
+        return $this->codigoEstrangeiro;
     }
 
-    /**
-     * @return NaoNifEnum
-     */
-    public function getNaoNif(): NaoNifEnum
+    public function getNaoNif(): ?NaoNifEnum
     {
-        return $this->pessoaDTO->naoNif;
+        return $this->naoNif;
     }
 
-    /**
-     * @return string|null
-     */
+    public function getIdentificadorCadastro(): ?string
+    {
+        return $this->identificadorCadastro;
+    }
+
     public function getCertificado(): ?string
     {
-        return $this->pessoaDTO->certificado;
+        return $this->certificado;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getSimplesNacional(): ?bool
     {
-        return $this->pessoaDTO->simplesNacional;
+        return $this->simplesNacional;
     }
 
-    /**
-     * @return int|null
-     */
     public function getRegimeTributario(): ?int
     {
-        return $this->pessoaDTO->regimeTributario;
+        return $this->regimeTributario;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getIncentivoFiscal(): ?bool
     {
-        return $this->pessoaDTO->incentivoFiscal;
+        return $this->incentivoFiscal;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getIncentivadorCultural(): ?bool
     {
-        return $this->pessoaDTO->incentivadorCultural;
+        return $this->incentivadorCultural;
     }
 
-    /**
-     * @return int|null
-     */
     public function getRegimeTributarioEspecial(): ?int
     {
-        return $this->pessoaDTO->regimeTributarioEspecial;
+        return $this->regimeTributarioEspecial;
     }
+
+
 }

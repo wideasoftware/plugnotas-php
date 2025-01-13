@@ -1,18 +1,40 @@
 <?php
 
-namespace TecnoSpeed\Plugnotas\Common;
+namespace TecnoSpeed\Plugnotas\Common\Impostos;
 
 use TecnoSpeed\Plugnotas\Enums\CstIpiEnum;
 
-class Ipi
+readonly class Ipi
 {
     public function __construct
     (
-        public string     $codigoEnquadramentoLegal,
-        public CstIpiEnum $cst,
-        public ?float     $baseCalculo,
-        public ?float     $aliquota
+        private string     $codigoEnquadramentoLegal,
+        private CstIpiEnum $cst,
+        private ?float     $baseCalculo,
+        private ?float     $aliquota
     )
     {
     }
+
+    public function getCodigoEnquadramentoLegal(): string
+    {
+        return $this->codigoEnquadramentoLegal;
+    }
+
+    public function getCst(): CstIpiEnum
+    {
+        return $this->cst;
+    }
+
+    public function getBaseCalculo(): ?float
+    {
+        return $this->baseCalculo;
+    }
+
+    public function getAliquota(): ?float
+    {
+        return $this->aliquota;
+    }
+
+
 }

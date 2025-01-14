@@ -8,51 +8,24 @@ use TecnoSpeed\Plugnotas\Error\ValidationError;
 
 class PagamentoBuilder
 {
-    /**
-     * @var bool|null
-     */
     private ?bool $aVista;
-    /**
-     * @var FormasDePagamentoEnum|null
-     */
     private ?FormasDePagamentoEnum $meio;
-    /**
-     * @var string|null
-     */
     private ?string $descricaoMeio;
-    /**
-     * @var float
-     */
     private float $valor;
-    /**
-     * @var string|null
-     */
     private ?string $data;
 
-    /**
-     * @param bool|null $aVista
-     * @return PagamentoBuilder
-     */
     public function setAVista(?bool $aVista): PagamentoBuilder
     {
         $this->aVista = $aVista;
         return $this;
     }
 
-    /**
-     * @param string|null $meio
-     * @return $this
-     */
     public function setMeio(?string $meio): PagamentoBuilder
     {
         $this->meio = FormasDePagamentoEnum::from($meio);
         return $this;
     }
 
-    /**
-     * @param string|null $descricaoMeio
-     * @return PagamentoBuilder
-     */
     public function setDescricaoMeio(?string $descricaoMeio): PagamentoBuilder
     {
         $this->descricaoMeio = $descricaoMeio;
@@ -60,8 +33,6 @@ class PagamentoBuilder
     }
 
     /**
-     * @param float $valor
-     * @return PagamentoBuilder
      * @throws ValidationError
      */
     public function setValor(float $valor): PagamentoBuilder
@@ -74,10 +45,6 @@ class PagamentoBuilder
         return $this;
     }
 
-    /**
-     * @param string|null $data
-     * @return PagamentoBuilder
-     */
     public function setData(?string $data): PagamentoBuilder
     {
         $this->data = $data;

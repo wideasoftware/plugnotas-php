@@ -4,71 +4,27 @@ namespace TecnoSpeed\Plugnotas\Builders;
 
 use TecnoSpeed\Plugnotas\Common\Item;
 use TecnoSpeed\Plugnotas\Common\Tributos;
-use TecnoSpeed\Plugnotas\Dto\ComercialETributavelDto;
-use TecnoSpeed\Plugnotas\Dto\ItemDto;
-
 class ItemBuilder
 {
-    /**
-     * @var string
-     */
-    private string $codigo;
-    /**
-     * @var string
-     */
-    private string $descricao;
-    /**
-     * @var string
-     */
-    private string $ncm;
-    /**
-     * @var string
-     */
-    private string $cest;
-    /**
-     * @var string
-     */
-    private string $cfop;
-    /**
-     * @var float
-     */
-    private float $valor;
-    /**
-     * @var Tributos
-     */
-    private Tributos $tributos;
-    /**
-     * @var float
-     */
-    private float $valorFrete;
-    /**
-     * @var float
-     */
-    private float $valorSeguro;
-    /**
-     * @var float
-     */
-    private float $valorDesconto;
-    /**
-     * @var float
-     */
-    private float $valorOutros;
-    /**
-     * @var ComercialETributavelDto
-     */
-    private ComercialETributavelDto $quantidade;
-    /**
-     * @var ComercialETributavelDto
-     */
-    private ComercialETributavelDto $valorUnitario;
-
+    private ?string $codigo = null;
+    private ?string $descricao = null;
+    private ?string $ncm = null;
+    private ?string $cest = null;
+    private ?string $cfop = null;
+    private ?float $valor = null;
+    private ?Tributos $tributos = null;
+    private ?float $valorFrete = null;
+    private ?float $valorSeguro = null;
+    private ?float $valorDesconto = null;
+    private ?float $valorOutros = null;
+    private ?array $quantidade = null;
+    private ?array $valorUnitario = null;
 
     public function setCodigo(?string $codigo): ItemBuilder
     {
         $this->codigo = $codigo;
         return $this;
     }
-
 
     public function setDescricao(?string $descricao): ItemBuilder
     {
@@ -132,13 +88,19 @@ class ItemBuilder
 
     public function setQuantidade(?float $comercial, ?float $tributavel): ItemBuilder
     {
-        $this->quantidade = new ComercialETributavelDto($comercial, $tributavel);
+        $this->quantidade = [
+            'comercial' => $comercial,
+            'tributavel' => $tributavel
+        ];
         return $this;
     }
 
     public function setValorUnitario(?float $comercial, ?float $tributavel): ItemBuilder
     {
-        $this->valorUnitario = new ComercialETributavelDto($comercial, $tributavel);
+        $this->valorUnitario = [
+            'comercial' => $comercial,
+            'tributavel' => $tributavel
+        ];
 
         return $this;
     }
@@ -148,7 +110,7 @@ class ItemBuilder
      */
     public function build(): Item
     {
-        $itemDto = new ItemDto
+        return new Item
         (
             codigo: $this->codigo,
             descricao: $this->descricao,
@@ -164,7 +126,5 @@ class ItemBuilder
             quantidade: $this->quantidade,
             valorUnitario: $this->valorUnitario,
         );
-
-        return new Item($itemDto);
     }
 }

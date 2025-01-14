@@ -1,20 +1,12 @@
 <?php
 
-namespace TecnoSpeed\Plugnotas\Common;
+namespace TecnoSpeed\Plugnotas\Common\Impostos;
 
 use TecnoSpeed\Plugnotas\Enums\CstIcmsEnum;
 use TecnoSpeed\Plugnotas\Enums\OrigemEnum;
 
 readonly class Icms
 {
-    /**
-     * @param OrigemEnum $origem
-     * @param CstIcmsEnum $cst
-     * @param array|null $creditoSimplesNacional
-     * @param SubstituicaoTributaria|null $substituicaoTributaria
-     * @param float|null $valor
-     * @param array|null $efetivo
-     */
     public function __construct
     (
         private OrigemEnum              $origem,
@@ -27,49 +19,31 @@ readonly class Icms
     {
     }
 
-    /**
-     * @return OrigemEnum
-     */
     public function getOrigem(): OrigemEnum
     {
         return $this->origem;
     }
 
-    /**
-     * @return CstIcmsEnum
-     */
     public function getCst(): CstIcmsEnum
     {
         return $this->cst;
     }
 
-    /**
-     * @return array|null
-     */
     public function getCreditoSimplesNacional(): ?array
     {
         return $this->creditoSimplesNacional;
     }
 
-    /**
-     * @return SubstituicaoTributaria|null
-     */
     public function getSubstituicaoTributaria(): ?SubstituicaoTributaria
     {
         return $this->substituicaoTributaria;
     }
 
-    /**
-     * @return float|null
-     */
     public function getValor(): ?float
     {
         return $this->valor;
     }
 
-    /**
-     * @return array|null
-     */
     public function getEfetivo(): ?array
     {
         return $this->efetivo;

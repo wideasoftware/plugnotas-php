@@ -2,6 +2,7 @@
 
 namespace TecnoSpeed\Plugnotas\Builders;
 
+
 use TecnoSpeed\Plugnotas\Common\Impostos\Icms;
 use TecnoSpeed\Plugnotas\Common\Impostos\SubstituicaoTributaria;
 use TecnoSpeed\Plugnotas\Enums\CstIcmsEnum;
@@ -96,9 +97,6 @@ class IcmsBuilder
         return $this;
     }
 
-    /**
-     * @return Icms
-     */
     public function build(): Icms
     {
         return new Icms(

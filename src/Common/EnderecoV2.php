@@ -26,11 +26,11 @@ readonly class EnderecoV2
     }
 
     /**
-     * @return TipoLogradouroEnum|null
+     * @return string|null
      */
-    public function getTipoLogradouro(): ?TipoLogradouroEnum
+    public function getTipoLogradouro(): ?string
     {
-        return $this->tipoLogradouro;
+        return $this->tipoLogradouro->value;
     }
 
 

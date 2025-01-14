@@ -36,6 +36,9 @@ class Pessoa
     {
     }
 
+    /**
+     * @return ?string
+     */
     public function getNome(): ?string
     {
         return $this->nome;
@@ -86,6 +89,9 @@ class Pessoa
         return $this->telefone;
     }
 
+    /**
+     * @return ?IndicadorInscricaoEstadualEnum
+     */
     public function getIndicadorInscricaoEstadual(): ?IndicadorInscricaoEstadualEnum
     {
         return $this->indicadorInscricaoEstadual;
@@ -96,6 +102,9 @@ class Pessoa
         return $this->codigoEstrangeiro;
     }
 
+    /**
+     * @return ?NaoNifEnum
+     */
     public function getNaoNif(): ?NaoNifEnum
     {
         return $this->naoNif;

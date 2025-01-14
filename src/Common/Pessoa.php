@@ -29,9 +29,9 @@ class Pessoa
 
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getNome(): string
+    public function getNome(): ?string
     {
         return $this->pessoaDTO->nome;
     }
@@ -110,9 +110,9 @@ class Pessoa
 
 
     /**
-     * @return IndicadorInscricaoEstadualEnum
+     * @return ?IndicadorInscricaoEstadualEnum
      */
-    public function getIndicadorInscricaoEstadual(): IndicadorInscricaoEstadualEnum
+    public function getIndicadorInscricaoEstadual(): ?IndicadorInscricaoEstadualEnum
     {
         return $this->pessoaDTO->indicadorInscricaoEstadual;
     }
@@ -127,9 +127,9 @@ class Pessoa
     }
 
     /**
-     * @return NaoNifEnum
+     * @return ?NaoNifEnum
      */
-    public function getNaoNif(): NaoNifEnum
+    public function getNaoNif(): ?NaoNifEnum
     {
         return $this->pessoaDTO->naoNif;
     }

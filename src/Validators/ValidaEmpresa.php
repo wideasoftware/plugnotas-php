@@ -7,6 +7,7 @@ use TecnoSpeed\Plugnotas\Common\Pessoa;
 use TecnoSpeed\Plugnotas\Error\ValidationError;
 use TecnoSpeed\Plugnotas\Traits\DataTransform;
 use TecnoSpeed\Plugnotas\Traits\Validation;
+use Respect\Validation\Validator as v;
 
 class ValidaEmpresa
 {
@@ -23,9 +24,11 @@ class ValidaEmpresa
             v::key('cpfCnpj', v::cnpj()->notEmpty()),
             v::key('razaoSocial', v::stringType()->notEmpty()),
             v::key('simplesNacional', v::boolType()->notEmpty()),
-            v::key('regimeTributario', v::stringType()->notEmpty()),
-            v::key('regimeTributarioEspecial', v::stringType()->notEmpty()),
-            v::key('email', v::stringType()->notEmpty()),
+            v::key('regimeTributario', v::numericVal()->notOptional()),
+            v::key('regimeTributarioEspecial', v::numericVal()->notOptional()),
+            v::key('inscricaoMunicipal', v::stringType()),
+            v::key('inscricaoEstadual', v::stringType()),
+            v::key('email', v::stringType()),
             v::keyNested('endereco.bairro', v::stringType()->notEmpty()),
             v::keyNested('endereco.cep', v::stringType()->notEmpty()),
             v::keyNested('endereco.codigoCidade', v::stringType()->notEmpty()),

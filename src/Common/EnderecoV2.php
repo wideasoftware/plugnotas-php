@@ -16,11 +16,11 @@ readonly class EnderecoV2
     }
 
     /**
-     * @return TipoLogradouroEnum|null
+     * @return string|null
      */
-    public function getTipoLogradouro(): ?TipoLogradouroEnum
+    public function getTipoLogradouro(): ?string
     {
-        return $this->enderecoDto->tipoLogradouro;
+        return $this->enderecoDto->tipoLogradouro->value;
     }
 
 
@@ -104,11 +104,11 @@ readonly class EnderecoV2
     }
 
     /**
-     * @return EstadoEnum|null
+     * @return string|null
      */
-    public function getEstado(): ?EstadoEnum
+    public function getEstado(): ?string
     {
-        return $this->enderecoDto->estado;
+        return $this->enderecoDto->estado->value;
     }
 
 

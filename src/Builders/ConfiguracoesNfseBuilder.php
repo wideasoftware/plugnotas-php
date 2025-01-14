@@ -9,6 +9,7 @@ use TecnoSpeed\Plugnotas\Dto\PrefeituraDto;
 use TecnoSpeed\Plugnotas\Error\ValidationError;
 use TecnoSpeed\Plugnotas\Nfse\ConfiguracoesNfse;
 use TecnoSpeed\Plugnotas\Traits\DataTransform;
+use Respect\Validation\Validator as v;
 
 class ConfiguracoesNfseBuilder
 {
@@ -45,7 +46,10 @@ class ConfiguracoesNfseBuilder
     {
         $rpsDto = new ConfiguracaoRpsDto(
             lote: $lote,
-            numeracao: $numeracao,
+            numeracao: array_map(
+                fn($numeracao) => ['numero' => $numeracao['number'], 'serie' => $numeracao['serial']],
+                $numeracao
+            ),
             numeracaoAutomatica: $numeracaoAutomatica,
             agrupaLoteAutomatico: $agrupaLoteAutomatico,
             agrupaLoteComSerieAutomatico: $agrupaLoteComSerieAutomatico,
@@ -57,12 +61,15 @@ class ConfiguracoesNfseBuilder
 
     public function setPrefeitura(?string $login, ?string $senha): ConfiguracoesNfseBuilder
     {
-        $prefeituraDto = new PrefeituraDto(
-            login: $login,
-            senha: $senha
-        );
+        if ($login && $senha) {
+            $prefeituraDto = new PrefeituraDto(
+                login: $login,
+                senha: $senha
+            );
 
-        $this->prefeitura = $prefeituraDto;
+            $this->prefeitura = $prefeituraDto;
+        }
+
         return $this;
     }
 
@@ -91,36 +98,8 @@ class ConfiguracoesNfseBuilder
     /**
      * @throws Exception
      */
-    public function validate(): bool
-    {
-        $data = $this->toArray();
-
-        $validacao = v::arrayType()
-            ->key('ativo', v::boolType()->notEmpty())
-            ->key('email', v::arrayType()
-                ->key('envio')->notEmpty())
-            ->key('rps', v::arrayType()->each(
-                v::arrayType()
-                    ->key('numero', v::numericVal(), true)
-                    ->key('serie', v::stringType(), true)
-            ), true)
-            ->key('prefeitura', v::arrayType()
-                ->key('login', v::stringType())
-                ->key('senha', v::stringType()))
-            ->validate($data);
-
-        if (!$validacao) {
-            throw new ValidationError('Os parâmetros mínimos para criar uma empresa não foram preenchidos.');
-        }
-    }
-
-    /**
-     * @throws Exception
-     */
     public function build(): ConfiguracoesNfse
     {
-        $this->validate();
-
         $configuracoesNfseDto = new ConfiguracoesNfseDto(
             nfseNacional: $this->nfseNacional,
             consultaNfseNacional: $this->consultaNfseNacional,

@@ -28,6 +28,7 @@ class EmpresaBuilder
 
     public function setConfiguracoesNfse(?ConfiguracoesNfse $configuracoesNfse): EmpresaBuilder
     {
+        $configuracoesNfse->validate();
         $this->configuracoesNfse = $configuracoesNfse;
         return $this;
     }

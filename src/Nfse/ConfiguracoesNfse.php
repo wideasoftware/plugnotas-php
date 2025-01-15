@@ -64,7 +64,7 @@ readonly class ConfiguracoesNfse
      * @throws ValidationError
      * @throws Exception
      */
-    public function validate(): bool
+    public function validate(): void
     {
         $data = $this->toArray();
 

@@ -16,17 +16,95 @@ readonly class Empresa
     use Communication, DataTransform;
 
     public function __construct(
-        private Configuration $configuration,
-        public ?Pessoa $pessoa,
+        private Configuration     $configuration,
+        public ?string            $cpfCnpj,
+        public ?string            $razaoSocial,
+        public ?string            $nomeFantasia,
+        public ?EnderecoV2        $endereco,
+        public ?string            $email,
+        public ?string            $inscricaoEstadual,
+        public ?string            $inscricaoMunicipal,
+        public ?array             $telefone,
+        public ?string            $certificado,
+        public ?bool              $simplesNacional,
+        public ?int               $regimeTributario,
+        public ?int               $regimeTributarioEspecial,
+        public ?bool              $incentivoFiscal,
+        public ?bool              $incentivadorCultural,
         public ?ConfiguracoesNfse $nfse
     )
     {
 
     }
 
-    public function getPessoa(): Pessoa
+    public function getCpfCnpj(): ?string
     {
-        return $this->pessoa;
+        return $this->cpfCnpj;
+    }
+
+    public function getRazaoSocial(): ?string
+    {
+        return $this->razaoSocial;
+    }
+
+    public function getEndereco(): ?EnderecoV2
+    {
+        return $this->endereco;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function getInscricaoEstadual(): ?string
+    {
+        return $this->inscricaoEstadual;
+    }
+
+    public function getInscricaoMunicipal(): ?string
+    {
+        return $this->inscricaoMunicipal;
+    }
+
+    public function getNomeFantasia(): ?string
+    {
+        return $this->nomeFantasia;
+    }
+
+    public function getTelefone(): ?array
+    {
+        return $this->telefone;
+    }
+
+    public function getCertificado(): ?string
+    {
+        return $this->certificado;
+    }
+
+    public function getSimplesNacional(): ?bool
+    {
+        return $this->simplesNacional;
+    }
+
+    public function getRegimeTributario(): ?int
+    {
+        return $this->regimeTributario;
+    }
+
+    public function getRegimeTributarioEspecial(): ?int
+    {
+        return $this->regimeTributarioEspecial;
+    }
+
+    public function getIncentivoFiscal(): ?bool
+    {
+        return $this->incentivoFiscal;
+    }
+
+    public function getIncentivadorCultural(): ?bool
+    {
+        return $this->incentivadorCultural;
     }
 
     public function getConfiguracoesNfse(): ConfiguracoesNfse

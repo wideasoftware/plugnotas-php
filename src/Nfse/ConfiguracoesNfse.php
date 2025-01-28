@@ -55,7 +55,7 @@ readonly class ConfiguracoesNfse
         return $this->dto->ativo;
     }
 
-    public function getTipoContrato(): bool
+    public function getTipoContrato(): int
     {
         return $this->dto->tipoContrato;
     }

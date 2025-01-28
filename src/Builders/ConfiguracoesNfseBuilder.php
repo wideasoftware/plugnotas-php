@@ -6,7 +6,6 @@ use Exception;
 use TecnoSpeed\Plugnotas\Dto\ConfiguracaoRpsDto;
 use TecnoSpeed\Plugnotas\Dto\ConfiguracoesNfseDto;
 use TecnoSpeed\Plugnotas\Dto\PrefeituraDto;
-use TecnoSpeed\Plugnotas\Error\ValidationError;
 use TecnoSpeed\Plugnotas\Nfse\ConfiguracoesNfse;
 use TecnoSpeed\Plugnotas\Traits\DataTransform;
 use Respect\Validation\Validator as v;
@@ -22,7 +21,7 @@ class ConfiguracoesNfseBuilder
     private ?array $email = null;
     private bool $producao;
     private bool $ativo;
-    private string $tipoContrato = '0';
+    private int $tipoContrato = 0;
 
     public function setNfseNacional(?bool $nfseNacional): ConfiguracoesNfseBuilder
     {
@@ -108,7 +107,7 @@ class ConfiguracoesNfseBuilder
             email: $this->email,
             producao: $this->producao,
             ativo: $this->ativo,
-            tipoContrato: '0'
+            tipoContrato: 0
         );
         return new ConfiguracoesNfse($configuracoesNfseDto);
     }

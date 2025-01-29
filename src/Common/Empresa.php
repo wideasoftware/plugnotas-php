@@ -19,7 +19,7 @@ readonly class Empresa
         public string             $cpfCnpj,
         public string             $razaoSocial,
         public ?string            $nomeFantasia,
-        public ?EnderecoV2        $endereco,
+        public EnderecoV2         $endereco,
         public ?string            $email,
         public ?string            $inscricaoEstadual,
         public ?string            $inscricaoMunicipal,
@@ -28,8 +28,6 @@ readonly class Empresa
         public bool               $simplesNacional,
         public int                $regimeTributario,
         public int                $regimeTributarioEspecial,
-        public ?bool              $incentivoFiscal,
-        public ?bool              $incentivadorCultural,
         public ?ConfiguracoesNfse $nfse
     )
     {
@@ -96,16 +94,6 @@ readonly class Empresa
         return $this->regimeTributarioEspecial;
     }
 
-    public function getIncentivoFiscal(): ?bool
-    {
-        return $this->incentivoFiscal;
-    }
-
-    public function getIncentivadorCultural(): ?bool
-    {
-        return $this->incentivadorCultural;
-    }
-
     public function getNfse(): ConfiguracoesNfse
     {
         return $this->nfse;
@@ -124,7 +112,7 @@ readonly class Empresa
         return $communication->send(
             'POST',
             '/empresa',
-            $this->toArray()
+            $this->toArray(true)
         );
     }
 
@@ -140,7 +128,7 @@ readonly class Empresa
         return $communication->send(
             'PATCH',
             "/empresa/{$this->getCpfCnpj()}",
-            $this->toArray()
+            $this->toArray(true)
         );
     }
 }

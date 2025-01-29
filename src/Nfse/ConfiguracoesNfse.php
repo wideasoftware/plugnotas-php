@@ -19,16 +19,6 @@ readonly class ConfiguracoesNfse
     {
     }
 
-    public function getNfseNacional(): ?bool
-    {
-        return $this->dto->nfseNacional;
-    }
-
-    public function getConsultaNfseNacional(): ?bool
-    {
-        return $this->dto->consultaNfseNacional;
-    }
-
     public function getRps(): ?ConfiguracaoRpsDto
     {
         return $this->dto->rps;
@@ -37,11 +27,6 @@ readonly class ConfiguracoesNfse
     public function getPrefeitura(): ?PrefeituraDto
     {
         return $this->dto->prefeitura;
-    }
-
-    public function getEmail(): ?array
-    {
-        return $this->dto->email;
     }
 
     public function getProducao(): bool

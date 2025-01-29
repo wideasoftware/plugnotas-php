@@ -2,7 +2,6 @@
 
 namespace TecnoSpeed\Plugnotas\Builders;
 
-use Exception;
 use TecnoSpeed\Plugnotas\Common\Empresa;
 use TecnoSpeed\Plugnotas\Common\EnderecoV2;
 use TecnoSpeed\Plugnotas\Configuration;
@@ -16,20 +15,18 @@ class EmpresaBuilder
     use Validation;
 
     private Configuration $configuration;
-    private ?string $cpfCnpj = null;
-    private ?string $razaoSocial = null;
-    private ?EnderecoV2 $endereco = null;
-    private ?string $email = null;
-    private ?string $inscricaoEstadual = null;
-    private ?string $inscricaoMunicipal = null;
+    private string $cpfCnpj;
+    private string $razaoSocial;
+    private EnderecoV2 $endereco;
+    private string $email;
+    private string $inscricaoEstadual;
+    private string $inscricaoMunicipal;
     private ?string $nomeFantasia = null;
     private ?array $telefone = null;
     private ?string $certificado = null;
-    private ?bool $simplesNacional = null;
-    private ?int $regimeTributario = null;
-    private ?bool $incentivoFiscal = null;
-    private ?bool $incentivadorCultural = null;
-    private ?int $regimeTributarioEspecial = null;
+    private bool $simplesNacional;
+    private int $regimeTributario;
+    private int $regimeTributarioEspecial;
     private ?ConfiguracoesNfse $configuracoesNfse = null;
 
     public function setConfiguration(Configuration $configuration): EmpresaBuilder
@@ -51,7 +48,7 @@ class EmpresaBuilder
         return $this;
     }
 
-    public function setRazaoSocial(?string $razaoSocial): EmpresaBuilder
+    public function setRazaoSocial(string $razaoSocial): EmpresaBuilder
     {
         $this->razaoSocial = $razaoSocial;
         return $this;
@@ -63,7 +60,7 @@ class EmpresaBuilder
         return $this;
     }
 
-    public function setEndereco(?EnderecoV2 $endereco): EmpresaBuilder
+    public function setEndereco(EnderecoV2 $endereco): EmpresaBuilder
     {
         $this->endereco = $endereco;
         return $this;
@@ -72,7 +69,7 @@ class EmpresaBuilder
     /**
      * @throws ValidationError
      */
-    public function setEmail(?string $email): EmpresaBuilder
+    public function setEmail(string $email): EmpresaBuilder
     {
         if ($email) {
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -116,33 +113,21 @@ class EmpresaBuilder
         return $this;
     }
 
-    public function setSimplesNacional(?bool $simplesNacional): EmpresaBuilder
+    public function setSimplesNacional(bool $simplesNacional): EmpresaBuilder
     {
         $this->simplesNacional = $simplesNacional;
         return $this;
     }
 
-    public function setRegimeTributario(?int $regimeTributario): EmpresaBuilder
+    public function setRegimeTributario(int $regimeTributario): EmpresaBuilder
     {
         $this->regimeTributario = $regimeTributario;
         return $this;
     }
 
-    public function setRegimeTributarioEspecial(?int $regimeTributarioEspecial): EmpresaBuilder
+    public function setRegimeTributarioEspecial(int $regimeTributarioEspecial): EmpresaBuilder
     {
         $this->regimeTributarioEspecial = $regimeTributarioEspecial;
-        return $this;
-    }
-
-    public function setIncentivoFiscal(?bool $incentivoFiscal): EmpresaBuilder
-    {
-        $this->incentivoFiscal = $incentivoFiscal;
-        return $this;
-    }
-
-    public function setIncentivadorCultural(?bool $incentivadorCultural): EmpresaBuilder
-    {
-        $this->incentivadorCultural = $incentivadorCultural;
         return $this;
     }
 
@@ -168,8 +153,6 @@ class EmpresaBuilder
             simplesNacional: $this->simplesNacional,
             regimeTributario: $this->regimeTributario,
             regimeTributarioEspecial: $this->regimeTributarioEspecial,
-            incentivoFiscal: $this->incentivoFiscal,
-            incentivadorCultural: $this->incentivadorCultural,
             nfse: $this->configuracoesNfse,
         );
     }

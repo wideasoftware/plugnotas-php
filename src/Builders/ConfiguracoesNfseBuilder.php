@@ -14,33 +14,15 @@ class ConfiguracoesNfseBuilder
 {
     use DataTransform;
 
-    private ?bool $nfseNacional = null;
-    private ?bool $consultaNfseNacional = null;
     private ?ConfiguracaoRpsDto $rps = null;
     private ?PrefeituraDto $prefeitura = null;
-    private ?array $email = null;
     private bool $producao;
     private bool $ativo;
     private int $tipoContrato = 0;
 
-    public function setNfseNacional(?bool $nfseNacional): ConfiguracoesNfseBuilder
-    {
-        $this->nfseNacional = $nfseNacional;
-        return $this;
-    }
-
-    public function setConsultaNfseNacional(?bool $consultaNfseNacional): ConfiguracoesNfseBuilder
-    {
-        $this->consultaNfseNacional = $consultaNfseNacional;
-        return $this;
-    }
-
     public function setRps(
         ?int   $lote,
         ?array $numeracao,
-        ?bool  $numeracaoAutomatica,
-        ?bool  $agrupaLoteAutomatico,
-        ?bool  $agrupaLoteComSerieAutomatico,
     ): ConfiguracoesNfseBuilder
     {
         $rpsDto = new ConfiguracaoRpsDto(
@@ -49,9 +31,6 @@ class ConfiguracoesNfseBuilder
                 fn($numeracao) => ['numero' => $numeracao['number'], 'serie' => $numeracao['serial']],
                 $numeracao
             ),
-            numeracaoAutomatica: $numeracaoAutomatica,
-            agrupaLoteAutomatico: $agrupaLoteAutomatico,
-            agrupaLoteComSerieAutomatico: $agrupaLoteComSerieAutomatico,
         );
 
         $this->rps = $rpsDto;
@@ -72,16 +51,6 @@ class ConfiguracoesNfseBuilder
         return $this;
     }
 
-    public function setEnvioEmail(?bool $enviaEmail): ConfiguracoesNfseBuilder
-    {
-        $this->email = [
-            'envio' => $enviaEmail
-        ];
-
-        return $this;
-
-    }
-
     public function setProducao(bool $producao): ConfiguracoesNfseBuilder
     {
         $this->producao = $producao;
@@ -100,11 +69,8 @@ class ConfiguracoesNfseBuilder
     public function build(): ConfiguracoesNfse
     {
         $configuracoesNfseDto = new ConfiguracoesNfseDto(
-            nfseNacional: $this->nfseNacional,
-            consultaNfseNacional: $this->consultaNfseNacional,
             rps: $this->rps,
             prefeitura: $this->prefeitura,
-            email: $this->email,
             producao: $this->producao,
             ativo: $this->ativo,
             tipoContrato: 0

@@ -2,6 +2,8 @@
 
 namespace TecnoSpeed\Plugnotas\Nfse;
 
+use Exception;
+use Respect\Validation\Validator as v;
 use TecnoSpeed\Plugnotas\Dto\ConfiguracaoRpsDto;
 use TecnoSpeed\Plugnotas\Dto\ConfiguracoesNfseDto;
 use TecnoSpeed\Plugnotas\Dto\PrefeituraDto;
@@ -17,16 +19,6 @@ readonly class ConfiguracoesNfse
     {
     }
 
-    public function getNfseNacional(): ?bool
-    {
-        return $this->dto->nfseNacional;
-    }
-
-    public function getConsultaNfseNacional(): ?bool
-    {
-        return $this->dto->consultaNfseNacional;
-    }
-
     public function getRps(): ?ConfiguracaoRpsDto
     {
         return $this->dto->rps;
@@ -35,11 +27,6 @@ readonly class ConfiguracoesNfse
     public function getPrefeitura(): ?PrefeituraDto
     {
         return $this->dto->prefeitura;
-    }
-
-    public function getEmail(): ?array
-    {
-        return $this->dto->email;
     }
 
     public function getProducao(): bool
@@ -52,7 +39,7 @@ readonly class ConfiguracoesNfse
         return $this->dto->ativo;
     }
 
-    public function getTipoContrato(): bool
+    public function getTipoContrato(): int
     {
         return $this->dto->tipoContrato;
     }

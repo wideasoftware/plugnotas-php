@@ -28,12 +28,6 @@ class PessoaBuilder
     private ?NaoNifEnum $naoNif = null;
     private ?string $nome = null;
     private ?string $identificadorCadastro = null;
-    private ?string $certificado = null;
-    private ?bool $simplesNacional = null;
-    private ?int $regimeTributario = null;
-    private ?bool $incentivoFiscal = null;
-    private ?bool $incentivadorCultural = null;
-    private ?int $regimeTributarioEspecial = null;
 
     /**
      * @throws ValidationError
@@ -180,42 +174,6 @@ class PessoaBuilder
         return $this;
     }
 
-    public function setCertificado(?string $certificado): PessoaBuilder
-    {
-        $this->certificado = $certificado;
-        return $this;
-    }
-
-    public function setSimplesNacional(?bool $simplesNacional): PessoaBuilder
-    {
-        $this->simplesNacional = $simplesNacional;
-        return $this;
-    }
-
-    public function setRegimeTributario(?int $regimeTributario): PessoaBuilder
-    {
-        $this->regimeTributario = $regimeTributario;
-        return $this;
-    }
-
-    public function setIncentivoFiscal(?bool $incentivoFiscal): PessoaBuilder
-    {
-        $this->incentivoFiscal = $incentivoFiscal;
-        return $this;
-    }
-
-    public function setIncentivadorCultural(?bool $incentivadorCultural): PessoaBuilder
-    {
-        $this->incentivadorCultural = $incentivadorCultural;
-        return $this;
-    }
-
-    public function setRegimeTributarioEspecial(?int $regimeTributarioEspecial): PessoaBuilder
-    {
-        $this->regimeTributarioEspecial = $regimeTributarioEspecial;
-        return $this;
-    }
-
     /**
      * @return Pessoa
      */
@@ -236,12 +194,6 @@ class PessoaBuilder
             codigoEstrangeiro: $this->codigoEstrangeiro,
             naoNif: $this->naoNif,
             identificadorCadastro: $this->identificadorCadastro,
-            certificado: $this->certificado,
-            simplesNacional: $this->simplesNacional,
-            regimeTributario: $this->regimeTributario,
-            incentivoFiscal: $this->incentivoFiscal,
-            incentivadorCultural: $this->incentivadorCultural,
-            regimeTributarioEspecial: $this->regimeTributarioEspecial
         );
     }
 }

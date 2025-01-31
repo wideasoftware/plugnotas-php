@@ -2,24 +2,31 @@
 
 namespace TecnoSpeed\Plugnotas\Dto;
 
+use TecnoSpeed\Plugnotas\Traits\DataTransform;
+
 class ConfiguracaoRpsDto
 {
+use DataTransform;
 
     /**
      * @param int|null $lote
-     * @param NumeracaoRpsDto[]|null $numeracao
-     * @param bool|null $numeracaoAutomatica
-     * @param bool|null $agrupaLoteAutomatico
-     * @param bool|null $agrupaLoteComSerieAutomatico
+     * @param array|null $numeracao
      */
     public function __construct(
         public ?int $lote,
         public ?array $numeracao,
-        public ?bool $numeracaoAutomatica,
-        public ?bool $agrupaLoteAutomatico,
-        public ?bool $agrupaLoteComSerieAutomatico
     )
     {
 
+    }
+
+    public function getLote(): ?int
+    {
+        return $this->lote;
+    }
+
+    public function getNumeracao(): ?array
+    {
+        return $this->numeracao;
     }
 }

@@ -10,4 +10,14 @@ class PrefeituraDto
     )
     {
     }
+
+    public function getLogin(): ?string
+    {
+        return $this->login;
+    }
+
+    public function getSenha(): ?string
+    {
+        return $this->senha;
+    }
 }

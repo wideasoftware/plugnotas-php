@@ -1,12 +1,12 @@
 <?php
 
-namespace TecnoSpeed\Plugnotas\Common;
+namespace TecnoSpeed\Plugnotas\Empresa;
 
 use Exception;
 use TecnoSpeed\Plugnotas\Communication\Response;
 use TecnoSpeed\Plugnotas\Configuration;
 use TecnoSpeed\Plugnotas\Error\ConfigurationRequiredError;
-use TecnoSpeed\Plugnotas\Nfse\ConfiguracoesNfse;
+use TecnoSpeed\Plugnotas\Common\EnderecoV2;
 use TecnoSpeed\Plugnotas\Traits\Communication;
 use TecnoSpeed\Plugnotas\Traits\DataTransform;
 
@@ -28,7 +28,7 @@ readonly class Empresa
         public bool               $simplesNacional,
         public int                $regimeTributario,
         public int                $regimeTributarioEspecial,
-        public ?ConfiguracoesNfse $nfse
+        public ?Nfse          $nfse
     )
     {
 
@@ -94,7 +94,7 @@ readonly class Empresa
         return $this->regimeTributarioEspecial;
     }
 
-    public function getNfse(): ConfiguracoesNfse
+    public function getNfse(): Nfse
     {
         return $this->nfse;
     }

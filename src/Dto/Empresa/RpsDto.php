@@ -1,12 +1,12 @@
 <?php
 
-namespace TecnoSpeed\Plugnotas\Dto;
+namespace TecnoSpeed\Plugnotas\Dto\Empresa;
 
 use TecnoSpeed\Plugnotas\Traits\DataTransform;
 
-class ConfiguracaoRpsDto
+class RpsDto
 {
-use DataTransform;
+    use DataTransform;
 
     /**
      * @param int|null $lote

@@ -1,12 +1,12 @@
 <?php
 
-namespace TecnoSpeed\Plugnotas\Builders;
+namespace TecnoSpeed\Plugnotas\Builders\Empresa;
 
-use TecnoSpeed\Plugnotas\Common\Empresa;
+use TecnoSpeed\Plugnotas\Empresa\Empresa;
 use TecnoSpeed\Plugnotas\Common\EnderecoV2;
 use TecnoSpeed\Plugnotas\Configuration;
 use TecnoSpeed\Plugnotas\Error\ValidationError;
-use TecnoSpeed\Plugnotas\Nfse\ConfiguracoesNfse;
+use TecnoSpeed\Plugnotas\Empresa\Nfse;
 use Respect\Validation\Validator as v;
 use TecnoSpeed\Plugnotas\Traits\Validation;
 
@@ -27,7 +27,7 @@ class EmpresaBuilder
     private bool $simplesNacional;
     private int $regimeTributario;
     private int $regimeTributarioEspecial;
-    private ?ConfiguracoesNfse $configuracoesNfse = null;
+    private ?Nfse $nfse = null;
 
     public function setConfiguration(Configuration $configuration): EmpresaBuilder
     {
@@ -131,9 +131,9 @@ class EmpresaBuilder
         return $this;
     }
 
-    public function setConfiguracoesNfse(?ConfiguracoesNfse $configuracoesNfse): EmpresaBuilder
+    public function setConfiguracoesNfse(?Nfse $nfse): EmpresaBuilder
     {
-        $this->configuracoesNfse = $configuracoesNfse;
+        $this->nfse = $nfse;
         return $this;
     }
 
@@ -153,7 +153,7 @@ class EmpresaBuilder
             simplesNacional: $this->simplesNacional,
             regimeTributario: $this->regimeTributario,
             regimeTributarioEspecial: $this->regimeTributarioEspecial,
-            nfse: $this->configuracoesNfse,
+            nfse: $this->nfse,
         );
     }
 }

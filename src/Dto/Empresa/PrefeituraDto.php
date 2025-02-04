@@ -1,6 +1,6 @@
 <?php
 
-namespace TecnoSpeed\Plugnotas\Dto;
+namespace TecnoSpeed\Plugnotas\Dto\Empresa;
 
 class PrefeituraDto
 {

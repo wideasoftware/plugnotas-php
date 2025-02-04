@@ -7,10 +7,12 @@ class Response
     public $body;
     public $statusCode;
 
-    public static function parse($response)
+    public static function parse($response, bool $jsonDecode = true)
     {
         $responseObject = new Response;
-        $responseObject->body = \json_decode($response->getBody()->getContents());
+
+        $body = $response->getBody()->getContents();
+        $responseObject->body = $jsonDecode ? \json_decode($body) : $body;
         $responseObject->statusCode = $response->getStatusCode();
 
         return $responseObject;

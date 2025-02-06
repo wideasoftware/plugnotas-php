@@ -371,15 +371,10 @@ class Nfse extends BuilderAbstract implements IDfe
     public function downloadPdf($id)
     {
         $communication = $this->getCallApiInstance($this->configuration);
-        if (!$this->configuration->getNfseDownloadDirectory()) {
-            throw new RequiredError('É necessário setar o diretório para download do PDF.');
-        }
 
         return $communication->download(
             'GET',
-            "/nfse/pdf/${id}",
-            null,
-            $this->configuration->getNfseDownloadDirectory() . '/' . $id . '.pdf'
+            "/nfse/pdf/{$id}",
         );
     }
 
@@ -387,30 +382,19 @@ class Nfse extends BuilderAbstract implements IDfe
     {
         $communication = $this->getCallApiInstance($this->configuration);
 
-        if (!$this->configuration->getNfseDownloadDirectory()) {
-            throw new RequiredError('É necessário setar o diretório para download do PDF.');
-        }
-
         return $communication->download(
             'GET',
-            "/nfse/pdf/${idIntegracao}/${cnpj}",
-            null,
-            $this->configuration->getNfseDownloadDirectory() . '/' . $cnpj . '-' . $idIntegracao . '.pdf'
+            "/nfse/pdf/{$idIntegracao}/{$cnpj}",
         );
     }
 
     public function downloadXml($id)
     {
         $communication = $this->getCallApiInstance($this->configuration);
-        if (!$this->configuration->getNfseDownloadDirectory()) {
-            throw new RequiredError('É necessário setar o diretório para download do XML.');
-        }
 
         return $communication->download(
             'GET',
-            "/nfse/xml/${id}",
-            null,
-            $this->configuration->getNfseDownloadDirectory() . '/' . $id . '.xml'
+            "/nfse/xml/{$id}",
         );
     }
 
@@ -418,15 +402,9 @@ class Nfse extends BuilderAbstract implements IDfe
     {
         $communication = $this->getCallApiInstance($this->configuration);
 
-        if (!$this->configuration->getNfseDownloadDirectory()) {
-            throw new RequiredError('É necessário setar o diretório para download do XML.');
-        }
-
         return $communication->download(
             'GET',
-            "/nfse/xml/${idIntegracao}/${cnpj}",
-            null,
-            $this->configuration->getNfseDownloadDirectory() . '/' . $cnpj . '-' . $idIntegracao . '.xml'
+            "/nfse/xml/{$idIntegracao}/{$cnpj}",
         );
     }
 

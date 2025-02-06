@@ -83,7 +83,7 @@ class CallApi
         }
     }
 
-    public function download($method, $destination, $data, $fileName)
+    public function download($method, $destination, $data = null)
     {
         try {
             if ($method === 'GET') {
@@ -92,11 +92,10 @@ class CallApi
                     $destination,
                     [
                         'headers' => $this->headers,
-                        'sink' => $fileName
                     ]
                 );
 
-                return ResponseObject::parse($response);
+                return ResponseObject::parse($response, false);
             }
 
             $response = $this->client->request(
@@ -105,11 +104,10 @@ class CallApi
                 [
                     'headers' => $this->headers,
                     'json' => $data,
-                    'sink' => $fileName
                 ]
             );
 
-            return ResponseObject::parse($response);
+            return ResponseObject::parse($response, false);
         } catch (ClientException $ce) {
             $response = $ce->getResponse();
             return ResponseObject::parse($response);

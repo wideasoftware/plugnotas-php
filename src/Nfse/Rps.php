@@ -2,6 +2,7 @@
 
 namespace TecnoSpeed\Plugnotas\Nfse;
 
+use Exception;
 use TecnoSpeed\Plugnotas\Abstracts\BuilderAbstract;
 use TecnoSpeed\Plugnotas\Error\ValidationError;
 
@@ -11,9 +12,12 @@ class Rps extends BuilderAbstract
     private $competencia;
     private $dataVencimento;
 
-    public function setDataEmissao(\DateTimeInterface $dataEmissao)
+    /**
+     * @throws Exception
+     */
+    public function setDataEmissao(string $dataEmissao): void
     {
-        $this->dataEmissao = $dataEmissao->format('Y-m-d\TH:i:s');
+        $this->dataEmissao = (new \DateTime($dataEmissao))->format('Y-m-d H:i:s');
     }
 
     public function getDataEmissao()
@@ -21,18 +25,25 @@ class Rps extends BuilderAbstract
         return $this->dataEmissao;
     }
 
-    public function setCompetencia(\DateTimeInterface $competencia)
+    /**
+     * @throws Exception
+     */
+    public function setCompetencia(string $competencia): void
     {
-        $this->competencia = $competencia->format('Y-m-d');
+        $this->competencia = (new \DateTime($competencia))->format('Y-m-d H:i:s');
     }
 
     public function getCompetencia()
     {
         return $this->competencia;
     }
-    public function setDataVencimento(\DateTimeInterface $dataVencimento)
+
+    /**
+     * @throws Exception
+     */
+    public function setDataVencimento(string $dataVencimento): void
     {
-        $this->dataVencimento = $dataVencimento->format('Y-m-d\TH:i:s');
+        $this->dataVencimento = (new \DateTime($dataVencimento))->format('Y-m-d H:i:s');
     }
 
     public function getDataVencimento()

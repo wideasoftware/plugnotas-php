@@ -26,16 +26,13 @@ class Pessoa
         public ?string                         $codigoEstrangeiro,
         public ?NaoNifEnum                     $naoNif,
         public ?string                         $identificadorCadastro,
-        public ?string                         $certificado,
-        public ?bool                           $simplesNacional,
-        public ?int                            $regimeTributario,
-        public ?bool                           $incentivoFiscal,
-        public ?bool                           $incentivadorCultural,
-        public ?int                            $regimeTributarioEspecial
     )
     {
     }
 
+    /**
+     * @return ?string
+     */
     public function getNome(): ?string
     {
         return $this->nome;
@@ -86,6 +83,9 @@ class Pessoa
         return $this->telefone;
     }
 
+    /**
+     * @return ?IndicadorInscricaoEstadualEnum
+     */
     public function getIndicadorInscricaoEstadual(): ?IndicadorInscricaoEstadualEnum
     {
         return $this->indicadorInscricaoEstadual;
@@ -96,6 +96,9 @@ class Pessoa
         return $this->codigoEstrangeiro;
     }
 
+    /**
+     * @return ?NaoNifEnum
+     */
     public function getNaoNif(): ?NaoNifEnum
     {
         return $this->naoNif;
@@ -105,36 +108,4 @@ class Pessoa
     {
         return $this->identificadorCadastro;
     }
-
-    public function getCertificado(): ?string
-    {
-        return $this->certificado;
-    }
-
-    public function getSimplesNacional(): ?bool
-    {
-        return $this->simplesNacional;
-    }
-
-    public function getRegimeTributario(): ?int
-    {
-        return $this->regimeTributario;
-    }
-
-    public function getIncentivoFiscal(): ?bool
-    {
-        return $this->incentivoFiscal;
-    }
-
-    public function getIncentivadorCultural(): ?bool
-    {
-        return $this->incentivadorCultural;
-    }
-
-    public function getRegimeTributarioEspecial(): ?int
-    {
-        return $this->regimeTributarioEspecial;
-    }
-
-
 }

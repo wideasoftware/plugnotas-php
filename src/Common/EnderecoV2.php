@@ -114,11 +114,11 @@ readonly class EnderecoV2
     }
 
     /**
-     * @return EstadoEnum|null
+     * @return string|null
      */
-    public function getEstado(): ?EstadoEnum
+    public function getEstado(): ?string
     {
-        return $this->estado;
+        return $this->estado->value;
     }
 
 

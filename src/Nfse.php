@@ -45,7 +45,7 @@ class Nfse extends BuilderAbstract implements IDfe
     private $parcelas;
     private $informacoesComplementares;
     private $ativo;
-
+    private $status;
 
     public function setCidadePrestacao(CidadePrestacao $cidadePrestacao)
     {
@@ -232,7 +232,7 @@ class Nfse extends BuilderAbstract implements IDfe
         return $this->parcelas;
     }
 
-    public function setParcelas(array $parcelas)
+    public function setParcelas($parcelas)
     {
         $this->parcelas[] = $parcelas;
     }
@@ -245,6 +245,16 @@ class Nfse extends BuilderAbstract implements IDfe
     public function getAtivo()
     {
         return $this->ativo;
+    }
+
+    public function setStatus($status): void
+    {
+        $this->status = $status;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
     }
 
     public function validate()

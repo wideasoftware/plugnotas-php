@@ -12,7 +12,7 @@ class Response
         $responseObject = new Response;
 
         $body = $response->getBody()->getContents();
-        $responseObject->body = $jsonDecode ? \json_decode($body) : $body;
+        $responseObject->body = $jsonDecode ? \json_decode($body, true) : $body;
         $responseObject->statusCode = $response->getStatusCode();
 
         return $responseObject;
